@@ -8,7 +8,7 @@ SSARE is an open-source service designed to orchestrate the collection, processi
 <Note>
 SSARE stands for **S**emantic **S**earch **A**rticle **R**ecommendation **E**ngine.
 </Note>
-Key Features
+### Key Features:
 <CardGroup cols={2}>
   <Card title="Scraping" icon="spider-web">
     Ingest data from arbitrary sourcing scripts
@@ -29,27 +29,40 @@ Key Features
     Provide endpoints for semantic search and recommendations
   </Card>
 </CardGroup>
-Quick Start
-Get SSARE up and running in minutes:
-bash
-git clone https://github.com/JimVincentW/SSARE.git
+
+
+## Quick Start
+1. Get SSARE up and running in minutes:
+```bash bash
+git clone https://github.com/open-politics/SSARE.git
 cd SSARE
+mv .env.example .env
 docker-compose up --build
-Access the dashboard at http://localhost:8089/ or http://main_core_app:8089/ when inside the same Docker network.
-Architecture
-SSARE uses a microservices architecture for scalability and maintainability:
+```
+
+Access the dashboard at 
+````bash bash 
+http://localhost:8089/
+````
+
+## Architecture
+
 <AccordionGroup>
   <Accordion icon="broom" title="Scraper Service">
     Handles the ingestion of news articles from various sources.
   </Accordion>
   <Accordion icon="brain" title="Vectorization/NLP Service">
     Processes text into vector representations for semantic analysis.
+    If you want use a different model you need to adapt the models vector in SSARE/core/models.py
   </Accordion>
   <Accordion icon="database" title="PostgreSQL Service">
-    Stores the full text and metadata of articles.
+    - Stores the full text and metadata of articles.
+    - Responsible for creating jobs and storing processed data.
+    - Querying the database with [SQLModel](https://sqlmodel.tiangolo.com/)
   </Accordion>
   <Accordion icon="tag" title="Entity Service">
     Performs Named Entity Recognition on article text.
+    Read more about Named Entity Recognition [here](/essentials/ner)
   </Accordion>
   <Accordion icon="map-pin" title="Geocoding Service">
     Converts location entities to geographical coordinates.

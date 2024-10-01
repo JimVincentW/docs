@@ -63,10 +63,7 @@
       "pages": [
         "essentials/markdown",
         "essentials/ner",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "snippets/PydanticModels"
       ]
     },
     {
