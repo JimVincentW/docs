@@ -2,8 +2,8 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Open Politics Documentation",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/opp_logo_black.svg",
+    "light": "/logo/opp_logo_white.svg"
   },
   "favicon": "/favicon.svg",
   "colors": {
@@ -36,7 +36,7 @@
     {
       "name": "Documentation",
       "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
+      "url": "https://docs.open-politics.org"
     },
     {
       "name": "Community",
@@ -46,7 +46,7 @@
     {
       "name": "Blog",
       "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "url": "https://open-politics.org/blog/posts"
     }
   ],
   "navigation": [
@@ -54,7 +54,7 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "quickstart",
+        "ssare",
         "development"
       ]
     },
