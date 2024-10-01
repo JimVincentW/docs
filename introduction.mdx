@@ -1,71 +1,87 @@
 ---
-title: Introduction
-description: 'Welcome to the home of your new documentation'
+title: 'Open Politics 🌐'
+description: 'Open Source Political Intelligence'
 ---
 
-<img
-  className="block dark:hidden"
-  src="/images/hero-light.svg"
-  alt="Hero Light"
-/>
-<img
-  className="hidden dark:block"
-  src="/images/hero-dark.svg"
-  alt="Hero Dark"
-/>
+## Introduction
+Open Politics' vision is to democratise political intelligence. The mission is to create an open-source data science and AI toolkit to analyse, summarise, and visualise political information.
 
-## Setting up
+<Note>
+This normal markdown is extended by mintlify mdx like the introduction page you see here. We want to rewrite our old markdown readme in this mdx with tags here.
+</Note>
 
-The first step to world-class documentation is setting up your editing environments.
+## Table of Contents
+- [Why Open Politics Exists](#why-open-politics-exists)
+- [Update: SSARE Release](#update-ssare-release)
+- [The Webapp](#the-webapp)
+- [Engage! Developer Jour Fixe](#engage-developer-jour-fixe)
+- [Tasks](#tasks)
+- [AI Models](#ai-models)
+- [Data Challenges](#data-challenges)
+- [Journalistic Challenges](#journalistic-challenges)
+- [Quality Assurance](#quality-assurance)
+- [Architecture](#architecture)
+- [Usage](#usage)
+- [Necessary API Keys/Environment Variables](#necessary-api-keysenvironment-variables)
+- [Contributing](#contributing)
+- [Contact](#contact)
+- [License](#license)
 
-<CardGroup cols={2}>
-  <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
-  >
-    Get your docs set up locally for easy development
-  </Card>
-  <Card
-    title="Preview Changes"
-    icon="image"
-    href="https://mintlify.com/docs/development"
-  >
-    Preview your changes before you push to make sure they're perfect
-  </Card>
-</CardGroup>
+## Why Open Politics Exists
+- All things regarding politics, be they news, conflicts or legislative procedures, are hard to keep track of. It's hard to find the time to read through all the documents and news articles necessary to gain a broad and well-informed understanding of political situations. Technology offers great possibilities to make such processes more accessible. Recently, the advent of Large Language Models has extended the capabilities of textual analysis and understanding. Especially the ability to formulate tasks in natural language opens up new possibilities for analysing text data. Potentially revolutionising the way qualitative and quantitative research can be combined.
+- This project aims to combine the best of natural language LLM interfacing and classical Data Science methods to build tools that provide a comprehensive overview of political topics, including summaries of news articles, information about political actors, and the relationships between them.
+- The goal of this project is to make politics more accessible and understandable for everyone.
 
-## Make it yours
+## Update: SSARE Release
+<Note>
+[SSARE - (Semantic Search Article Recommendation Engine)](https://github.com/JimVincentW/SSARE)
+</Note>
+SSARE is Open Politics' data aggregation system and vector storage endpoint. It aims to create up-to-date and relevant datasets for the LLMs to work with. A microservice infrastructure continuously scrapes news sites and stores them in a vector storage and a relational database (Postgres). Sources can be added with Python scripts which yield a dataframe with: URL | Headline | Paragraphs | Source. Just clone the service, add your scripts and bring your own data endpoint into production.
 
-Update your docs to your brand and add valuable content for the best user conversion.
+## The Webapp (Overview)
+![Open Politics Stack](assets/images/opp_high_level.png)
+25.06.2024: 
+**The Django stack is now replaced by a FastAPI backend + NextJS Frontend.**
+The stack setup & is largely based on Tiangolo's Fullstack Template. 
+Security and configuration updates will be fetched from the template.
 
-<CardGroup cols={2}>
-  <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
-  >
-    Customize your docs to your company's colors and brands
-  </Card>
-  <Card
-    title="Reference APIs"
-    icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
-  >
-    Automatically generate endpoints from an OpenAPI spec
-  </Card>
-  <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/components/accordion"
-  >
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/customers"
-  >
-    Check out our showcase of our favorite documentation
-  </Card>
-</CardGroup>
+### Backend
+FastAPI, Postgres, Adminer \
+The API's can be generated into OpenAPI clients. As an example for on of the core services one API documentation of our microservice architecture is laid out in the tab in the top left.
+For the prototype some static data is served to illustrate future purposes (like the leaders of countries, articles on the globe, etc.).
+The rest of the data is pulled from APIs, SSARE (https://github.com/JimVincentW/SSARE) and storages like Tavily, Bundestag API, OECD API, etc.
+
+**The methodic layer** of what information is presented and when is currently buried in the frontend with the help of the Vercel AI SDK. The plan is to dynamically choose data analysis and presentation methods that are presented as streaming generative interfaces. 
+
+Once it is more clear how FastAPI can provide the same capabilities as the Vercel AI SDK, the methodic layer will be moved to the backend. 
+
+### Frontend
+The frontend is now a Next.js app using shadcn as a UI library, amcharts for the globe and axios data fatches to the backend. The roadmap foresees that Open Politics will provide a unified interface for data resource management.
+
+## Want to engage? Look into our Developer Jour Fixe!
+- Interested in the project? Want to contribute? Share a thought?
+- Every Wednesday 15:30 Berlin Time
+- [Discord Server](https://discord.gg/KAFPp2KQ?event=1219348620860588123)
+Join and talk about the project, ask questions, propose ideas, or just listen in.  
+Currently needed:
+- Data Scraper Modules 
+- Interdisciplinary collaboration on the instruction sets for the LLMs 
+- Prompt Engineering suggestions
+- Frontend/UX/UI work
+
+## Tasks
+MVP Elements:
+- Issue Area Identification
+- Actor Identification / Named Entity Recognition
+- Stance Triangulation
+
+Including but not limited to tasks like:
+- Information summarization
+- Vector storage & retrieval 
+- Information clustering
+- Entity Extraction (Named Entity Recognition)
+- Q&A Chatbots (for interactive information)
+- Providing historical context 
+- Statement & Intention decoding
+- Visual representation of political data
+- Monitoring and alerts

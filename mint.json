@@ -28,7 +28,8 @@
   "tabs": [
     {
       "name": "API Reference",
-      "url": "api-reference"
+      "url": "api-reference",
+      "openapi": "/data/openapi.json"
     }
   ],
   "anchors": [
@@ -84,8 +85,7 @@
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
+    "github": "https://github.com/open-politics",
     "linkedin": "https://www.linkedin.com/company/mintsearch"
   }
 }

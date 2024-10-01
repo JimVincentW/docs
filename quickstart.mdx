@@ -1,86 +1,227 @@
 ---
-title: 'Quickstart'
-description: 'Start building awesome documentation in under 5 minutes'
+title: 'SSARE 🌐📰🔍🧠🗺️🪡📊🤖🗄️🔧'
+description: 'An open-source service for political intelligence and news analysis'
 ---
 
-## Setup your development
-
-Learn how to update your docs locally and deploy them to the public.
-
-### Edit and preview
-
-<AccordionGroup>
-  <Accordion icon="github" title="Clone your docs locally">
-    During the onboarding process, we created a repository on your Github with
-    your docs content. You can find this repository on our
-    [dashboard](https://dashboard.mintlify.com). To clone the repository
-    locally, follow these
-    [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-    in your terminal.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Preview changes">
-    Previewing helps you make sure your changes look as intended. We built a
-    command line interface to render these changes locally. 1. Install the
-    [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the
-    documentation changes locally with this command: ``` npm i -g mintlify ```
-    2. Run the following command at the root of your documentation (where
-    `mint.json` is): ``` mintlify dev ```
-  </Accordion>
-</AccordionGroup>
-
-### Deploy your changes
-
-<AccordionGroup>
-
-<Accordion icon="message-bot" title="Install our Github app">
-  Our Github app automatically deploys your changes to your docs site, so you
-  don't need to manage deployments yourself. You can find the link to install on
-  your [dashboard](https://dashboard.mintlify.com). Once the bot has been
-  successfully installed, there should be a check mark next to the commit hash
-  of the repo.
-</Accordion>
-<Accordion icon="rocket" title="Push your changes">
-  [Commit and push your changes to
-  Git](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push)
-  for your changes to update in your docs site. If you push and don't see that
-  the Github app successfully deployed your changes, you can also manually
-  update your docs through our [dashboard](https://dashboard.mintlify.com).
-</Accordion>
-
-</AccordionGroup>
-
-## Update your docs
-
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
-
-<CardGroup>
-
-<Card title="Style Your Docs" icon="paintbrush" href="/settings/global">
-  Add flair to your docs with personalized branding.
-</Card>
-
-<Card
-  title="Add API Endpoints"
-  icon="square-code"
-  href="/api-playground/configuration"
->
-  Implement your OpenAPI spec and enable API user interaction.
-</Card>
-
-<Card
-  title="Integrate Analytics"
-  icon="chart-mixed"
-  href="/analytics/supported-integrations"
->
-  Draw insights from user interactions with your documentation.
-</Card>
-
-<Card
-  title="Host on a Custom Domain"
-  icon="browser"
-  href="/settings/custom-domain/subdomain"
->
-  Keep your docs on your own website's subdomain.
-</Card>
-
+## Introduction
+SSARE is an open-source service designed to orchestrate the collection, processing, and analysis of news articles, with a focus on political intelligence.
+<Note>
+SSARE stands for **S**emantic **S**earch **A**rticle **R**ecommendation **E**ngine.
+</Note>
+Key Features
+<CardGroup cols={2}>
+  <Card title="Scraping" icon="spider-web">
+    Ingest data from arbitrary sourcing scripts
+  </Card>
+  <Card title="Vector Processing" icon="vector-square">
+    Convert articles into vector representations
+  </Card>
+  <Card title="Entity Recognition" icon="tag">
+    Identify entities like locations, persons, and organizations
+  </Card>
+  <Card title="Geocoding" icon="map-pin">
+    Convert recognized locations to geographical coordinates
+  </Card>
+  <Card title="Storage" icon="database">
+    Store articles and metadata in SQL and vector databases
+  </Card>
+  <Card title="Querying" icon="magnifying-glass">
+    Provide endpoints for semantic search and recommendations
+  </Card>
 </CardGroup>
+Quick Start
+Get SSARE up and running in minutes:
+bash
+git clone https://github.com/JimVincentW/SSARE.git
+cd SSARE
+docker-compose up --build
+Access the dashboard at http://localhost:8089/ or http://main_core_app:8089/ when inside the same Docker network.
+Architecture
+SSARE uses a microservices architecture for scalability and maintainability:
+<AccordionGroup>
+  <Accordion icon="broom" title="Scraper Service">
+    Handles the ingestion of news articles from various sources.
+  </Accordion>
+  <Accordion icon="brain" title="Vectorization/NLP Service">
+    Processes text into vector representations for semantic analysis.
+  </Accordion>
+  <Accordion icon="database" title="PostgreSQL Service">
+    Stores the full text and metadata of articles.
+  </Accordion>
+  <Accordion icon="tag" title="Entity Service">
+    Performs Named Entity Recognition on article text.
+  </Accordion>
+  <Accordion icon="map-pin" title="Geocoding Service">
+    Converts location entities to geographical coordinates.
+  </Accordion>
+  <Accordion icon="server" title="API Service">
+    Provides endpoints for querying and retrieving processed data.
+  </Accordion>
+</AccordionGroup>
+Data Flow
+
+Scraper scripts collect articles
+Articles are processed for vector representation and entity extraction
+Entities are geocoded if they represent locations
+Data is stored in PostgreSQL and vector databases
+API endpoints allow for querying and retrieval of processed data
+
+Adding Sources
+To add a new source to SSARE:
+
+Create a scraping script in the scraper_service/scrapers folder
+Ensure your script outputs a DataFrame with the following columns:
+
+url
+headline
+paragraphs
+source
+
+
+
+<CodeGroup>
+```python Example Scraper
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+def scrape_cnn_articles():
+# Scraping logic here
+# Save with the following columns:
+# url
+# headline
+# paragraphs
+# source
+# ...
+df = pd.DataFrame(articles)
+return df
+cnn_articles_df = scrape_cnn_articles()
+cnn_articles_df.to_csv('cnn_articles.csv', index=False)
+```
+</CodeGroup>
+
+## Use Cases
+
+### Entity Ranking
+
+Retrieve and rank entities from your processed articles:
+
+<CodeGroup>
+```python Entity Ranking Script
+import requests
+from collections import Counter, defaultdict
+
+def print_sorted_entities(entity_type, limit=10):
+    url = 'http://localhost:5434/articles'
+    params = {
+        'geocoding_created': 0,
+        'limit': 200,
+        'embeddings_created': 1,
+        'entities_extracted': 1
+    }
+
+    response = requests.get(url, params=params)
+    if response.status_code == 200:
+        data = response.json()
+        entity_counter = Counter()
+        entity_articles = defaultdict(list)
+
+        for article in data:
+            entities = article['entities']
+            for entity in entities:
+                if entity['tag'] == entity_type:
+                    entity_name = entity['text']
+                    entity_counter[entity_name] += 1
+                    entity_articles[entity_name].append(article['headline'] or article['url'])
+
+        for entity, count in entity_counter.most_common(limit):
+            print(f"{entity_type}: {entity}, Count: {count}")
+            print("Associated Articles:")
+            for article in set(entity_articles[entity]):
+                print(f" - {article}")
+            print("\n")
+    else:
+        print('API request failed.')
+
+print_sorted_entities('NORP', 5)  # Print top 5 NORP (affiliation) entities
+```
+</CodeGroup>
+GeoJSON Generation
+Create GeoJSON features from the locations in your data:
+<CodeGroup>
+```python GeoJSON Generation
+import requests
+import json
+def generate_geojson():
+url = 'http://localhost:5434/articles'
+params = {
+'geocoding_created': 1,
+'limit': 100
+}
+response = requests.get(url, params=params)
+if response.status_code == 200:
+    data = response.json()
+    features = []
+
+    for article in data:
+        for entity in article['entities']:
+            if entity['tag'] == 'GPE' and 'lat' in entity and 'lon' in entity:
+                feature = {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [entity['lon'], entity['lat']]
+                    },
+                    "properties": {
+                        "name": entity['text'],
+                        "article": article['headline']
+                        # add any other information you want to include in the geojson
+                    }
+                }
+                features.append(feature)
+
+    geojson = {
+        "type": "FeatureCollection",
+        "features": features
+    }
+
+    with open('locations.geojson', 'w') as f:
+        json.dump(geojson, f)
+
+    print("GeoJSON file created: locations.geojson")
+else:
+    print('API request failed.')
+generate_geojson()
+```
+</CodeGroup>
+
+## Roadmap
+
+<CardGroup cols={2}>
+  <Card title="Custom Embedding Models" icon="cube">
+    Support for user-defined embedding models
+  </Card>
+  <Card title="Enhanced Geocoding" icon="map">
+    Improve accuracy and coverage of location data
+  </Card>
+  <Card title="Kubernetes Orchestration" icon="diagram-project">
+    Scalable deployment with Kubernetes
+  </Card>
+  <Card title="Expanded Scraper Support" icon="spider">
+    We are looking forward to creating "flavors" of information spaces. This will need flexible and modular scraping.
+  </Card>
+</CardGroup>
+
+## Contributing
+
+We welcome contributions from developers, data scientists, and political enthusiasts. To contribute:
+
+1. Fork the repository
+2. Create a new branch for your feature
+3. Commit your changes
+4. Open a pull request
+
+For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+SSARE is distributed under the MIT License. See the `LICENSE` file in the repository for full details.

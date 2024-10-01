@@ -1,0 +1,817 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+    },
+    "paths": {
+    "/healthz": {
+    "get": {
+    "summary": "Healthcheck",
+    "operationId": "healthcheck_healthz_get",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/articles": {
+    "get": {
+    "summary": "Get Articles",
+    "operationId": "get_articles_articles_get",
+    "parameters": [
+    {
+    "name": "url",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "string"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "title": "Url"
+    }
+    },
+    {
+    "name": "search_query",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "string"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "title": "Search Query"
+    }
+    },
+    {
+    "name": "search_type",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "$ref": "#/components/schemas/SearchType",
+    "default": "text"
+    }
+    },
+    {
+    "name": "has_embeddings",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "boolean"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "description": "Filter articles with embeddings",
+    "title": "Has Embeddings"
+    },
+    "description": "Filter articles with embeddings"
+    },
+    {
+    "name": "has_geocoding",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "boolean"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "description": "Filter articles with geocoding",
+    "title": "Has Geocoding"
+    },
+    "description": "Filter articles with geocoding"
+    },
+    {
+    "name": "has_entities",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "boolean"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "description": "Filter articles with entities",
+    "title": "Has Entities"
+    },
+    "description": "Filter articles with entities"
+    },
+    {
+    "name": "has_classification",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "boolean"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "description": "Filter articles with classification",
+    "title": "Has Classification"
+    },
+    "description": "Filter articles with classification"
+    },
+    {
+    "name": "skip",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "integer"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "description": "Number of articles to skip",
+    "default": 0,
+    "title": "Skip"
+    },
+    "description": "Number of articles to skip"
+    },
+    {
+    "name": "limit",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "type": "integer",
+    "description": "Number of articles to return",
+    "default": 10,
+    "title": "Limit"
+    },
+    "description": "Number of articles to return"
+    },
+    {
+    "name": "sort_by",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "string"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "title": "Sort By"
+    }
+    },
+    {
+    "name": "sort_order",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "type": "string",
+    "pattern": "^(asc|desc)$",
+    "default": "desc",
+    "title": "Sort Order"
+    }
+    },
+    {
+    "name": "filters",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "string"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "description": "JSON string of filters",
+    "title": "Filters"
+    },
+    "description": "JSON string of filters"
+    },
+    {
+    "name": "news_category",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "string"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "description": "Filter by news category",
+    "title": "News Category"
+    },
+    "description": "Filter by news category"
+    },
+    {
+    "name": "secondary_category",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "string"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "description": "Filter by secondary category",
+    "title": "Secondary Category"
+    },
+    "description": "Filter by secondary category"
+    },
+    {
+    "name": "keyword",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "string"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "description": "Filter by keyword",
+    "title": "Keyword"
+    },
+    "description": "Filter by keyword"
+    },
+    {
+    "name": "entities",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "string"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "description": "Comma-separated list of entities",
+    "title": "Entities"
+    },
+    "description": "Comma-separated list of entities"
+    },
+    {
+    "name": "locations",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "string"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "description": "Comma-separated list of locations",
+    "title": "Locations"
+    },
+    "description": "Comma-separated list of locations"
+    },
+    {
+    "name": "topics",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "string"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "description": "Comma-separated list of topics",
+    "title": "Topics"
+    },
+    "description": "Comma-separated list of topics"
+    },
+    {
+    "name": "classification_scores",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "string"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "description": "JSON string of classification score ranges",
+    "title": "Classification Scores"
+    },
+    "description": "JSON string of classification score ranges"
+    },
+    {
+    "name": "keyword_weights",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "string"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "description": "JSON string of keyword weights",
+    "title": "Keyword Weights"
+    },
+    "description": "JSON string of keyword weights"
+    },
+    {
+    "name": "exclude_keywords",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "anyOf": [
+    {
+    "type": "string"
+    },
+    {
+    "type": "null"
+    }
+    ],
+    "description": "Comma-separated list of exclude keywords",
+    "title": "Exclude Keywords"
+    },
+    "description": "Comma-separated list of exclude keywords"
+    }
+    ],
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    },
+    "422": {
+    "description": "Validation Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/HTTPValidationError"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "/classification_fields": {
+    "get": {
+    "summary": "Get Classification Fields",
+    "operationId": "get_classification_fields_classification_fields_get",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/location_entities/{location_name}": {
+    "get": {
+    "summary": "Get Location Entities",
+    "operationId": "get_location_entities_location_entities__location_name__get",
+    "parameters": [
+    {
+    "name": "location_name",
+    "in": "path",
+    "required": true,
+    "schema": {
+    "type": "string",
+    "title": "Location Name"
+    }
+    },
+    {
+    "name": "skip",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "type": "integer",
+    "default": 0,
+    "title": "Skip"
+    }
+    },
+    {
+    "name": "limit",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "type": "integer",
+    "default": 50,
+    "title": "Limit"
+    }
+    }
+    ],
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    },
+    "422": {
+    "description": "Validation Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/HTTPValidationError"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "/articles_by_entity/{entity_name}": {
+    "get": {
+    "summary": "Get Articles By Entity",
+    "operationId": "get_articles_by_entity_articles_by_entity__entity_name__get",
+    "parameters": [
+    {
+    "name": "entity_name",
+    "in": "path",
+    "required": true,
+    "schema": {
+    "type": "string",
+    "title": "Entity Name"
+    }
+    },
+    {
+    "name": "skip",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "type": "integer",
+    "default": 0,
+    "title": "Skip"
+    }
+    },
+    {
+    "name": "limit",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "type": "integer",
+    "default": 10,
+    "title": "Limit"
+    }
+    }
+    ],
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    },
+    "422": {
+    "description": "Validation Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/HTTPValidationError"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "/deduplicate_articles": {
+    "post": {
+    "summary": "Deduplicate Articles",
+    "operationId": "deduplicate_articles_deduplicate_articles_post",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/flags": {
+    "get": {
+    "summary": "Produce Flags",
+    "operationId": "produce_flags_flags_get",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/store_raw_articles": {
+    "post": {
+    "summary": "Store Raw Articles",
+    "operationId": "store_raw_articles_store_raw_articles_post",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/create_embedding_jobs": {
+    "post": {
+    "summary": "Create Embedding Jobs",
+    "operationId": "create_embedding_jobs_create_embedding_jobs_post",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/store_articles_with_embeddings": {
+    "post": {
+    "summary": "Store Articles With Embeddings",
+    "operationId": "store_articles_with_embeddings_store_articles_with_embeddings_post",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/create_entity_extraction_jobs": {
+    "post": {
+    "summary": "Create Entity Extraction Jobs",
+    "operationId": "create_entity_extraction_jobs_create_entity_extraction_jobs_post",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/store_articles_with_entities": {
+    "post": {
+    "summary": "Store Articles With Entities",
+    "operationId": "store_articles_with_entities_store_articles_with_entities_post",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/create_geocoding_jobs": {
+    "post": {
+    "summary": "Create Geocoding Jobs",
+    "operationId": "create_geocoding_jobs_create_geocoding_jobs_post",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/store_articles_with_geocoding": {
+    "post": {
+    "summary": "Store Articles With Geocoding",
+    "operationId": "store_articles_with_geocoding_store_articles_with_geocoding_post",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/create_classification_jobs": {
+    "post": {
+    "summary": "Create Classification Jobs",
+    "operationId": "create_classification_jobs_create_classification_jobs_post",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/store_articles_with_classification": {
+    "post": {
+    "summary": "Store Articles With Classification",
+    "operationId": "store_articles_with_classification_store_articles_with_classification_post",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/delete_all_classifications": {
+    "delete": {
+    "summary": "Delete All Classifications",
+    "operationId": "delete_all_classifications_delete_all_classifications_delete",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/articles_csv_quick": {
+    "get": {
+    "summary": "Get Articles Csv",
+    "operationId": "get_articles_csv_articles_csv_quick_get",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/articles_csv_full": {
+    "get": {
+    "summary": "Get Articles Csv",
+    "operationId": "get_articles_csv_articles_csv_full_get",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "components": {
+    "schemas": {
+    "HTTPValidationError": {
+    "properties": {
+    "detail": {
+    "items": {
+    "$ref": "#/components/schemas/ValidationError"
+    },
+    "type": "array",
+    "title": "Detail"
+    }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+    },
+    "SearchType": {
+    "type": "string",
+    "enum": [
+    "text",
+    "semantic",
+    "structured"
+    ],
+    "title": "SearchType"
+    },
+    "ValidationError": {
+    "properties": {
+    "loc": {
+    "items": {
+    "anyOf": [
+    {
+    "type": "string"
+    },
+    {
+    "type": "integer"
+    }
+    ]
+    },
+    "type": "array",
+    "title": "Location"
+    },
+    "msg": {
+    "type": "string",
+    "title": "Message"
+    },
+    "type": {
+    "type": "string",
+    "title": "Error Type"
+    }
+    },
+    "type": "object",
+    "required": [
+    "loc",
+    "msg",
+    "type"
+    ],
+    "title": "ValidationError"
+    }
+    }
+    }
+    }
