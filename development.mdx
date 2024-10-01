@@ -1,98 +1,56 @@
 ---
-title: 'Development'
+title: 'SSARE - Install & Development'
 description: 'Learn how to preview changes locally'
 ---
 
 <Info>
-  **Prerequisite** You should have installed Node.js (version 18.10.0 or
-  higher).
+  **Prerequisite** You should have installed docker along with docker compose.
 </Info>
 
-Step 1. Install Mintlify on your OS:
 
-<CodeGroup>
 
-```bash npm
-npm i -g mintlify
-```
 
-```bash yarn
-yarn global add mintlify
-```
 
-</CodeGroup>
+<Steps>
+  <Step title="Clone the repository">
+    <CodeGroup>
+    ```bash bash
+    git clone https://github.com/Open-Politics/Open-Politics.git
+    ```
+    </CodeGroup>
+  </Step>
+  <Step title="Change .env.example to .env">
+    <CodeGroup>
+    ```bash bash
+    mv .env.example .env
+    ```
+    </CodeGroup>
+  </Step>
+  <Step title="Run the docker compose file">
+    <CodeGroup>
+    ```bash bash
+    docker compose up
+    ```
+    </CodeGroup>
+  </Step>
+  <Step title="Go to the dashboard">
+    <Card title="Dashboard URL" img="/images/ssare_hub.png" color="green">
+      ```bash bash 
+      http://localhost:8089/
+      ```
+      <img src="/images/ssare_hub.png" />
+    </Card>
+  </Step>
+</Steps>
 
-Step 2. Go to the docs are located (where you can find `mint.json`) and run the following command:
 
-```bash
-mintlify dev
-```
-
-The documentation website is now available at `http://localhost:3000`.
-
-### Custom Ports
-
-Mintlify uses port 3000 by default. You can use the `--port` flag to customize the port Mintlify runs on. For example, use this command to run in port 3333:
-
-```bash
-mintlify dev --port 3333
-```
-
-You will see an error like this if you try to run Mintlify in a port that's already taken:
-
-```md
-Error: listen EADDRINUSE: address already in use :::3000
-```
-
-## Mintlify Versions
-
-Each CLI is linked to a specific version of Mintlify. Please update the CLI if your local website looks different than production.
-
-<CodeGroup>
-
-```bash npm
-npm i -g mintlify@latest
-```
-
-```bash yarn
-yarn global upgrade mintlify
-```
-
-</CodeGroup>
-
-## Deployment
-
-<Tip>
-  Unlimited editors available under the [Startup
-  Plan](https://mintlify.com/pricing)
-</Tip>
-
-You should see the following if the deploy successfully went through:
-
-<Frame>
-  <img src="/images/checks-passed.png" style={{ borderRadius: '0.5rem' }} />
-</Frame>
-
-## Troubleshooting
-
-Here's how to solve some common problems when working with the CLI.
 
 <AccordionGroup>
-  <Accordion title="Mintlify is not loading">
-    Update to Node v18. Run `mintlify install` and try again.
+  <Accordion title="Ports unavailable">
+    Check your .env file to ensure the ports are correctly configured and not in use by other services.
   </Accordion>
-  <Accordion title="No such file or directory on Windows">
-Go to the `C:/Users/Username/.mintlify/` directory and remove the `mint`
-folder. Then Open the Git Bash in this location and run `git clone
-https://github.com/mintlify/mint.git`.
-
-Repeat step 3.
-
-  </Accordion>
-  <Accordion title="Getting an unknown error">
-    Try navigating to the root of your device and delete the ~/.mintlify folder.
-    Then run `mintlify dev` again.
+  <Accordion title="At reserve">
+    Tear down the current setup, clone the repository again, and copy the .env.example file to .env.
   </Accordion>
 </AccordionGroup>
 
-Curious about what changed in a CLI version? [Check out the CLI changelog.](/changelog/command-line)
