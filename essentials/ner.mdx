@@ -1,0 +1,53 @@
+---
+title: 'Entity Recognition in Data Science'
+description: 'Understanding the role of entity recognition in open-source political intelligence'
+icon: 'fa fa-tags'
+---
+
+
+## Entity Recognition
+
+### What is Entity Recognition?
+
+Entity Recognition, also known as Named Entity Recognition (NER), is a crucial task in data science and natural language processing. It involves identifying and classifying key information (entities) in text into predefined categories such as names of persons, organizations, locations, expressions of times, quantities, monetary values, percentages, etc.
+
+### Importance in Political Intelligence
+
+In the context of open-source political intelligence, entity recognition helps in extracting relevant information from vast amounts of political data. This can include identifying political figures, organizations, events, and locations from news articles, social media, and other sources.
+
+### Using Flair's NER Model
+
+We use the **Flair** model for English NER, specifically the **ner-english-ontonotes-fast** model. This model is based on Flair embeddings and LSTM-CRF and predicts 18 tags with an F1-Score of 89.3 (Ontonotes).
+
+<Note>
+Search models, datasets, users on Hugging Face.
+</Note>
+
+<Note>
+As this is a microservice, we can use basically any model for NER. This model was chosen for its wide array of possible entities.
+If you want to change the NER model, the Pydantic Models for the Entities and the functions that save articles in the postgres service need to be modified.
+</Note>
+
+#### Predicted Tags
+
+| Tag       | Meaning                |
+| --------- | ---------------------- |
+| CARDINAL  | cardinal value         |
+| DATE      | date value             |
+| EVENT     | event name             |
+| FAC       | building name          |
+| GPE       | geo-political entity   |
+| LANGUAGE  | language name          |
+| LAW       | law name               |
+| LOC       | location name          |
+| MONEY     | money name             |
+| NORP      | affiliation            |
+| ORDINAL   | ordinal value          |
+| ORG       | organization name      |
+| PERCENT   | percent value          |
+| PERSON    | person name            |
+| PRODUCT   | product name           |
+| QUANTITY  | quantity value         |
+| TIME      | time value             |
+| WORK_OF_ART | name of work of art  |
+

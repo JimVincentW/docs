@@ -1,0 +1,80 @@
+---
+title: 'Pydantic Data Models'
+description: 'Documentation for Pydantic data models used in our project'
+icon: 'fa fa-database'
+---
+
+## Pydantic Data Models
+
+This document provides an overview of the Pydantic data models used in our project. These models are essential for defining the structure of our data and ensuring data validation.
+
+### BaseModel
+```mermaid
+classDiagram
+    class BaseModel {
+        +UUID id
+    }
+    class BaseDoc {
+        +str url
+        +str headline
+        +str paragraphs
+    }
+    class Article {
+        +str url
+        +str headline
+        +str paragraphs
+        +str source
+        +datetime insertion_date
+        +List[float] embeddings
+    }
+    class NewsArticleClassification {
+        +UUID article_id
+        +str title
+        +str news_category
+        +List[str] secondary_categories
+        +List[str] keywords
+        +int geopolitical_relevance
+        +int legislative_influence_score
+        +int international_relevance_score
+        +int democratic_process_implications_score
+        +int general_interest_score
+        +int spam_score
+        +int clickbait_score
+        +int fake_news_score
+        +int satire_score
+    }
+    class Entity {
+        +str name
+        +str entity_type
+    }
+    class Location {
+        +str name
+        +str type
+        +List[float] coordinates
+        +float weight
+    }
+    class Tag {
+        +str name
+    }
+    
+    BaseModel <|-- Article
+    BaseModel <|-- NewsArticleClassification
+    BaseModel <|-- Entity
+    BaseModel <|-- Location
+    BaseModel <|-- Tag
+    
+    Article "1" -- "0..1" NewsArticleClassification
+    Article "1" -- "0..*" Entity
+    Article "1" -- "0..*" Tag
+    Entity "0..*" -- "0..*" Location
+end
+```
+
+### BaseDoc
+
+The `BaseDoc` model is the base class for all documents in our system. It includes common fields such as `url`, `headline`, `paragraphs`, `source`.
+This means any data that you can translate into that format can be inserted. 
+More metadata fields and classes can be discussed for following versions.
+
+```mermaid
+classDiagram

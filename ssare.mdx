@@ -58,28 +58,54 @@ SSARE uses a microservices architecture for scalability and maintainability:
     Provides endpoints for querying and retrieving processed data.
   </Accordion>
 </AccordionGroup>
-Data Flow
 
-Scraper scripts collect articles
-Articles are processed for vector representation and entity extraction
-Entities are geocoded if they represent locations
-Data is stored in PostgreSQL and vector databases
-API endpoints allow for querying and retrieval of processed data
+##  Flows
 
-Adding Sources
-To add a new source to SSARE:
+### Ingestion Process
+<Card title='Ingestion Process'>
+<Steps>
+  <Step title="Collect Articles" icon="newspaper" iconType="solid">
+    Scraper scripts collect articles from various sources.
+  </Step>
+  <Step title="Process Articles" icon="fa-solid fa-gears" iconType="solid">
+    Articles are processed for vector representation and entity extraction.
+    <Steps>
+      <Step title="Vector Representation" icon="vector-square" iconType="solid">
+        Convert article text into numerical vectors for semantic analysis.
+      </Step>
+      <Step title="Entity Extraction" icon="tags" iconType="solid">
+        Identify and extract named entities such as persons, organizations, and locations.
+      </Step>
+      <Step title="Geocoding" icon="map" iconType="solid">
+        Convert extracted location entities to geographical coordinates.
+      </Step>
+      <Step title="Classification" icon="sitemap" iconType="solid">
+        LLMs are used to classify the article into the categories you want to use.
+      </Step>
+    </Steps>
+  </Step>
+  <Step title="Store Data" icon="database" iconType="solid">
+    Processed data is stored in PostgreSQL and vector databases.
+  </Step>
+  <Step title="Provide Access" icon="server" iconType="solid">
+    API endpoints allow for querying and retrieval of processed data.
+  </Step>
+</Steps>
+</Card>
 
-Create a scraping script in the scraper_service/scrapers folder
-Ensure your script outputs a DataFrame with the following columns:
+### Adding Sources
+<Card>
+<Steps>
+  <Step title="Create Scraping/ Sourcing Script">
+    To add a new source to SSARE, create a scraping script in the scraper_service/scrapers folder.
+    That doesn't necessarily need to be scraping script, it can also be just a function where you load data e.g. from an S3 Storage Bucket.
+  </Step>
+  <Step title="Define Output">
+    Ensure your script outputs a DataFrame with the following columns:
 
-url
-headline
-paragraphs
-source
+    > | url | headline | paragraphs | source |
 
-
-
-<CodeGroup>
+    <CodeGroup>
 ```python Example Scraper
 import requests
 from bs4 import BeautifulSoup
@@ -98,6 +124,15 @@ cnn_articles_df = scrape_cnn_articles()
 cnn_articles_df.to_csv('cnn_articles.csv', index=False)
 ```
 </CodeGroup>
+  </Step>
+  <Step title="Integrate with SSARE">
+    Add your new scraper to the SSARE pipeline for automatic processing.
+  </Step>
+</Steps>
+</Card>
+
+
+
 
 ## Use Cases
 
@@ -145,8 +180,11 @@ def print_sorted_entities(entity_type, limit=10):
 print_sorted_entities('NORP', 5)  # Print top 5 NORP (affiliation) entities
 ```
 </CodeGroup>
-GeoJSON Generation
+
+### GeoJSON Generation
+
 Create GeoJSON features from the locations in your data:
+
 <CodeGroup>
 ```python GeoJSON Generation
 import requests
@@ -208,6 +246,12 @@ generate_geojson()
   </Card>
   <Card title="Expanded Scraper Support" icon="spider">
     We are looking forward to creating "flavors" of information spaces. This will need flexible and modular scraping.
+  </Card>
+  <Card title="Knowledge Graphs" icon="diagram-network">
+    Implement knowledge graph capabilities for enhanced data relationships
+  </Card>
+  <Card title="GraphRAG" icon="chart-network">
+    Integrate Graph Retrieval-Augmented Generation for improved context understanding
   </Card>
 </CardGroup>
 

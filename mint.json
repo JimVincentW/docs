@@ -62,7 +62,7 @@
       "group": "Essentials",
       "pages": [
         "essentials/markdown",
-        "essentials/code",
+        "essentials/ner",
         "essentials/images",
         "essentials/settings",
         "essentials/navigation",
