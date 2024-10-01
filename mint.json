@@ -2,7 +2,8 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Open Politics Documentation",
   "logo": {
-    "text": "OPP Documentation"
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
   },
   "favicon": "/favicon.svg",
   "colors": {
