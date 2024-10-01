@@ -2,8 +2,8 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Open Politics Documentation",
   "logo": {
-    "dark": "/logo/opp_logo_black.svg",
-    "light": "/logo/opp_logo_white.svg"
+    "dark": "/logo/opp_white.svg",
+    "light": "/logo/opp_black.svg"
   },
   "favicon": "/favicon.svg",
   "colors": {
@@ -54,16 +54,15 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "ssare",
+        "data",
         "development"
       ]
     },
     {
       "group": "Essentials",
       "pages": [
-        "essentials/markdown",
         "essentials/ner",
-        "snippets/PydanticModels"
+        "essentials/datastruc"
       ]
     },
     {

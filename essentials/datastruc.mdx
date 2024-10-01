@@ -1,0 +1,72 @@
+---
+title: 'Data Structures'
+description: 'Understanding the data structure of SSARE'
+icon: 'fa fa-database'
+---
+
+
+## Pydantic Data Models
+
+This document provides an overview of the Pydantic data models used in our project. These models are essential for defining the structure of our data and ensuring data validation.
+
+### BaseModel
+```mermaid
+classDiagram
+    class BaseModel {
+        +UUID id
+    }
+    class Article {
+        +url: str
+        +headline: str
+        +paragraphs: List[str]
+        +source: str
+        +insertion_date: datetime
+    }
+    class NewsArticleClassification {
+        +article_id: UUID
+        +title: str
+        +news_category: str
+        +secondary_categories: List[str]
+    }
+    
+    BaseModel <|-- Article
+    BaseModel <|-- NewsArticleClassification
+    Article "1" -- "0..1" NewsArticleClassification
+
+    subgraph Engineered Features
+        class Embeddings {
+            +List[float] embeddings
+        }
+        class Entities {
+            +List[Entity] entities
+        }
+        class Locations {
+            +List[Location] locations
+        }
+        class Classifications {
+            +List[Tag] classifications
+        }
+        class Keywords {
+            +List[str] keywords
+        }
+        class NLPScore {
+            +int score
+        }
+    end
+
+    Article "1" -- "1" Embeddings
+    Article "1" -- "1" Entities
+    Article "1" -- "1" Locations
+    Article "1" -- "1" Classifications
+    Article "1" -- "1" Keywords
+    Article "1" -- "1" NLPScore
+```
+
+### BaseDoc
+
+The `BaseDoc` model is the base class for all documents in our system. It includes common fields such as `url`, `headline`, `paragraphs`, `source`.
+This means any data that you can translate into that format can be inserted. 
+More metadata fields and classes can be discussed for following versions.
+
+```mermaid
+classDiagram
