@@ -94,11 +94,15 @@ http://localhost:8089/
 <Steps>
   <Step title="Collect Articles" icon="newspaper" iconType="solid">
     Scraper scripts collect articles from various sources.
-    Sources can be adjust with custom source scripts, just make it return 
-    -- Url, Headline, Paragraphs, Source
+    Sources can be adjusted with custom source scripts, just make them return:
+    > url, headline, paragraphs and source in a csv file.
+
+    This flexibility allows you to integrate various data sources into the SSARE pipeline.
   </Step>
   <Step title="Process Articles" icon="fa-solid fa-gears" iconType="solid">
     Articles are processed for vector representation and entity extraction.
+    Each of the following steps is a microservice roughly working in the same way:
+    {/* <img src='/images/service_pipes.png'/ > */}
     <Steps>
       <Step title="Vector Representation" icon="vector-square" iconType="solid">
         Convert article text into numerical vectors for semantic analysis.
@@ -111,6 +115,90 @@ http://localhost:8089/
       </Step>
       <Step title="Classification" icon="sitemap" iconType="solid">
         LLMs are used to classify the article into the categories you want to use.
+        With instructor you can choose any dimension that you wish to analyse your data by.
+        You can use str, int, List[str] and most other regular types supported by Pydantic models to define your classification schema. This flexibility allows you to tailor the classification to your specific needs and extract structured information from the articles efficiently.
+
+        <Info>You can use local llms with Ollama through SSARE, just change LOCAL_LLM=True in the .env.</Info>
+
+        <Accordion title="Two possible solutions for custom intelligence:">
+
+          
+        <CodeGroup>
+          ```python Political Bias Analysis
+          import instructor
+          from openai import OpenAI
+          from pydantic import BaseModel
+          from typing import List, Dict
+
+          class PoliticalBiasMetrics(BaseModel):
+              overall_bias: str  # e.g., "left", "center-left", "center", "center-right", "right"
+              bias_score: float  # Scale from -1.0 (far left) to 1.0 (far right)
+              partisan_phrases: List[str]
+              balanced_reporting_score: float  # Scale from 0.0 (highly biased) to 1.0 (perfectly balanced)
+              key_topics: List[str]
+              topic_bias: Dict[str, float]  # e.g., {"economy": 0.2, "healthcare": -0.3}
+
+          # Patch the OpenAI client with instructor
+          client = instructor.patch(OpenAI())
+
+          # Extract political bias metrics from an article
+          bias_metrics = client.chat.completions.create(
+              model="gpt-4",
+              response_model=PoliticalBiasMetrics,
+              messages=[
+                  {"role": "system", "content": "You are an expert political analyst tasked with objectively assessing political bias in news articles. Provide a detailed, impartial analysis based solely on the content provided."},
+                  {"role": "user", "content": "Analyze the political bias in the following article, focusing on overall bias, specific partisan language, balanced reporting, key topics, and topic-specific biases. Provide your analysis in a structured format.\n\nArticle text: [Insert full article text here]"}
+              ],
+          )
+
+          print(f"Overall bias: {bias_metrics.overall_bias}")
+          print(f"Bias score: {bias_metrics.bias_score}")
+          print(f"Partisan phrases: {', '.join(bias_metrics.partisan_phrases)}")
+          print(f"Balanced reporting score: {bias_metrics.balanced_reporting_score}")
+          print(f"Key topics: {', '.join(bias_metrics.key_topics)}")
+          print(f"Topic-specific biases: {bias_metrics.topic_bias}")
+          ```
+
+          ```python Environmental Impact Assessment
+          import instructor
+          from openai import OpenAI
+          from pydantic import BaseModel
+          from typing import List, Dict
+
+          class EnvironmentalImpactMetrics(BaseModel):
+              primary_environmental_topics: List[str]
+              topic_relevance: Dict[str, float]  # e.g., {"climate_change": 0.9, "biodiversity": 0.5}
+              sentiment: Dict[str, float]  # e.g., {"climate_change": -0.7, "renewable_energy": 0.8}
+              proposed_solutions: List[Dict[str, str]]  # e.g., [{"solution": "Carbon tax", "topic": "Climate change"}]
+              urgency_score: float  # Scale from 0.0 (low urgency) to 1.0 (high urgency)
+              scientific_accuracy: float  # Scale from 0.0 (low accuracy) to 1.0 (high accuracy)
+              key_stakeholders: List[str]
+
+          # Patch the OpenAI client with instructor
+          client = instructor.patch(OpenAI())
+
+          # Assess environmental impact metrics from an article
+          impact_metrics = client.chat.completions.create(
+              model="gpt-4",
+              response_model=EnvironmentalImpactMetrics,
+              messages=[
+                  {"role": "system", "content": "You are an expert environmental scientist tasked with analyzing news articles for their environmental content and impact. Provide a comprehensive, objective assessment based on the latest scientific understanding."},
+                  {"role": "user", "content": "Analyze the environmental impact discussed in the following article. Focus on identifying key topics, assessing their relevance and sentiment, evaluating proposed solutions, determining the urgency of the issues, checking scientific accuracy, and identifying key stakeholders. Provide your analysis in a structured format.\n\nArticle text: [Insert full article text here]"}
+              ],
+          )
+
+          print(f"Primary environmental topics: {', '.join(impact_metrics.primary_environmental_topics)}")
+          print(f"Topic relevance: {impact_metrics.topic_relevance}")
+          print(f"Sentiment analysis: {impact_metrics.sentiment}")
+          print(f"Proposed solutions: {', '.join([f'{s['solution']} ({s['topic']})' for s in impact_metrics.proposed_solutions])}")
+          print(f"Urgency score: {impact_metrics.urgency_score}")
+          print(f"Scientific accuracy: {impact_metrics.scientific_accuracy}")
+          print(f"Key stakeholders: {', '.join(impact_metrics.key_stakeholders)}")
+          ```
+          </CodeGroup>
+        </Accordion>
+
+        These examples demonstrate how you can create custom intelligence systems to extract specific metrics from articles, tailored to your analysis needs.
       </Step>
     </Steps>
   </Step>
@@ -119,10 +207,37 @@ http://localhost:8089/
   </Step>
   <Step title="Provide Access" icon="server" iconType="solid">
     API endpoints allow for querying and retrieval of processed data.
+    Here's a detailed breakdown of the API endpoint for retrieving articles:
+
+    ### Get Articles
+    <Accordion title="Query Parameters">
+    <ParamField query="url" type="string">
+      Optional URL to filter articles by specific URL.
+    </ParamField>
+
+    <ParamField query="search_query" type="string">
+      Optional search query to filter articles based on content.
+    </ParamField>
+
+    <ParamField query="search_type" type="string" default="TEXT">
+      Type of search to perform. Can be either "TEXT" for standard text search or "SEMANTIC" for embedding-based search.
+    </ParamField>
+
+    <ParamField query="skip" type="integer" default="0">
+      Number of articles to skip (for pagination).
+    </ParamField>
+
+    <ParamField query="limit" type="integer" default="10">
+      Maximum number of articles to return.
+    </ParamField>
+    </Accordion>
+
+    This endpoint allows you to retrieve articles with various filtering options. It supports both text-based and semantic search, and can filter articles based on the presence of embeddings, geocoding, entities, and classifications.
+
+    The response will include detailed information about each article, including its content, associated entities, tags, and classification (if available).
   </Step>
 </Steps>
 </Card>
-
 ### Adding Sources
 <Card>
 <Steps>
