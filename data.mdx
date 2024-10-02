@@ -75,9 +75,11 @@ http://localhost:8089/
   </Accordion>
   <Accordion icon="map-pin" title="Geocoding Service">
     Converts location entities to geographical coordinates.
+    When you start up the services first the Pelias Docker Image will download a placeholder dataset.
+        This means you can fully locally convert locations to geocoordinates and in general handle locations and region mapping without any external service.
   </Accordion>
   <Accordion icon="server" title="API Service">
-    Provides endpoints for querying and retrieving processed data.
+    
   </Accordion>
 </AccordionGroup>
 
@@ -263,17 +265,22 @@ generate_geojson()
   <Card title="Enhanced Geocoding" icon="map">
     Improve accuracy and coverage of location data
   </Card>
-  <Card title="Kubernetes Orchestration" icon="diagram-project">
+  <Card title="Kubernetes Orchestration" icon="ship">
     Scalable deployment with Kubernetes
   </Card>
   <Card title="Expanded Scraper Support" icon="spider">
     We are looking forward to creating "flavors" of information spaces. This will need flexible and modular scraping.
   </Card>
-  <Card title="Knowledge Graphs" icon="diagram-network">
+  <Card title="Knowledge Graphs" icon="diagram-project">
     Implement knowledge graph capabilities for enhanced data relationships
   </Card>
   <Card title="GraphRAG" icon="chart-network">
     Integrate Graph Retrieval-Augmented Generation for improved context understanding
+  </Card>
+  <Card title="Custom Information Spaces" icon="globe">
+    Our initial focus is on international politics and global news. 
+    We aim to expand this to individual information spaces for more granular coverage. 
+    We're also working towards multi-region and multi-language support.
   </Card>
 </CardGroup>
 
