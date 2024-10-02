@@ -3,7 +3,7 @@
   "name": "Open Politics Documentation",
   "logo": {
     "dark": "/logo/opp_black.svg",
-    "light": "/logo/opp_white.svg"
+    "light": "/logo/opp_white.svg",
   },
   "favicon": "/favicon.svg",
   "colors": {
@@ -74,9 +74,8 @@
     {
       "group": "Endpoint Examples",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/endpoint/articles",
+        "api-reference/endpoint/create_classification_jobs"
       ]
     }
   ],
