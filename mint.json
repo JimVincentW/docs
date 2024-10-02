@@ -2,8 +2,8 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Open Politics Documentation",
   "logo": {
-    "dark": "/logo/opp_white.svg",
-    "light": "/logo/opp_black.svg"
+    "dark": "/logo/opp_black.svg",
+    "light": "/logo/opp_white.svg"
   },
   "favicon": "/favicon.svg",
   "colors": {
@@ -53,7 +53,7 @@
     {
       "group": "Get Started",
       "pages": [
-        "introduction",
+        "opp",
         "data",
         "development"
       ]

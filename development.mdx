@@ -11,37 +11,83 @@ description: 'Learn how to preview changes locally'
 
 
 
-<Steps>
-  <Step title="Clone the repository">
-    <CodeGroup>
-    ```bash bash
-    git clone https://github.com/Open-Politics/Open-Politics.git
-    ```
-    </CodeGroup>
-  </Step>
-  <Step title="Change .env.example to .env">
-    <CodeGroup>
-    ```bash bash
-    mv .env.example .env
-    ```
-    </CodeGroup>
-  </Step>
-  <Step title="Run the docker compose file">
-    <CodeGroup>
-    ```bash bash
-    docker compose up
-    ```
-    </CodeGroup>
-  </Step>
-  <Step title="Go to the dashboard">
-    <Card title="Dashboard URL" img="/images/ssare_hub.png" color="green">
-      ```bash bash 
-      http://localhost:8089/
-      ```
-      <img src="/images/ssare_hub.png" />
-    </Card>
-  </Step>
-</Steps>
+<Tabs>
+  <Tab title="Open Politics">
+    <Steps>
+      <Step title="Clone the repository">
+        <CodeGroup>
+        ```bash bash
+        git clone https://github.com/Open-Politics/Open-Politics.git
+        ```
+        </CodeGroup>
+      </Step>
+      <Step title="Change .env.example to .env">
+        <CodeGroup>
+        ```bash bash
+        cd Open-Politics
+        mv .env.example .env
+        ```
+
+        <Icon icon="check" iconType="solid" /> The documentation you want, effortlessly
+        
+        </CodeGroup>
+      </Step>
+      <Step title="Run the docker compose file">
+        <CodeGroup>
+        ```bash bash
+        docker compose up
+        ```
+        </CodeGroup>
+      </Step>
+      <Step title="Go to the dashboard">
+        <Card title="Dashboard URL" img="/images/ssare_hub.png" color="green">
+          ```bash bash 
+          http://localhost:3000/desk_synthese
+          ```
+          <Frame>
+          <img src="/images/opp_desk2.png" />
+          </Frame>
+        </Card>
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="SSARE">
+    <Steps>
+      <Step title="Clone the repository">
+        <CodeGroup>
+        ```bash bash
+        git clone https://github.com/open-politics/SSARE.git
+        ```
+        </CodeGroup>
+      </Step>
+      <Step title="Change .env.example to .env">
+        <CodeGroup>
+        ```bash bash
+        cd SSARE
+        mv .env.example .env
+        ```
+        </CodeGroup>
+      </Step>
+      <Step title="Run the boot script">
+        <CodeGroup>
+        ```bash bash
+        sudo bash boot.sh
+        ```
+        </CodeGroup>
+      </Step>
+      <Step title="Go to the app">
+        <Card title="Dashboard URL" img="/images/ssare_hub.png" color="green">
+          ```bash bash 
+          http://localhost:3000/desk_synthese
+          ```
+          <Frame>
+          <img src="/images/ssare_hub.png" />
+          </Frame>
+        </Card>
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 
 

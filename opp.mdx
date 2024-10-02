@@ -1,10 +1,14 @@
 ---
 title: 'Open Politics 🌐'
-description: 'Open Source Political Intelligence'
 ---
 
 ## Introduction
 Open Politics' vision is to democratise political intelligence. The mission is to create an open-source data science and AI toolkit to analyse, summarise, and visualise political information.
+
+<Frame>
+  <img src="/images/opp_desk.png"/>
+</Frame>
+
 <AccordionGroup>
 <Accordion title="Index">
 ## Table of Contents
@@ -16,9 +20,6 @@ Open Politics' vision is to democratise political intelligence. The mission is t
 - [AI Models](#ai-models)
 - [Data Challenges](#data-challenges)
 - [Journalistic Challenges](#journalistic-challenges)
-- [Quality Assurance](#quality-assurance)
-- [Architecture](#architecture)
-- [Usage](#usage)
 - [Necessary API Keys/Environment Variables](#necessary-api-keysenvironment-variables)
 - [Contributing](#contributing)
 - [Contact](#contact)
@@ -33,11 +34,11 @@ Open Politics' vision is to democratise political intelligence. The mission is t
 
 ## Update: SSARE Release
 <Note>
-[SSARE - (Semantic Search Article Recommendation Engine)](https://github.com/JimVincentW/SSARE)
+[SSARE - (Semantic Search Article Recommendation Engine)](https://github.com/open-politics/SSARE)
 </Note>
 > SSARE is Open Politics' data aggregation system and vector storage endpoint. It aims to create up-to-date and relevant datasets for the LLMs to work with. 
 
-A microservice infrastructure continuously scrapes news sites and stores them in a vector storage and a relational database (Postgres). Sources can be added with Python scripts which yield a dataframe with: URL | Headline | Paragraphs | Source. Just clone the service, add your scripts and bring your own data endpoint into production.
+> A microservice infrastructure continuously scrapes news sites and stores them in a vector storage and a relational database (Postgres). Sources can be added with Python scripts which yield a dataframe with: URL | Headline | Paragraphs | Source. Just clone the service, add your scripts and bring your own data endpoint into production.
 
 <AccordionGroup>
     <Accordion title="Webapp (Overview)" icon='chalkboard' iconType="solid" >
@@ -50,7 +51,7 @@ Security and configuration updates will be fetched from the template.
 FastAPI, Postgres, Adminer \
 The API's can be generated into OpenAPI clients. As an example for on of the core services one API documentation of our microservice architecture is laid out in the tab in the top left.
 For the prototype some static data is served to illustrate future purposes (like the leaders of countries, articles on the globe, etc.).
-The rest of the data is pulled from APIs, SSARE (https://github.com/JimVincentW/SSARE) and storages like Tavily, Bundestag API, OECD API, etc.
+The rest of the data is pulled from APIs, SSARE (https://github.com/open-politics/SSARE) and storages like Tavily, Bundestag API, OECD API, etc.
 
 **The methodic layer** of what information is presented and when is currently buried in the frontend with the help of the Vercel AI SDK. The plan is to dynamically choose data analysis and presentation methods that are presented as streaming generative interfaces. 
 
@@ -72,9 +73,9 @@ Currently needed:
 - Frontend/UX/UI work
 
 ## Tasks
-MVP Elements:
-- Issue Area Identification
-- Actor Identification / Named Entity Recognition
+Generally researching:
+- Issue/ Area Identification
+- Actor Identification / Named Entity Recognition   
 - Stance Triangulation
 
 Including but not limited to tasks like:
