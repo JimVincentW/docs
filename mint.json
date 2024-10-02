@@ -4,6 +4,7 @@
   "logo": {
     "dark": "/logo/opp_black.svg",
     "light": "/logo/opp_white.svg",
+    "href": "https://open-politics.org"
   },
   "favicon": "/favicon.svg",
   "colors": {
