@@ -6,29 +6,30 @@ title: 'Open Politics 🌐'
 Open Politics' vision is to democratise political intelligence. The mission is to create an open-source data science and AI toolkit to analyse, summarise, and visualise political information.
 
 <Frame>
-  <img src="/images/opp_desk.png"/>
+  <img src="/images/opp_home.png"/>
 </Frame>
 
-<AccordionGroup>
-<Accordion title="Index">
+<Note>
+    There is a preliminary alpha running, we encourage your own experiments with the stack though.
+    Please contact us at engage@open-politics.org if you want to request access.
+</Note>
+
+<Card title="How we engineer data" icon="layer-group" href="/data" horizontal={true}>
+</Card>
+
 ## Table of Contents
 - [Why Open Politics Exists](#why-open-politics-exists)
 - [Update: SSARE Release](#update-ssare-release)
-- [The Webapp](#the-webapp)
 - [Engage! Developer Jour Fixe](#engage-developer-jour-fixe)
 - [Tasks](#tasks)
-- [AI Models](#ai-models)
-- [Data Challenges](#data-challenges)
-- [Journalistic Challenges](#journalistic-challenges)
-- [Necessary API Keys/Environment Variables](#necessary-api-keysenvironment-variables)
 - [Contributing](#contributing)
-- [Contact](#contact)
-- [License](#license)
-</Accordion>
-</AccordionGroup>
+
 
 ## Why Open Politics Exists
 - All things regarding politics, be they news, conflicts or legislative procedures, are hard to keep track of. It's hard to find the time to read through all the documents and news articles necessary to gain a broad and well-informed understanding of political situations. Technology offers great possibilities to make such processes more accessible. Recently, the advent of Large Language Models has extended the capabilities of textual analysis and understanding. Especially the ability to formulate tasks in natural language opens up new possibilities for analysing text data. Potentially revolutionising the way qualitative and quantitative research can be combined.
+<Frame>
+  <img src="/images/opp_zoom.png"/>
+</Frame>
 - This project aims to combine the best of natural language LLM interfacing and classical Data Science methods to build tools that provide a comprehensive overview of political topics, including summaries of news articles, information about political actors, and the relationships between them.
 - The goal of this project is to make politics more accessible and understandable for everyone.
 
@@ -43,22 +44,11 @@ Open Politics' vision is to democratise political intelligence. The mission is t
 <AccordionGroup>
     <Accordion title="Webapp (Overview)" icon='chalkboard' iconType="solid" >
         <img height="200" src="/images/opp_high_level.png" />
-**The Django stack is now replaced by a FastAPI backend + NextJS Frontend.**
-The stack setup & is largely based on Tiangolo's Fullstack Template. 
-Security and configuration updates will be fetched from the template.
+        **The Django stack is now replaced by a FastAPI backend + NextJS Frontend.**  
+        The stack setup & is largely based on Tiangolo's Fullstack Template. 
+        Security and configuration updates will be fetched from the template.
 
-### Backend
-FastAPI, Postgres, Adminer \
-The API's can be generated into OpenAPI clients. As an example for on of the core services one API documentation of our microservice architecture is laid out in the tab in the top left.
-For the prototype some static data is served to illustrate future purposes (like the leaders of countries, articles on the globe, etc.).
-The rest of the data is pulled from APIs, SSARE (https://github.com/open-politics/SSARE) and storages like Tavily, Bundestag API, OECD API, etc.
-
-**The methodic layer** of what information is presented and when is currently buried in the frontend with the help of the Vercel AI SDK. The plan is to dynamically choose data analysis and presentation methods that are presented as streaming generative interfaces. 
-
-Once it is more clear how FastAPI can provide the same capabilities as the Vercel AI SDK, the methodic layer will be moved to the backend. 
-
-### Frontend
-The frontend is now a Next.js app using shadcn as a UI library, amcharts for the globe and axios data fatches to the backend. The roadmap foresees that Open Politics will provide a unified interface for data resource management.
+        The frontend is now a Next.js app using shadcn as a UI library, amcharts for the globe and axios data fatches to the backend. The roadmap foresees that Open Politics will provide a unified interface for data resource management.
     </Accordion>
 </AccordionGroup>
 ## Want to engage? Look into our Developer Jour Fixe!
@@ -75,7 +65,7 @@ Currently needed:
 ## Tasks
 Generally researching:
 - Issue/ Area Identification
-- Actor Identification / Named Entity Recognition   
+- Actor Identification  
 - Stance Triangulation
 
 Including but not limited to tasks like:
@@ -87,4 +77,5 @@ Including but not limited to tasks like:
 - Providing historical context 
 - Statement & Intention decoding
 - Visual representation of political data
-- Monitoring and alerts
+- Monitoring and alerts  
+[..+ unmaintained and heavily overloaded list of features]

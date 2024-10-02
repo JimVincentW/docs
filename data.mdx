@@ -60,12 +60,10 @@ http://localhost:8089/
 
 ## Architecture
 
-Our data engine consists out of several pipelines packaged in individual docker instances.
-Each of these act like a serverles or ETL workflow. They engineer new features upon the base doc format.
-This aims to generally enable more and more features. The data validation is completely done with Pydantic. THe queris with SQLModel.
-So if you change the code/models.py (and start with a fresh db) you can start adding custom fields to your data.
-Add a new service, change the models.py and orchestration.py.
-Add the trigger and saving operations in the ssare/postgres_service/main.py
+Our data engine consists of several pipelines packaged in individual Docker instances.
+Each of these acts like a serverless or ETL workflow, engineering new features upon the base doc format.
+
+This modular approach allows for the seamless integration of new features and data sources.
 ### Orchestration & observation
 #### Prefect
 <Accordion title="Prefect Dashboard">
@@ -179,9 +177,9 @@ Add the trigger and saving operations in the ssare/postgres_service/main.py
     This flexibility allows you to integrate various data sources into the SSARE pipeline.
   </Step>
   <Step title="Process Articles" icon="fa-solid fa-gears" iconType="solid">
-    Articles are processed for vector representation and entity extraction.
+    Articles are processed for new features.
     Each of the following steps is a microservice roughly working in the same way:
-    {/* <img src='/images/service_pipes.png'/ > */}
+    <img src='/images/service_pipes.png'/ >
     <Steps>
       <Step title="Vector Representation" icon="vector-square" iconType="solid">
         Convert article text into numerical vectors for semantic analysis.
