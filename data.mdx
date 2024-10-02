@@ -60,6 +60,68 @@ http://localhost:8089/
 
 ## Architecture
 
+Our data engine consists out of several pipelines packaged in individual docker instances.
+Each of these act like a serverles or ETL workflow. They engineer new features upon the base doc format.
+This aims to generally enable more and more features. The data validation is completely done with Pydantic. THe queris with SQLModel.
+So if you change the code/models.py (and start with a fresh db) you can start adding custom fields to your data.
+Add a new service, change the models.py and orchestration.py.
+Add the trigger and saving operations in the ssare/postgres_service/main.py
+### Orchestration & observation
+#### Prefect
+<Accordion title="Prefect Dashboard">
+  Currently the docker containers decorate tasks and flows with Prefect.
+  This means that you can see all the tasks and flows in the dashboard.
+  
+  Furthermore this should enable converting the flows from http based triggers to prefect deployments
+  that can be e.g. deployed in a Ray Cluster.
+  <Accordion title="Prefect Tasks & Flows">
+  <CodeGroup>
+  ````bash prefect 
+  from prefect import flow, task
+
+
+  @task
+  def say_hello(name: str):
+      print(f"Hello {name}!")
+
+
+  @flow
+  def hello_universe(names: list[str]):
+      for name in names:
+          say_hello(name)
+
+
+  if __name__ == "__main__":
+      hello_universe.serve(name="your-first-deployment")
+  ````
+
+   ````bash w/ Ray 
+  from prefect import flow, task
+  # you need to install prefect-ray with pip in the container
+  from prefect_ray.task_runners import RayTaskRunner
+
+  @task
+  def say_hello(name: str):
+      print(f"Hello {name}!")
+
+
+  @flow(task_runner=RayTaskRunner()) # insert address, but check the Prefect documenation for more infos
+  def hello_universe(names: list[str]):
+      for name in names:
+          say_hello(name)
+
+
+  if __name__ == "__main__":
+      hello_universe.serve(name="your-first-deployment")
+  ````
+  </CodeGroup>
+  </Accordion>
+<Frame>
+  <img src="/images/prefect_dashboard.png" />
+</Frame>
+</Accordion>
+### Services
+
 <AccordionGroup>
   <Accordion icon="broom" title="Scraper Service">
     Handles the ingestion of news articles from various sources.
@@ -82,8 +144,25 @@ http://localhost:8089/
     When you start up the services first the Pelias Docker Image will download a placeholder dataset.
         This means you can fully locally convert locations to geocoordinates and in general handle locations and region mapping without any external service.
   </Accordion>
-  <Accordion icon="server" title="API Service">
-    
+  <Accordion icon="server" title="Postgres Service">
+    Quries Postgres Database. Relational, text search and vector search.
+    Creates jobs for pipelines.
+    Stores articles. 
+  </Accordion>
+</AccordionGroup>
+### Databases
+<AccordionGroup>
+  <Accordion icon="broom" title="Relational Databases">
+    - PostgreSQL (with PGVector Plugin)  
+    -- ArticlesDB: stores the full text and metadata of articles. Entities, Locations, Classifications
+    -- PrefectDB: stores the workflow state and configuration.
+  </Accordion>
+  <Accordion icon="broom" title="Vector Databases">
+    - PGVector
+    - Qdrant (re-introducing soon)
+  </Accordion>
+  <Accordion icon="broom" title="Graph Databases">
+    - Neo4j (upcoming): for all things graphs
   </Accordion>
 </AccordionGroup>
 
@@ -143,7 +222,7 @@ http://localhost:8089/
 
           # Extract political bias metrics from an article
           bias_metrics = client.chat.completions.create(
-              model="gpt-4",
+              model="gpt-4o",
               response_model=PoliticalBiasMetrics,
               messages=[
                   {"role": "system", "content": "You are an expert political analyst tasked with objectively assessing political bias in news articles. Provide a detailed, impartial analysis based solely on the content provided."},
@@ -205,7 +284,7 @@ http://localhost:8089/
   <Step title="Store Data" icon="database" iconType="solid">
     Processed data is stored in PostgreSQL and vector databases.
   </Step>
-  <Step title="Provide Access" icon="server" iconType="solid">
+  <Step title="Access" icon="server" iconType="solid">
     API endpoints allow for querying and retrieval of processed data.
     Here's a detailed breakdown of the API endpoint for retrieving articles:
 
