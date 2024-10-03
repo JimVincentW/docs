@@ -12,45 +12,41 @@ This document provides an overview of the Pydantic data models used in our proje
 ### BaseModel
 ```mermaid
 classDiagram
-    class BaseModel {
-    }
     class Article {
-        +UUID id
-        +url: str
-        +headline: str
-        +paragraphs: List[str]
-        +source: str
-        +insertion_date: datetime
+        UUID id
+        url: str
+        headline: str
+        paragraphs: List[str]
+        source: str
+        insertion_date: datetime
     }
     class NewsArticleClassification {
-        +article_id: UUID
-        +title: str
-        +news_category: str
-        +secondary_categories: List[str]
+        article_id: UUID
+        title: str
+        news_category: str
+        secondary_categories: List[str]
     }
     
-    BaseModel <|-- Article
-    BaseModel <|-- NewsArticleClassification
     Article "1" -- "0..1" NewsArticleClassification
 
     subgraph Engineered Features
         class Embeddings {
-            +List[float] embeddings
+            List[float] embeddings
         }
         class Entities {
-            +List[Entity] entities
+            List[Entity] entities
         }
         class Locations {
-            +List[Location] locations
+            List[Location] locations
         }
         class Classifications {
-            +List[Tag] classifications
+            List[Tag] classifications
         }
         class Keywords {
-            +List[str] keywords
+            List[str] keywords
         }
         class NLPScore {
-            +int score
+            int score
         }
     end
 
