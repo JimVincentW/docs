@@ -4,14 +4,21 @@ description: 'Understanding the role of entity recognition in open-source politi
 icon: 'id-badge'
 ---
 
-
 ## Entity Recognition
 
 ### What is Entity Recognition?
 
+<Frame>
+  <img src="/images/ner-illustration.png" alt="Entity Recognition Illustration"/>
+</Frame>
+
 Entity Recognition, also known as Named Entity Recognition (NER), is a frequently used task in data science and natural language processing. It involves identifying and classifying key information (entities) in text into predefined categories such as names of persons, organizations, locations, expressions of times, quantities, monetary values, percentages, etc.
 
 ### Importance in Political Intelligence
+
+<Frame>
+  <img src="/images/political-intelligence-ner.png" alt="NER in Political Intelligence"/>
+</Frame>
 
 In the context of open-source political intelligence, entity recognition helps in extracting relevant information from vast amounts of political data. This can include identifying political figures, organizations, events, and locations from news articles, social media, and other sources.
 
@@ -26,24 +33,23 @@ If you want to change the NER model, the Pydantic Models for the Entities and th
 
 #### Predicted Tags
 
-| Tag       | Meaning                |
-| --------- | ---------------------- |
-| CARDINAL  | cardinal value         |
-| DATE      | date value             |
-| EVENT     | event name             |
-| FAC       | building name          |
-| GPE       | geo-political entity   |
-| LANGUAGE  | language name          |
-| LAW       | law name               |
-| LOC       | location name          |
-| MONEY     | money name             |
-| NORP      | affiliation            |
-| ORDINAL   | ordinal value          |
-| ORG       | organization name      |
-| PERCENT   | percent value          |
-| PERSON    | person name            |
-| PRODUCT   | product name           |
-| QUANTITY  | quantity value         |
-| TIME      | time value             |
-| WORK_OF_ART | name of work of art  |
-
+| Tag       | Meaning                |                                   |
+| --------- | ---------------------- | --------------------------------------- |
+| CARDINAL  | cardinal value         | <Icon icon="hashtag" />                 |
+| DATE      | date value             | <Icon icon="calendar" />                |
+| EVENT     | event name             | <Icon icon="star" />                    |
+| FAC       | building name          | <Icon icon="building" />                |
+| GPE       | geo-political entity   | <Icon icon="globe" />                   |
+| LANGUAGE  | language name          | <Icon icon="language" />                |
+| LAW       | law name               | <Icon icon="gavel" />                   |
+| LOC       | location name          | <Icon icon="map" />              |
+| MONEY     | money name             | <Icon icon="dollar-sign" />             |
+| NORP      | affiliation            | <Icon icon="users" />                   |
+| ORDINAL   | ordinal value          | <Icon icon="list-ol" />                 |
+| ORG       | organization name      | <Icon icon="building-columns" />        |
+| PERCENT   | percent value          | <Icon icon="percent" />                 |
+| PERSON    | person name            | <Icon icon="user" />                    |
+| PRODUCT   | product name           | <Icon icon="box" />                     |
+| QUANTITY  | quantity value         | <Icon icon="weight-scale" />            |
+| TIME      | time value             | <Icon icon="clock" />                   |
+| WORK_OF_ART | name of work of art  | <Icon icon="palette" />                 |
