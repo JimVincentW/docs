@@ -33,7 +33,7 @@ This is a preliminary guide to the webapp's most essential features and how you 
 </Step>
 <Step>
   <Frame
-    caption="You can retrieve basic economic indicators for all OECF countries"
+    caption="You can retrieve basic economic indicators for all OECD countries"
   >
     <img src="/images/globe_step_4.png"/>
   </Frame>
@@ -41,14 +41,3 @@ This is a preliminary guide to the webapp's most essential features and how you 
 </Steps>
 </Accordion>
 
-<Accordion title="The Search - Retrieval Augmented Generation">
-  <Note>
-  For Developers: The internal search functionality uses a Retrieval Augmented Generation (RAG) pipeline to process queries. Content is split into chunks and embedded using vector embeddings, which are then retrieved using L2 distance similarity matching. While our current implementation uses basic RAG with content chunks, we remain flexible to adopting other RAG approaches as the field evolves. For more details on our content structure, see the [Datastructure](/essentials/datastruc) documentation.
-  </Note>
-  <Frame>
-    <img src="/images/search_1.png"/>
-  </Frame>
-  
-  We are generally extending our search with other solutions while our internal alogorithms are catching up to SOTA retrieval scores.
-  Perplexity is perfectly suited for this task.
-</Accordion>
