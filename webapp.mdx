@@ -1,0 +1,54 @@
+---
+title: 'How to use the webapp'
+---
+
+This is a preliminary guide to the webapp's most essential features and how you can interact with the data available.
+<Frame>
+  <img src="/images/opp_one.png"/>
+</Frame>
+
+<Accordion title="The Globe - Geospatial Data">
+## THE GLOBE
+<Steps>
+<Step>
+<Frame
+    caption="The content inside the engine is classified into 'Event Types' like Elections, Protests, War and such. These are displayed by icons. If they are too close on the map, things can get messy. That's why they transform to clusters for events of the same type. This is surely not the final state of our UX, but a step in the right direction"
+>
+  <img src="/images/globe_step_1.png"/>
+</Frame>
+</Step>
+<Step>
+<Frame
+    caption="Clicking a cluster will show you the articles underneath their locations in that cluster"
+>
+  <img src="/images/globe_step_2.png"/>
+</Frame>
+</Step>
+<Step>
+<Frame
+    caption="For any clicked location you can retrieve a list of the entities most relevant to that location. Any highlighted entity will show a quick wikipedia-driven summary and the articles they appear in."
+>
+  <img src="/images/globe_step_41.png"/>
+</Frame>
+</Step>
+<Step>
+  <Frame
+    caption="You can retrieve basic economic indicators for all OECF countries"
+  >
+    <img src="/images/globe_step_4.png"/>
+  </Frame>
+</Step>
+</Steps>
+</Accordion>
+
+<Accordion title="The Search - Retrieval Augmented Generation">
+  <Note>
+  For Developers: The internal search functionality uses a Retrieval Augmented Generation (RAG) pipeline to process queries. Content is split into chunks and embedded using vector embeddings, which are then retrieved using L2 distance similarity matching. While our current implementation uses basic RAG with content chunks, we remain flexible to adopting other RAG approaches as the field evolves. For more details on our content structure, see the [Datastructure](/essentials/datastruc) documentation.
+  </Note>
+  <Frame>
+    <img src="/images/search_1.png"/>
+  </Frame>
+  
+  We are generally extending our search with other solutions while our internal alogorithms are catching up to SOTA retrieval scores.
+  Perplexity is perfectly suited for this task.
+</Accordion>

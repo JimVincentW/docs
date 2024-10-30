@@ -5,26 +5,13 @@
     "version": "0.1.0"
     },
     "paths": {
-    "/healthz": {
+    "/contents": {
     "get": {
-    "summary": "Healthcheck",
-    "operationId": "healthcheck_healthz_get",
-    "responses": {
-    "200": {
-    "description": "Successful Response",
-    "content": {
-    "application/json": {
-    "schema": {}
-    }
-    }
-    }
-    }
-    }
-    },
-    "/articles": {
-    "get": {
-    "summary": "Get Articles",
-    "operationId": "get_articles_articles_get",
+    "tags": [
+    "search"
+    ],
+    "summary": "Get Contents",
+    "operationId": "get_contents_contents_get",
     "parameters": [
     {
     "name": "url",
@@ -66,78 +53,6 @@
     "$ref": "#/components/schemas/SearchType",
     "default": "text"
     }
-    },
-    {
-    "name": "has_embeddings",
-    "in": "query",
-    "required": false,
-    "schema": {
-    "anyOf": [
-    {
-    "type": "boolean"
-    },
-    {
-    "type": "null"
-    }
-    ],
-    "description": "Filter articles with embeddings",
-    "title": "Has Embeddings"
-    },
-    "description": "Filter articles with embeddings"
-    },
-    {
-    "name": "has_geocoding",
-    "in": "query",
-    "required": false,
-    "schema": {
-    "anyOf": [
-    {
-    "type": "boolean"
-    },
-    {
-    "type": "null"
-    }
-    ],
-    "description": "Filter articles with geocoding",
-    "title": "Has Geocoding"
-    },
-    "description": "Filter articles with geocoding"
-    },
-    {
-    "name": "has_entities",
-    "in": "query",
-    "required": false,
-    "schema": {
-    "anyOf": [
-    {
-    "type": "boolean"
-    },
-    {
-    "type": "null"
-    }
-    ],
-    "description": "Filter articles with entities",
-    "title": "Has Entities"
-    },
-    "description": "Filter articles with entities"
-    },
-    {
-    "name": "has_classification",
-    "in": "query",
-    "required": false,
-    "schema": {
-    "anyOf": [
-    {
-    "type": "boolean"
-    },
-    {
-    "type": "null"
-    }
-    ],
-    "description": "Filter articles with classification",
-    "title": "Has Classification"
-    },
-    "description": "Filter articles with classification"
     },
     {
     "name": "skip",
@@ -400,24 +315,11 @@
     }
     }
     },
-    "/classification_fields": {
-    "get": {
-    "summary": "Get Classification Fields",
-    "operationId": "get_classification_fields_classification_fields_get",
-    "responses": {
-    "200": {
-    "description": "Successful Response",
-    "content": {
-    "application/json": {
-    "schema": {}
-    }
-    }
-    }
-    }
-    }
-    },
     "/location_entities/{location_name}": {
     "get": {
+    "tags": [
+    "search"
+    ],
     "summary": "Get Location Entities",
     "operationId": "get_location_entities_location_entities__location_name__get",
     "parameters": [
@@ -473,10 +375,52 @@
     }
     }
     },
-    "/articles_by_entity/{entity_name}": {
+    "/most_relevant_entities": {
+    "post": {
+    "tags": [
+    "search"
+    ],
+    "summary": "Get Most Relevant Entities",
+    "operationId": "get_most_relevant_entities_most_relevant_entities_post",
+    "requestBody": {
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/MostRelevantEntitiesRequest"
+    }
+    }
+    },
+    "required": true
+    },
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    },
+    "422": {
+    "description": "Validation Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/HTTPValidationError"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "/contents_by_entity/{entity_name}": {
     "get": {
+    "tags": [
+    "search"
+    ],
     "summary": "Get Articles By Entity",
-    "operationId": "get_articles_by_entity_articles_by_entity__entity_name__get",
+    "operationId": "get_articles_by_entity_contents_by_entity__entity_name__get",
     "parameters": [
     {
     "name": "entity_name",
@@ -530,10 +474,42 @@
     }
     }
     },
-    "/deduplicate_articles": {
-    "post": {
-    "summary": "Deduplicate Articles",
-    "operationId": "deduplicate_articles_deduplicate_articles_post",
+    "/contents_by_location/{location}": {
+    "get": {
+    "tags": [
+    "search"
+    ],
+    "summary": "Get Articles By Location",
+    "operationId": "get_articles_by_location_contents_by_location__location__get",
+    "parameters": [
+    {
+    "name": "location",
+    "in": "path",
+    "required": true,
+    "schema": {
+    "type": "string",
+    "title": "Location"
+    }
+    },
+    {
+    "name": "skip",
+    "in": "query",
+    "required": true,
+    "schema": {
+    "type": "integer",
+    "title": "Skip"
+    }
+    },
+    {
+    "name": "limit",
+    "in": "query",
+    "required": true,
+    "schema": {
+    "type": "integer",
+    "title": "Limit"
+    }
+    }
+    ],
     "responses": {
     "200": {
     "description": "Successful Response",
@@ -542,12 +518,25 @@
     "schema": {}
     }
     }
+    },
+    "422": {
+    "description": "Validation Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/HTTPValidationError"
+    }
+    }
+    }
     }
     }
     }
     },
     "/flags": {
     "get": {
+    "tags": [
+    "pipelines"
+    ],
     "summary": "Produce Flags",
     "operationId": "produce_flags_flags_get",
     "responses": {
@@ -562,10 +551,13 @@
     }
     }
     },
-    "/store_raw_articles": {
+    "/store_raw_contents": {
     "post": {
-    "summary": "Store Raw Articles",
-    "operationId": "store_raw_articles_store_raw_articles_post",
+    "tags": [
+    "pipelines"
+    ],
+    "summary": "Store Raw Contents",
+    "operationId": "store_raw_contents_store_raw_contents_post",
     "responses": {
     "200": {
     "description": "Successful Response",
@@ -580,6 +572,9 @@
     },
     "/create_embedding_jobs": {
     "post": {
+    "tags": [
+    "pipelines"
+    ],
     "summary": "Create Embedding Jobs",
     "operationId": "create_embedding_jobs_create_embedding_jobs_post",
     "responses": {
@@ -594,10 +589,13 @@
     }
     }
     },
-    "/store_articles_with_embeddings": {
+    "/store_contents_with_embeddings": {
     "post": {
-    "summary": "Store Articles With Embeddings",
-    "operationId": "store_articles_with_embeddings_store_articles_with_embeddings_post",
+    "tags": [
+    "pipelines"
+    ],
+    "summary": "Store Contents With Embeddings",
+    "operationId": "store_contents_with_embeddings_store_contents_with_embeddings_post",
     "responses": {
     "200": {
     "description": "Successful Response",
@@ -612,6 +610,9 @@
     },
     "/create_entity_extraction_jobs": {
     "post": {
+    "tags": [
+    "pipelines"
+    ],
     "summary": "Create Entity Extraction Jobs",
     "operationId": "create_entity_extraction_jobs_create_entity_extraction_jobs_post",
     "responses": {
@@ -626,10 +627,13 @@
     }
     }
     },
-    "/store_articles_with_entities": {
+    "/store_contents_with_entities": {
     "post": {
-    "summary": "Store Articles With Entities",
-    "operationId": "store_articles_with_entities_store_articles_with_entities_post",
+    "tags": [
+    "pipelines"
+    ],
+    "summary": "Store Contents With Entities",
+    "operationId": "store_contents_with_entities_store_contents_with_entities_post",
     "responses": {
     "200": {
     "description": "Successful Response",
@@ -644,6 +648,9 @@
     },
     "/create_geocoding_jobs": {
     "post": {
+    "tags": [
+    "pipelines"
+    ],
     "summary": "Create Geocoding Jobs",
     "operationId": "create_geocoding_jobs_create_geocoding_jobs_post",
     "responses": {
@@ -658,10 +665,13 @@
     }
     }
     },
-    "/store_articles_with_geocoding": {
+    "/store_contents_with_geocoding": {
     "post": {
-    "summary": "Store Articles With Geocoding",
-    "operationId": "store_articles_with_geocoding_store_articles_with_geocoding_post",
+    "tags": [
+    "pipelines"
+    ],
+    "summary": "Store Contents With Geocoding",
+    "operationId": "store_contents_with_geocoding_store_contents_with_geocoding_post",
     "responses": {
     "200": {
     "description": "Successful Response",
@@ -676,6 +686,9 @@
     },
     "/create_classification_jobs": {
     "post": {
+    "tags": [
+    "pipelines"
+    ],
     "summary": "Create Classification Jobs",
     "operationId": "create_classification_jobs_create_classification_jobs_post",
     "responses": {
@@ -690,10 +703,32 @@
     }
     }
     },
-    "/store_articles_with_classification": {
+    "/store_contents_with_classification": {
     "post": {
-    "summary": "Store Articles With Classification",
-    "operationId": "store_articles_with_classification_store_articles_with_classification_post",
+    "tags": [
+    "pipelines"
+    ],
+    "summary": "Store Contents With Classification",
+    "operationId": "store_contents_with_classification_store_contents_with_classification_post",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/deduplicate_contents": {
+    "post": {
+    "tags": [
+    "helper"
+    ],
+    "summary": "Deduplicate Contents",
+    "operationId": "deduplicate_contents_deduplicate_contents_post",
     "responses": {
     "200": {
     "description": "Successful Response",
@@ -708,6 +743,9 @@
     },
     "/delete_all_classifications": {
     "delete": {
+    "tags": [
+    "helper"
+    ],
     "summary": "Delete All Classifications",
     "operationId": "delete_all_classifications_delete_all_classifications_delete",
     "responses": {
@@ -722,10 +760,13 @@
     }
     }
     },
-    "/articles_csv_quick": {
-    "get": {
-    "summary": "Get Articles Csv",
-    "operationId": "get_articles_csv_articles_csv_quick_get",
+    "/delete_all_embeddings": {
+    "delete": {
+    "tags": [
+    "helper"
+    ],
+    "summary": "Delete All Embeddings",
+    "operationId": "delete_all_embeddings_delete_all_embeddings_delete",
     "responses": {
     "200": {
     "description": "Successful Response",
@@ -738,10 +779,87 @@
     }
     }
     },
-    "/articles_csv_full": {
+    "/contents_csv_quick": {
     "get": {
-    "summary": "Get Articles Csv",
-    "operationId": "get_articles_csv_articles_csv_full_get",
+    "tags": [
+    "helper"
+    ],
+    "summary": "Get Contents Csv Quick",
+    "operationId": "get_contents_csv_quick_contents_csv_quick_get",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/contents_csv_full": {
+    "get": {
+    "tags": [
+    "helper"
+    ],
+    "summary": "Get Contents Csv",
+    "operationId": "get_contents_csv_contents_csv_full_get",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/contents_with_chunks": {
+    "get": {
+    "tags": [
+    "helper"
+    ],
+    "summary": "Get Contents With Chunks",
+    "operationId": "get_contents_with_chunks_contents_with_chunks_get",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/fix_and_purge_null_content_type": {
+    "post": {
+    "tags": [
+    "helper"
+    ],
+    "summary": "Fix And Purge Null Content Type",
+    "description": "Fixes entries with NULL content_type by setting a default value and purges any remaining NULL entries.",
+    "operationId": "fix_and_purge_null_content_type_fix_and_purge_null_content_type_post",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/healthz": {
+    "get": {
+    "summary": "Healthcheck",
+    "operationId": "healthcheck_healthz_get",
     "responses": {
     "200": {
     "description": "Successful Response",
@@ -770,12 +888,39 @@
     "type": "object",
     "title": "HTTPValidationError"
     },
+    "MostRelevantEntitiesRequest": {
+    "properties": {
+    "article_ids": {
+    "items": {
+    "type": "string"
+    },
+    "type": "array",
+    "title": "Article Ids"
+    },
+    "skip": {
+    "type": "integer",
+    "title": "Skip",
+    "default": 0
+    },
+    "limit": {
+    "type": "integer",
+    "title": "Limit",
+    "default": 10
+    }
+    },
+    "type": "object",
+    "required": [
+    "article_ids"
+    ],
+    "title": "MostRelevantEntitiesRequest"
+    },
     "SearchType": {
     "type": "string",
     "enum": [
     "text",
     "semantic",
-    "structured"
+    "structured",
+    "location"
     ],
     "title": "SearchType"
     },

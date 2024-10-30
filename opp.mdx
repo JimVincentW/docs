@@ -3,10 +3,12 @@ title: 'Open Politics 🌐'
 ---
 
 ## Introduction
-Open Politics' vision is to democratise political intelligence. The mission is to create an open-source data science and AI toolkit to analyse, summarise, and visualise political information.
+Open Politics' vision is to democratise political intelligence. 
+
+The mission is to create an open-source data science and AI toolkit to analyse, summarise, and visualise political information.
 
 <Frame>
-  <img src="/images/opp_home.png"/>
+  <img height="50" src="/images/opp_home.png"/>
 </Frame>
 
 <Note>
@@ -26,12 +28,43 @@ Open Politics' vision is to democratise political intelligence. The mission is t
 
 
 ## Why Open Politics Exists
-- All things regarding politics, be they news, conflicts or legislative procedures, are hard to keep track of. It's hard to find the time to read through all the documents and news articles necessary to gain a broad and well-informed understanding of political situations. Technology offers great possibilities to make such processes more accessible. Recently, the advent of Large Language Models has extended the capabilities of textual analysis and understanding. Especially the ability to formulate tasks in natural language opens up new possibilities for analysing text data. Potentially revolutionising the way qualitative and quantitative research can be combined.
+- All things regarding politics, be they news, conflicts or legislative procedures, are hard to keep track of. It's hard to find the time to read through all the documents and news articles necessary to gain a broad and well-informed understanding of political situations. Technology offers great possibilities to make such processes more accessible.   
+  Recently, the advent of Large Language Models has extended the capabilities of textual analysis and understanding. Especially the ability to formulate tasks in natural language opens up new possibilities for analysing text data. Potentially revolutionising the way qualitative and quantitative research can be combined.
+
+This project specialises on assembling data, building infrastructure and embedding tools into meaningful user interfaces.
+
+
 <Frame>
-  <img src="/images/opp_zoom.png"/>
+  <img src="/images/opp_clusterzoom.png"/>
 </Frame>
-- This project aims to combine the best of natural language LLM interfacing and classical Data Science methods to build tools that provide a comprehensive overview of political topics, including summaries of news articles, information about political actors, and the relationships between them.
-- The goal of this project is to make politics more accessible and understandable for everyone.
+
+
+## We generally categorise our work into three pillars
+<AccordionGroup>
+<Accordion title="Aggregating Data & Engineering Insights" icon='brain'>
+  For any intelligence work, the first step is to gather data.
+
+  Our scraper service is designed to pick up data from arbitrary sources, as long as the format is returned as:
+  ```bash
+  URL | Headline | Paragraphs | Source
+  ```
+  Your sourcing script should be in Python an can be anything. You can load data from an S3 Bucket or design a cusotm scraping script.
+  The current scraper-container is equipped with most tools you would need: 
+  - Selenium 
+  - BeautifulSoup 
+  - Playwright
+
+
+</Accordion>
+<Accordion title="Making Information Accessible to Users in Meaningful interfaces" icon='globe' iconType="solid" >
+- Making Information Accessible to Users in Meaningful interfaces
+</Accordion>
+<Accordion title="Engaging Open Source, Public Scrutiny and Reproducibility" icon='code-pull-request' iconType="solid" >
+- Open Source, Public Scrutiny and Reproducibility
+</Accordion>
+</AccordionGroup>
+
+
 
 ## Update: SSARE Release
 <Note>

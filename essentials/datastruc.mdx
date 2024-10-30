@@ -1,7 +1,7 @@
 ---
 title: 'Data Structures'
 description: 'Understanding the data structure of SSARE'
-icon: 'fa fa-database'
+icon: 'kaaba'
 ---
 
 
@@ -9,54 +9,14 @@ icon: 'fa fa-database'
 
 This document provides an overview of the Pydantic data models used in our project. These models are essential for defining the structure of our data and ensuring data validation.
 
-### BaseModel
-```mermaid
-classDiagram
-    class Article {
-        UUID id
-        url: str
-        headline: str
-        paragraphs: List[str]
-        source: str
-        insertion_date: datetime
-    }
-    class NewsArticleClassification {
-        article_id: UUID
-        title: str
-        news_category: str
-        secondary_categories: List[str]
-    }
-    
-    Article "1" -- "0..1" NewsArticleClassification
+<Frame> 
+<img src="/images/datastruc.png"/>
+</Frame>
 
-    subgraph Engineered Features
-        class Embeddings {
-            List[float] embeddings
-        }
-        class Entities {
-            List[Entity] entities
-        }
-        class Locations {
-            List[Location] locations
-        }
-        class Classifications {
-            List[Tag] classifications
-        }
-        class Keywords {
-            List[str] keywords
-        }
-        class NLPScore {
-            int score
-        }
-    end
 
-    Article "1" -- "1" Embeddings
-    Article "1" -- "1" Entities
-    Article "1" -- "1" Locations
-    Article "1" -- "1" Classifications
-    Article "1" -- "1" Keywords
-    Article "1" -- "1" NLPScore
-```
+<Note>
+If you want to boot up the system and insert a new feature, flag or classification: the "Tag" model is mostly unused as of now. 
+</Note> 
 
 ### BaseDoc
 
@@ -64,5 +24,12 @@ The `BaseDoc` model is the base class for all documents in our system. It includ
 This means any data that you can translate into that format can be inserted. 
 More metadata fields and classes can be discussed for following versions.
 
-```mermaid
-classDiagram
+```python
+class BaseDoc(BaseModel):
+    url: str
+    headline: str
+    paragraphs: str
+    source: str
+```
+
+It is the base component for the ingestion via the [Scraper Service](/essentials/scraper).

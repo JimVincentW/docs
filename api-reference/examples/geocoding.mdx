@@ -1,0 +1,56 @@
+---
+title: 'Geocode Location'
+openapi: 'GET /geocode_location'
+---
+
+Get coordinates and location details for a given location name.
+
+## Request
+
+<ParamField query="location" type="string" required>
+  The name of the location to geocode (e.g., "Paris", "New York", "Europe")
+</ParamField>
+
+## Response
+
+<ResponseField name="location" type="Location Object">
+  <Expandable title="properties">
+    <ResponseField name="coordinates" type="array">
+      Array of [longitude, latitude] coordinates
+    </ResponseField>
+
+    <ResponseField name="location_type" type="string">
+      Type of the location (e.g., "city", "country", "continent")
+    </ResponseField>
+
+    <ResponseField name="bbox" type="array">
+      Bounding box coordinates [west, south, east, north], if available
+    </ResponseField>
+
+    <ResponseField name="area" type="number">
+      Area of the location in square kilometers, if available
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Example Request
+```bash Request
+localhost:3690/geocode_location?location=Berlin
+```
+
+```bash Returned Coordinates
+    {
+    "coordinates": [
+        13.407032,
+        52.524932
+    ],
+    "location_type": "locality",
+    "bbox": [
+        "13.088333",
+        "52.338242",
+        "13.760469",
+        "52.674917"
+    ],
+    "area": 0.118017
+}
+```

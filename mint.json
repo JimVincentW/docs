@@ -27,10 +27,16 @@
     "url": "https://open-politics.org"
   },
   "tabs": [
+
     {
-      "name": "API Reference",
-      "url": "api-reference",
-      "openapi": "/api-reference/endpoint/openapi.json"
+      "name": "Postgres Service API Reference",
+      "url": "api-postgres",
+      "openapi": "/api-reference/files/postgres_openapi.json"
+    },
+    {
+      "name": "Geo Service API Reference",
+      "url": "api-geo",
+      "openapi": "/api-reference/files/geo_openapi.json"
     }
   ],
   "anchors": [
@@ -62,26 +68,22 @@
     {
       "group": "Essentials",
       "pages": [
+        "essentials/classification",
+        "essentials/scraper",
         "essentials/ner",
-        "essentials/datastruc"
+        "essentials/datastruc",
+        "essentials/geocoding"
       ]
     },
     {
       "group": "API Documentation",
       "pages": [
-        "api-reference/introduction"
-      ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/articles",
-        "api-reference/endpoint/create_classification_jobs"
+        "api-reference/examples/geocoding"
       ]
     }
   ],
   "footerSocials": {
     "github": "https://github.com/open-politics",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "linkedin": "https://www.linkedin.com/company/102941572"
   }
 }

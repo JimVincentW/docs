@@ -1,0 +1,209 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+    },
+    "paths": {
+    "/classify_contents": {
+    "post": {
+    "summary": "Classify a batch of content",
+    "description": "Process and classify a batch of content items from the Redis queue.",
+    "operationId": "classify_contents_endpoint_classify_contents_post",
+    "parameters": [
+    {
+    "name": "batch_size",
+    "in": "query",
+    "required": false,
+    "schema": {
+    "type": "integer",
+    "maximum": 100,
+    "minimum": 1,
+    "description": "Number of content items to process in this batch",
+    "default": 50,
+    "title": "Batch Size"
+    },
+    "description": "Number of content items to process in this batch"
+    }
+    ],
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {
+    "type": "object",
+    "title": "Response Classify Contents Endpoint Classify Contents Post"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Validation Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/HTTPValidationError"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "/healthz": {
+    "get": {
+    "summary": "Healthz",
+    "operationId": "healthz_healthz_get",
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {}
+    }
+    }
+    }
+    }
+    }
+    },
+    "/location_from_query": {
+    "get": {
+    "summary": "Extract location from query",
+    "description": "Analyzes a text query and returns the most relevant location mentioned",
+    "operationId": "get_location_from_query_location_from_query_get",
+    "parameters": [
+    {
+    "name": "query",
+    "in": "query",
+    "required": true,
+    "schema": {
+    "type": "string",
+    "description": "The text query to analyze for location information",
+    "title": "Query"
+    },
+    "description": "The text query to analyze for location information",
+    "example": "What's happening in Berlin today?"
+    }
+    ],
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {
+    "type": "string",
+    "title": "Response Get Location From Query Location From Query Get"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Validation Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/HTTPValidationError"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "/split_query": {
+    "get": {
+    "summary": "Split and analyze query",
+    "description": "Analyzes a query to determine its type, geographical distribution, and generates related search queries.",
+    "operationId": "split_query_split_query_get",
+    "parameters": [
+    {
+    "name": "query",
+    "in": "query",
+    "required": true,
+    "schema": {
+    "type": "string",
+    "description": "The query to analyze and split",
+    "title": "Query"
+    },
+    "description": "The query to analyze and split",
+    "example": "How are US-China relations affecting global trade?"
+    }
+    ],
+    "responses": {
+    "200": {
+    "description": "Successful Response",
+    "content": {
+    "application/json": {
+    "schema": {
+    "type": "object",
+    "title": "Response Split Query Split Query Get"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Validation Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/HTTPValidationError"
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "components": {
+    "schemas": {
+    "HTTPValidationError": {
+    "properties": {
+    "detail": {
+    "items": {
+    "$ref": "#/components/schemas/ValidationError"
+    },
+    "type": "array",
+    "title": "Detail"
+    }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+    },
+    "ValidationError": {
+    "properties": {
+    "loc": {
+    "items": {
+    "anyOf": [
+    {
+    "type": "string"
+    },
+    {
+    "type": "integer"
+    }
+    ]
+    },
+    "type": "array",
+    "title": "Location"
+    },
+    "msg": {
+    "type": "string",
+    "title": "Message"
+    },
+    "type": {
+    "type": "string",
+    "title": "Error Type"
+    }
+    },
+    "type": "object",
+    "required": [
+    "loc",
+    "msg",
+    "type"
+    ],
+    "title": "ValidationError"
+    }
+    }
+    }
+    }
