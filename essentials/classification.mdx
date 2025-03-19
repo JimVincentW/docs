@@ -4,50 +4,8 @@ description: 'How we classify the content in our engine'
 icon: 'box'
 ---
 
-We use a combination of natural language prompting and structured data validation to perform qualitative content analysis at quantitative scale. This approach allows us to create sophisticated classification schemes that combine the nuanced understanding of LLMs with strict data validation.
+import ClassificationIntro from '/snippets/classifications-with-structured-models.mdx'
+import OpolFastClassIntroExample from '/snippets/fastclass-code-example-basic.mdx'
 
-The key components of our classification strategy are:
-
-1. **Natural Language Codebooks**: We define our classification criteria in natural language, allowing for rich, nuanced instructions that LLMs can understand and apply consistently.
-
-2. **Structured Output Enforcement**: Using Pydantic models, we strictly define the shape and validation rules for our classification outputs.
-
-3. **Type Safety**: We ensure that all classifications conform to our predefined schemas while allowing the flexibility of natural language interpretation.
-
-Here's an example of how these components work together:
-
-
-```python
-from pydantic import BaseModel
-import instructor
-from openai import OpenAI
-
-client = instructor.from_openai(OpenAI())
-
-class BananaLegalClassification(BaseModel):
-    """Determine if the content discusses the impact of legislative procedures on Banana Trade.
-    If relevant, return an intensity score from 1-10 indicating the extent."""
-    is_relevant: bool
-    intensity: int  
-
-def classify_banana_legal(query: str) -> BananaLegalClassification:
-    response = client.chat.completions.create(
-        model="llama3.1" if os.getenv("LOCAL_LLM") == "True" else "gpt-4o-2024-08-06",
-        response_model=BananaLegalClassification,
-        messages=[
-            {"role": "system", "content": "You are a political intelligence AI."},
-            {"role": "user", "content": f"The content to be analyzed is: {query}"}
-        ],
-    )
-    return response.dict()
-
-result = classify_banana_legal("EU Parliament Passes New Regulations on Banana Import Tariffs, Setting Stage for Trade Dispute with Latin American Producers")
-
-
-# How cool is that? ✨
-```
-<Note>
-We are using a local LLM for this example, but you can just change the LOCAL_LLM Flag of the .env file to False
-We are routing this through litellm to ensure api compatibility. But you can use any model and endpoint that is Instructor-->LiteLLM compatible (bust most are)
-
-</Note>
+<ClassificationIntro />
+<OpolFastClassIntroExample />

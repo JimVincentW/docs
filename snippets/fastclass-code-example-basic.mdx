@@ -1,0 +1,29 @@
+```python
+text = "Lets do something very bad, says very unstrustworthy president"
+
+instruction = "On a 1-10 scale how how much this articles indicates something bad happening in politics"
+
+int_value = xclass.classify("int", prompt, text)
+
+# print(int_value)
+# 9
+```
+
+or with a Pydantic Model  
+(note that we are using the field and model annotations as prompt instructons and leave the second argument empty)
+
+```python
+class MyClassifier(BaseModel):
+    """
+    We want to classify our content with this. We are focusing on political news. 
+    We need the most relevant keywords which are the Topics.
+
+    Work with news related categories. The relevance level should accurately filter out 
+    anecdotal content and focus on geopolitics.
+
+    A 1 might be the opinion of a celebrity on an issue and a 10 an invasion of 
+    one country into another.
+    """
+    keywords: List[str] = Field(description="The keywords relevant to this text. Only semantically relevant to a content system")
+    relevance_level: int = Field(description="On a 1-10 scale how much the content is relevant")
+```

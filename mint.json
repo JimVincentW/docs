@@ -18,33 +18,15 @@
   },
   "topbarLinks": [
     {
-      "name": "Contact",
-      "url": "mailto:engage@open-politics.org"
+      "name": "OPP Desk",
+      "url": "https://open-politics.org/desks/home/"
     }
   ],
   "topbarCtaButton": {
     "name": "Main Page",
     "url": "https://open-politics.org"
   },
-  "tabs": [
-
-    {
-      "name": "Postgres Service API Reference",
-      "url": "api-postgres",
-      "openapi": "/api-reference/files/postgres_openapi.json"
-    },
-    {
-      "name": "Geo Service API Reference",
-      "url": "api-geo",
-      "openapi": "/api-reference/files/geo_openapi.json"
-    }
-  ],
   "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://docs.open-politics.org"
-    },
     {
       "name": "Community",
       "icon": "slack",
@@ -58,7 +40,16 @@
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "The Project",
+      "pages": [
+        "opp",
+        "the-project/overview",
+        "the-project/manifest",
+        "the-project/timeline"
+      ]
+    },
+    {
+      "group": "The App",
       "pages": [
         "opp",
         "data",
@@ -67,19 +58,14 @@
       ]
     },
     {
-      "group": "Essentials",
+      "group": "The Data Engine",
       "pages": [
-        "essentials/classification",
-        "essentials/scraper",
-        "essentials/ner",
-        "essentials/datastruc",
-        "essentials/geocoding"
-      ]
-    },
-    {
-      "group": "API Documentation",
-      "pages": [
-        "api-reference/examples/geocoding"
+        "data-engine/overview",
+        "data-engine/classification",
+        "data-engine/scraper",
+        "data-engine/ner",
+        "data-engine/datastruc",
+        "data-engine/geocoding"
       ]
     }
   ],
