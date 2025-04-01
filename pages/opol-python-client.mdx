@@ -1,0 +1,333 @@
+---
+title: 'Python Client'
+description: 'Interact with the Open Politics data engine programmatically'
+---
+
+# Python Client
+
+The Opol Python client provides a streamlined way to interact with the Open Politics data engine programmatically. It offers a comprehensive set of tools for searching, analyzing, and enriching political content.
+
+<Frame>
+  <img src="/images/python-client.png" alt="Python Client Diagram" />
+</Frame>
+
+## Installation
+
+Install the Opol client via pip:
+
+```bash
+pip install opol
+```
+
+## Quick Start
+
+```python
+from opol import OPOL
+
+# Initialize the client
+opol = OPOL(mode="local")  # Use "local" for local installation, default for cloud service
+
+# Search for articles
+articles = opol.articles("German Election Politics", limit=30)
+
+# Get specific article by ID
+article = opol.articles.get_article(id="12345")
+
+# Search using the semantic search engine
+results = opol.search.engine("Articles about German politics")
+```
+
+## Key Features
+
+<CardGroup cols={2}>
+  <Card title="Article Retrieval" icon="newspaper">
+    Access and filter political content from diverse sources
+  </Card>
+  
+  <Card title="Semantic Search" icon="magnifying-glass">
+    Find relevant content based on meaning rather than keywords
+  </Card>
+  
+  <Card title="Content Reranking" icon="sort">
+    Optimize search results based on semantic relevance
+  </Card>
+  
+  <Card title="Entity Extraction" icon="users">
+    Identify key actors, organizations, and locations in content
+  </Card>
+  
+  <Card title="Geocoding" icon="map-pin">
+    Convert location entities to geographical coordinates
+  </Card>
+  
+  <Card title="LLM Integration" icon="robot">
+    Apply custom classification schemas to content
+  </Card>
+</CardGroup>
+
+## Working with Articles
+
+### Searching for Articles
+
+```python
+# Basic search
+articles = opol.articles("Ukraine conflict", limit=10)
+
+# Advanced search with filters
+articles = opol.articles.get_articles(
+    search_query="Climate change",
+    search_type="SEMANTIC",  # Can be "TEXT" or "SEMANTIC"
+    embeddings_created=1,    # Filter for articles with embeddings
+    entities_extracted=1,    # Filter for articles with entities
+    skip=0,
+    limit=20
+)
+```
+
+### Article Data Structure
+
+Each article contains rich metadata and content:
+
+```python
+article = articles[0]
+print(article["title"])          # Article title
+print(article["text_content"])   # Full text content
+print(article["source"])         # Source name
+print(article["url"])            # Original URL
+print(article["publication_date"]) # Publication date
+print(article["entities"])       # Extracted entities
+```
+
+## Semantic Search and Reranking
+
+One of the most powerful features of the Opol client is its ability to perform semantic search and reranking.
+
+### Two-Stage Reranking Example
+
+```python
+from opol import OPOL
+from opol.api.embeddings import Embeddings
+
+# Initialize clients
+opol = OPOL(mode="local")
+embedder = Embeddings(
+    mode="local",
+    use_api=True,
+    api_provider="jina",
+    api_provider_key=""  # Your API key if needed
+)
+
+# Search for articles
+articles = opol.articles("German Election Politics", limit=30)
+
+# Stage 1: Coarse reranking based on titles
+query = "This article talks about finance and the German elections."
+titles = [article["title"] for article in articles]
+ranked_indices_titles = embedder.rerank(query, titles)
+
+# Get reranked articles
+ranked_articles = [articles[i] for i in ranked_indices_titles]
+
+# Stage 2: Fine reranking based on content snippets
+texts = [article["text_content"][:300] for article in ranked_articles[:10]]
+ranked_indices_content = embedder.rerank(query, texts, lean=True)
+
+# Display top results
+print("Top articles after reranking:")
+for i in ranked_indices_content[:5]:
+    print(f"- {ranked_articles[i]['title']}")
+```
+
+### Vector Embeddings
+
+Generate embeddings for custom text:
+
+```python
+# Generate embeddings for a query
+query_embeddings = embedder.generate("German Election Politics", "retrieval.query")
+
+# Generate embeddings for an article
+article_embeddings = embedder.generate(article["text_content"], "retrieval.document")
+```
+
+## Geocoding and Location Analysis
+
+Extract and enrich location data:
+
+```python
+# Geocode a specific location
+location = "Berlin"
+coordinates = opol.geo.code(location)
+print(coordinates)  # {'coordinates': [13.407032, 52.524932]}
+
+# Get GeoJSON for events of a specific type
+war_events = opol.geo.json_by_event("War", limit=5)
+```
+
+## Economic Data and Polling
+
+Access structured data sources:
+
+```python
+# Get economic indicators for a country
+econ_data = opol.scraping.economic("Italy", indicators=["GDP"])
+
+# Get polling data
+polls = opol.scraping.polls("Germany", summarised=True)
+for poll in polls:
+    print(f"Party: {poll['party']}, Percentage: {poll['percentage']}")
+```
+
+## Advanced Usage
+
+### Custom Classification
+
+Apply your own schemas to analyze content:
+
+```python
+from pydantic import BaseModel, Field
+from typing import List, Dict
+
+# Define your classification schema
+class PoliticalPositioning(BaseModel):
+    economic_position: float = Field(
+        description="Rate the economic position from -1.0 (left) to 1.0 (right)"
+    )
+    social_position: float = Field(
+        description="Rate the social position from -1.0 (progressive) to 1.0 (conservative)"
+    )
+
+# Apply schema to articles
+results = opol.classify(
+    articles=articles[:5],
+    schema=PoliticalPositioning,
+    provider="ollama",  # Or "openai", "google", etc.
+    model="mistral"     # Model name
+)
+```
+
+### Entity Analysis
+
+Extract and analyze entities from content:
+
+```python
+# Get the most frequent entities across articles
+entities = []
+for article in articles[:20]:
+    if "entities" in article:
+        entities.extend([e["text"] for e in article["entities"]])
+
+from collections import Counter
+entity_counts = Counter(entities)
+top_entities = entity_counts.most_common(10)
+print(top_entities)
+```
+
+## Connection Modes
+
+The Opol client supports different connection modes:
+
+<CardGroup cols={3}>
+  <Card title="Local" icon="server">
+    Connect to a local installation of the Opol stack
+    
+    ```python
+    opol = OPOL(mode="local")
+    ```
+  </Card>
+  
+  <Card title="Container" icon="docker">
+    Connect to Opol running in Docker containers
+    
+    ```python
+    opol = OPOL(mode="container")
+    ```
+  </Card>
+  
+  <Card title="Remote" icon="cloud">
+    Connect to the hosted Opol service
+    
+    ```python
+    opol = OPOL()  # Default mode
+    ```
+  </Card>
+</CardGroup>
+
+## Configuration
+
+Customize the client behavior:
+
+```python
+# Configure logging
+import logging
+logging.basicConfig(level=logging.INFO)
+
+# Custom endpoints
+opol = OPOL(
+    mode="local",
+    base_url="http://localhost:5000",
+    api_key="your-api-key"
+)
+```
+
+## Examples
+
+### Entity Detection and Analysis
+
+```python
+# Get articles
+articles = opol.articles("Climate change", limit=10)
+
+# Analyze entities by type
+people = []
+organizations = []
+locations = []
+
+for article in articles:
+    if "entities" in article:
+        for entity in article["entities"]:
+            if entity["tag"] == "person":
+                people.append(entity["text"])
+            elif entity["tag"] == "organization":
+                organizations.append(entity["text"])
+            elif entity["tag"] in ["location", "geopolitical_entity"]:
+                locations.append(entity["text"])
+
+print(f"Top people: {Counter(people).most_common(5)}")
+print(f"Top organizations: {Counter(organizations).most_common(5)}")
+print(f"Top locations: {Counter(locations).most_common(5)}")
+```
+
+### Creating a Simple News Dashboard
+
+```python
+import matplotlib.pyplot as plt
+from collections import Counter
+import pandas as pd
+
+# Get recent articles
+articles = opol.articles.get_articles(limit=100)
+
+# Count sources
+sources = [article["source"] for article in articles if "source" in article]
+source_counts = Counter(sources)
+
+# Create a DataFrame and plot
+df = pd.DataFrame(source_counts.most_common(), columns=["Source", "Count"])
+df.plot(kind="bar", x="Source", y="Count", figsize=(10, 6))
+plt.title("Article Distribution by Source")
+plt.tight_layout()
+plt.show()
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="API Reference" icon="book" href="/api-reference">
+    Detailed documentation of all available methods and parameters
+  </Card>
+  
+  <Card title="Jupyter Notebooks" icon="code" href="https://github.com/open-politics/opol/tree/main/notebooks">
+    Example notebooks showcasing various use cases
+  </Card>
+</CardGroup>

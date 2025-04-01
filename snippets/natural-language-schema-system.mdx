@@ -1,0 +1,165 @@
+# Open Politics: Natural Language Schema Definition System
+
+## Core Concept
+
+The Natural Language Schema Definition System (NLSDS) is the central innovation of the Open Politics Project. It enables users to define analytical frameworks in natural language, which are then executed by Large Language Models to produce structured, consistent data from unstructured political texts.
+
+This system bridges the gap between qualitative and quantitative research approaches in political analysis. It allows domain experts without technical expertise to design sophisticated analytical frameworks that can be systematically applied across large document collections.
+
+## How It Works
+
+### Conceptual Framework
+
+The NLSDS operates on a simple yet powerful principle: political analysis often involves defining concepts, then systematically identifying and categorizing instances of those concepts in texts. Traditionally, this required either:
+
+1. Manual qualitative coding (limited by human capacity)
+2. Computational methods requiring technical expertise (limited by programming knowledge)
+
+Our system removes these limitations by allowing users to:
+
+1. Define analytical concepts in plain language
+2. Convert these definitions into structured data schemas
+3. Execute these schemas against document collections using LLMs
+4. Analyze the resulting structured data
+
+### Technical Implementation
+
+The NLSDS is implemented as a pipeline with several key components:
+
+1. **Schema Definition Interface**: Users define fields with:
+   - Data type (int, float, string, list, dict, etc.)
+   - Natural language description of what the field represents
+   - Optional examples, edge cases, and constraints
+2. **Schema Compilation**: The system converts user definitions into:
+   - A structured Pydantic model
+   - LLM prompt templates for extracting each field
+   - Validation rules for ensuring data quality
+3. **Execution Engine**: For each document:
+   - The system constructs prompts incorporating the field descriptions
+   - These prompts are sent to LLMs with appropriate context
+   - Results are parsed and validated against the schema
+   - Failed validations trigger refinement loops
+4. **Results Storage**: Structured outputs are:
+   - Stored in a database with references to source documents
+   - Linked to the schema definitions that produced them
+   - Tagged with provenance information for reproducibility
+
+## Example Schema
+
+Here's a simplified example of how a user might define a schema for analyzing political speeches:
+
+```python
+class SpeechAnalysis(BaseModel):
+    conservative_score: int = Field(
+        description="Rate how conservative the speech is on a scale from 1-10, where 1 is extremely progressive and 10 is extremely conservative. Consider positions on taxation, regulation, social issues, and tradition."
+    )
+    
+    economic_focus: float = Field(
+        description="What percentage of the speech focuses on economic issues? Consider mentions of jobs, taxes, spending, business, trade, etc."
+    )
+    
+    main_topics: List[str] = Field(
+        description="List the 3-5 main policy topics addressed in the speech. Be specific (e.g., 'healthcare reform' rather than just 'healthcare')."
+    )
+    
+    policy_positions: Dict[str, str] = Field(
+        description="For each policy topic identified, extract the speaker's specific position or proposal. Return as topic:position pairs."
+    )
+    
+    notable_quotes: List[Dict[str, str]] = Field(
+        description="Identify 2-3 notable quotes that best represent the speaker's key positions or rhetoric. For each quote, provide the text and the topic it addresses."
+    )
+```
+
+When applied to a collection of political speeches, this schema would produce structured, comparable data allowing analysis of how conservative different speakers are, what topics they prioritize, and what positions they take.
+
+## Use Cases
+
+The NLSDS enables numerous analytical approaches previously difficult to implement at scale:
+
+### 1. Multi-dimensional Political Positioning
+
+Instead of reducing political positions to a single left-right spectrum, analysts can define multiple independent dimensions (economic, social, foreign policy, etc.) and position texts along all of them simultaneously.
+
+### 2. Issue Framing Analysis
+
+Researchers can define different framing approaches for political issues (e.g., "immigration as economic issue" vs. "immigration as security issue") and systematically track how different sources frame topics over time.
+
+### 3. Argument Mapping
+
+By defining schemas that extract claims, evidence, and reasoning patterns, users can map the structure of political arguments across different sources and identify persuasive strategies.
+
+### 4. Comparative Analysis
+
+The same analytical framework can be applied across different languages, regions, or time periods, enabling systematic comparative studies that would be impractical with manual methods.
+
+### 5. Custom Classification Schemes
+
+Rather than using predetermined topic models or classification systems, researchers can define custom categories tailored to their specific research questions.
+
+## Technical Challenges
+
+Implementing the NLSDS presents several significant challenges:
+
+### 1. Consistency and Reliability
+
+Natural language is inherently ambiguous, and LLMs can be inconsistent. We address this through:
+
+- Careful prompt engineering
+- Multiple validation checks
+- Calibration mechanisms
+- Statistical reliability measures
+
+### 2. Transparency and Reproducibility
+
+For research integrity, users must understand how results were derived. We provide:
+
+- Explicit linking between definitions and results
+- Full provenance tracking
+- Audit trails for refinement loops
+- Version control for schemas
+
+### 3. Handling Edge Cases
+
+Political texts often contain ambiguity, metaphor, and implicit information. Our system includes:
+
+- Confidence scoring for extractions
+- Explicit handling of edge cases in schema definitions
+- Flagging of problematic extractions for human review
+
+### 4. Scale and Performance
+
+Processing large document collections with LLMs is computationally expensive. We optimize through:
+
+- Batched processing
+- Caching of similar queries
+- Progressive refinement approaches
+- Selective application of complex schemas
+
+## Future Development
+
+The NLSDS is continually evolving along several directions:
+
+### 1. Collaborative Schema Development
+
+Enabling teams to collaboratively refine analytical frameworks, share schema components, and build upon community-contributed definitions.
+
+### 2. Schema Versioning and Evolution
+
+Tracking how analytical frameworks evolve over time, with systematic approaches to applying updated schemas to previously analyzed documents.
+
+### 3. Cross-Modal Analysis
+
+Extending the system to handle multimodal political content, including images, videos, and audio recordings.
+
+### 4. Methodological Validation Tools
+
+Developing tools to validate schema reliability through techniques like inter-annotator agreement metrics, comparison with human coding, and sensitivity analysis.
+
+### 5. Integration with Classical Methods
+
+Creating bridges between LLM-driven analysis and traditional computational social science methods like topic modeling, network analysis, and statistical hypothesis testing.
+
+## Conclusion
+
+The Natural Language Schema Definition System represents a fundamental shift in how political analysis can be conducted. By making computational methods accessible through natural language, it democratizes advanced analytical capabilities while maintaining methodological rigor. This approach has implications beyond political science, potentially transforming how we analyze complex textual information across many domains.

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Open Politics Documentation",
+  "colors": {
+    "primary": "#0D9373",
+    "light": "#07C983",
+    "dark": "#0D9373"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "anchors": [
+      {
+        "anchor": "Documentation",
+        "icon": "book-open",
+        "groups": [
+          {
+            "group": "The Project",
+            "pages": [
+              "pages/project-manifest"
+            ]
+          },
+          {
+            "group": "The App",
+            "pages": [
+              "pages/introduction"
+            ]
+          },
+          {
+            "group": "The Data Engine",
+            "pages": [
+              "pages/architecture"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Discord Community Server",
+          "href": "https://discord.gg/AhqmEUr99T",
+          "icon": "slack"
+        }
+      ]
+    }
+  },
+  "logo": {
+    "light": "/logo/opp_white.svg",
+    "dark": "/logo/opp_black.svg",
+    "href": "https://open-politics.org"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "OPP Desk",
+        "href": "https://open-politics.org/desks/home/"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Main Page",
+      "href": "https://open-politics.org"
+    }
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/open-politics",
+      "linkedin": "https://www.linkedin.com/company/102941572"
+    }
+  }
+}

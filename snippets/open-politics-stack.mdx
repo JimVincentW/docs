@@ -1,0 +1,231 @@
+# Open Politics: Comprehensive Tool Stack
+
+## Architecture Overview
+
+The Open Politics project consists of two primary components working in concert:
+
+1. **OPOL (Data Engine)**: A modular, microservice-based data processing system that handles ingestion, enrichment, storage, and retrieval of political information.
+2. **Open Politics HQ (User Interface)**: A web application that provides intuitive interfaces for exploring, visualizing, and analyzing the processed information.
+
+This architecture separates concerns while maintaining tight integration, allowing each component to evolve independently while working together seamlessly.
+
+## Data Engine (OPOL)
+
+The data engine is the technological foundation of the Open Politics project, responsible for transforming raw data into structured, enriched information ready for analysis.
+
+### Core Components
+
+#### 1. Data Ingestion Pipeline
+
+- **Scraping Service**: Collects data from diverse sources including news sites, government portals, economic databases, and social media platforms.
+- **Document Upload Handling**: Processes user-uploaded documents in various formats (PDF, DOCX, CSV, etc.).
+- **SearXNG Integration**: Provides meta-search capabilities across multiple search engines for ad-hoc data gathering.
+- **Redis-Based Queue System**: Manages and prioritizes ingestion tasks.
+
+#### 2. Enrichment Pipeline
+
+- **Embeddings Service**: Generates vector representations of texts for semantic search and similarity comparisons.
+- **Entities Service**: Extracts named entities (people, organizations, locations) from texts.
+- **Geocoding Service**: Converts location mentions to geographical coordinates.
+- **Classification Service**: Applies various classification schemas to categorize content.
+- **Natural Language Schema Definition System**: Executes user-defined analytical frameworks via LLMs.
+
+#### 3. Storage Layer
+
+- **PostgreSQL Database**: Stores structured article metadata, entities, and classifications.
+- **pgvector Extension**: Enables vector similarity search within PostgreSQL.
+- **File Storage**: Manages original documents and generated artifacts.
+
+#### 4. Retrieval Layer
+
+- **Semantic Search**: Vector-based similarity queries.
+- **Structured Retrieval**: SQL-based filtering by metadata, entities, and classifications.
+- **Hybrid Search**: Combines semantic and structured approaches for optimal results.
+- **Geospatial Queries**: Location-based filtering and proximity searches.
+
+### Integration and Orchestration
+
+- **Prefect Workflow Engine**: Orchestrates batch processing jobs with monitoring, retry logic, and scheduling.
+- **FastAPI Microservices**: Provide real-time API endpoints for live queries.
+- **Kubernetes**: Manages container deployment and scaling.
+- **Python Client**: Simplifies programmatic interaction with the data engine.
+
+## User Interface (Open Politics HQ)
+
+The user interface transforms the data engine's capabilities into intuitive, accessible experiences for different types of users.
+
+### Core Components
+
+#### 1. Globe Visualization
+
+- Interactive 3D representation of global political events
+- Geospatial clustering and filtering
+- Temporal playback of event sequences
+- Drill-down from global view to specific locations
+
+#### 2. Search Interface
+
+- Unified search across multiple data types
+- Faceted filtering by entities, topics, locations, and time
+- Relevance scoring with explainable results
+- Save and share search configurations
+
+#### 3. Dashboard System
+
+- Customizable layouts for different analytical needs
+- Real-time data updates for monitoring
+- Comparative views across time periods or regions
+- Export capabilities for reports and presentations
+
+#### 4. Analysis Workspaces
+
+- Schema definition interface for creating analytical frameworks
+- Batch processing of document collections
+- Result visualization with multiple views (charts, tables, maps)
+- Collaborative annotation and discussion
+
+#### 5. Report Assembly
+
+- Combining multiple analyses into structured reports
+- Citation tracking back to source documents
+- Multiple export formats (PDF, HTML, presentations)
+- Template system for consistent reporting
+
+### Technical Implementation
+
+- NextJS-based web application
+- TypeScript for type safety and developer experience
+- Tailwind CSS for responsive, accessible design
+- Three.js for 3D visualizations
+- React-based component architecture
+- Server-side rendering for performance
+- Authentication and permission system
+
+## Data Flows and Integration
+
+The Open Politics architecture enables several key data flows that create a complete analytical pipeline:
+
+### 1. Data Acquisition Flow
+
+```
+Source (News/Doc/Upload) → Scraper Service → Document Store
+```
+
+### 2. Enrichment Flow
+
+```
+Document Store → Embeddings/Entities/Geo → Enriched Database
+```
+
+### 3. Analysis Flow
+
+```
+User Schema Definition → LLM Processing → Structured Results → Visualization
+```
+
+### 4. Search Flow
+
+```
+User Query → Hybrid Search (Vector + Structured) → Ranked Results
+```
+
+### 5. Report Flow
+
+```
+Multiple Analyses → Assembly Interface → Structured Report → Export
+```
+
+## Deployment Models
+
+The Open Politics stack supports multiple deployment scenarios:
+
+### 1. Full Self-Hosted
+
+- All components deployed on user-controlled infrastructure
+- Complete data sovereignty and customization
+- Higher resource requirements and technical expertise needed
+
+### 2. Client + Hosted Backend
+
+- User runs the web application locally
+- Data engine hosted as a service
+- Balances convenience with privacy
+
+### 3. Fully Hosted Service
+
+- Accessible through web browser
+- No local installation required
+- Tiered access models for different user types
+
+### 4. Hybrid Model
+
+- Core components self-hosted
+- Resource-intensive processes (like LLM inference) use hosted services
+- Optimizes for cost while maintaining control of sensitive data
+
+## Technical Challenges and Solutions
+
+### 1. Resource Efficiency
+
+**Challenge**: Political analysis at scale requires significant computational resources.
+
+**Solution**: We implement:
+
+- Intelligent caching of common queries and results
+- Tiered processing (quick lightweight analysis followed by deeper processing only where needed)
+- Efficient vector storage and retrieval optimizations
+- Selective use of local vs. remote LLMs based on task complexity
+
+### 2. Integration Complexity
+
+**Challenge**: Maintaining cohesion across many specialized microservices.
+
+**Solution**: We provide:
+
+- Unified Python client abstracting underlying complexity
+- Consistent API patterns across services
+- Comprehensive logging and monitoring
+- Containerization for reproducible environments
+
+### 3. Data Variability
+
+**Challenge**: Political data comes in diverse formats, languages, and structures.
+
+**Solution**: We implement:
+
+- Flexible ingestion pipelines with format-specific handlers
+- Multilingual processing capabilities
+- Normalization layers to standardize diverse inputs
+- Progressive enhancement approach to metadata
+
+## Future Directions
+
+The Open Politics tool stack is continuously evolving along several dimensions:
+
+### 1. Graph Analysis Capabilities
+
+- Knowledge graph construction from extracted entities and relationships
+- Graph visualization and exploration tools
+- Path analysis for connection discovery
+- Temporal graph evolution tracking
+
+### 2. Enhanced Multi-Modal Analysis
+
+- Processing of images, video, and audio in political content
+- Cross-modal correlation detection
+- Integrated analysis of text and visual rhetoric
+
+### 3. Collaborative Analysis Features
+
+- Real-time collaborative schema development
+- Shared analysis workspaces
+- Annotation and discussion capabilities
+- Version control for analytical frameworks
+
+### 4. Customizable Information Spaces
+
+- User-defined monitoring dashboards for specific political contexts
+- Personalized alert systems for relevant developments
+- Custom classification taxonomies shared across user communities
+
+We invite you to join us in building this new kind of political intelligence infrastructure—one that empowers citizens rather than institutions, values transparency over proprietary methods, and creates space for deep exchange of analytical perspectives.
