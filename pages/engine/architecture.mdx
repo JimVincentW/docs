@@ -1,0 +1,334 @@
+---
+title: 'Architecture'
+description: 'The technical architecture of the Open Politics data engine'
+---
+
+OPOL is the data engine that powers Open Politics, processing diverse political information into structured, enriched content ready for analysis. This page explains how OPOL is architected and how its components work together.
+
+<Card horizontal="true" href="/app/introduction">
+  Looking for user-facing features? See our HQ documentation for information about the application interface and analytical tools.
+</Card>
+
+## Overview
+
+<Frame caption="OPOL Stack Architecture with Workflow Orchestration">
+  <img src="/images/stackwithflowarchitecture.png" alt="OPOL Stack Architecture" />
+</Frame>
+
+OPOL employs a dual-architecture approach to handle both batch processing and live requests efficiently:
+
+1. **Microservice Architecture** for live API requests
+2. **Orchestrated Workflows** for batch processing
+
+This separation allows us to optimise for both interactive use and large-scale data processing.
+
+## Core Capabilities
+
+<CardGroup cols={3}>
+  <Card title="Data Ingestion" icon="spider-web">
+    Collection of content from diverse sources through configurable scrapers
+  </Card>
+  
+  <Card title="Vector Processing" icon="vector-square">
+    Conversion of text into numerical vectors for semantic analysis
+  </Card>
+  
+  <Card title="Entity Recognition" icon="tag">
+    Identification of people, organisations, locations, and other entities
+  </Card>
+  
+  <Card title="Geocoding" icon="map-pin">
+    Translation of location mentions into geographical coordinates
+  </Card>
+  
+  <Card title="LLM Classification" icon="robot" href="/engine/classification-framework">
+    Application of user-defined analytical frameworks using language models
+  </Card>
+  
+  <Card title="Semantic Search" icon="magnifying-glass">
+    Finding content based on meaning rather than just keywords
+  </Card>
+</CardGroup>
+
+## System Components
+
+OPOL is organised into several categories of components:
+
+<Tabs>
+  <Tab title="Services">
+    Microservices for handling live API requests:
+    
+    <CardGroup cols={2}>
+      <Card title="app-opol-core" icon="server">
+        Core dashboard application and API coordinator
+      </Card>
+      
+      <Card title="service-scraper" icon="spider-web">
+        Content collection from configured sources
+      </Card>
+      
+      <Card title="service-embeddings" icon="vector-square">
+        Vector processing for semantic operations
+      </Card>
+      
+      <Card title="service-entities" icon="tag">
+        Entity extraction and processing
+      </Card>
+      
+      <Card title="service-geo" icon="map-pin">
+        Geocoding and spatial processing
+      </Card>
+      
+      <Card title="service-postgres" icon="database">
+        Database interface and management
+      </Card>
+    </CardGroup>
+    
+    These services run continuously, handling requests as they arrive.
+  </Tab>
+  
+  <Tab title="Engines">
+    Supporting infrastructure components:
+    
+    <CardGroup cols={2}>
+      <Card title="engine-ollama" icon="robot">
+        Local LLM server for offline processing
+      </Card>
+      
+      <Card title="engine-pelias-placeholder" icon="map-pin">
+        Local geocoding services
+      </Card>
+      
+      <Card title="engine-prefect-server" icon="server">
+        Workflow orchestration dashboard
+      </Card>
+      
+      <Card title="engine-redis" icon="database">
+        Queue management and caching
+      </Card>
+      
+      <Card title="engine-searxng" icon="search">
+        Federated search capabilities
+      </Card>
+    </CardGroup>
+    
+    These components provide infrastructure support for the services.
+  </Tab>
+  
+  <Tab title="Databases">
+    Storage components for persistent data:
+    
+    <CardGroup cols={2}>
+      <Card title="database-articles" icon="database">
+        Primary PostgreSQL database with pgvector extension:
+        - Content storage
+        - Metadata
+        - Entity relationships
+        - Classification results
+        - Vector embeddings
+      </Card>
+      
+      <Card title="database-prefect" icon="database">
+        Orchestration state storage
+      </Card>
+    </CardGroup>
+  </Tab>
+  
+  <Tab title="Workflows">
+    Batch processing components:
+    
+    <CardGroup cols={2}>
+      <Card title="flowrunner-all" icon="server">
+        Complete processing pipeline
+      </Card>
+      
+      <Card title="flowrunner-scraping" icon="spider-web">
+        Content ingestion workflows
+      </Card>
+      
+      <Card title="flowrunner-embeddings" icon="vector-square">
+        Vector processing workflows
+      </Card>
+      
+      <Card title="flowrunner-entities" icon="tag">
+        Entity extraction workflows
+      </Card>
+    </CardGroup>
+    
+    <Frame>
+      <img src="/images/prefect_flows.png" alt="Prefect Flow Run Tracing" />
+    </Frame>
+    
+    These components are executed by the orchestration system as needed.
+  </Tab>
+</Tabs>
+
+## Data Flow
+
+The core data pipeline follows this sequence:
+
+<Steps>
+  <Step title="Content Ingestion">
+    Scrapers collect articles and documents from configured sources
+  </Step>
+  
+  <Step title="Initial Processing">
+    Content is cleaned, normalised, and stored in the database
+  </Step>
+  
+  <Step title="Vectorisation">
+    Text is converted into vector embeddings for semantic operations
+  </Step>
+  
+  <Step title="Entity Extraction">
+    Named entities are identified and categorised
+  </Step>
+  
+  <Step title="Geocoding">
+    Location entities are enriched with geographical coordinates
+  </Step>
+  
+  <Step title="Classification">
+    User-defined analytical frameworks are applied using LLMs
+  </Step>
+  
+  <Step title="Indexing">
+    Processed content is indexed for search and retrieval
+  </Step>
+</Steps>
+
+## Orchestration Mechanism
+
+<Frame caption="Prefect Dashboard showing workflow executions">
+  <img src="/images/prefect_dashboard.png" alt="Prefect Dashboard" />
+</Frame>
+
+OPOL uses Prefect for workflow orchestration, which provides:
+
+- **Scheduling** - Regular execution of data pipelines
+- **Monitoring** - Visibility into workflow performance
+- **Error Handling** - Automatic retries and failure management
+- **Scalability** - Horizontal scaling of processing tasks
+
+The orchestration flow follows two main patterns:
+
+1. **Orchestration Flow** - Coordinates the entire pipeline by triggering endpoints to:
+   - Create jobs and push to Redis queues
+   - Save results from processed queues
+
+2. **Processing Flows** - Run on schedules or manual triggers to:
+   - Check Redis for pending jobs
+   - Process jobs and update queues
+
+## LLM Integration
+
+OPOL provides flexible options for language model integration:
+
+<CardGroup cols={3}>
+  <Card title="OpenAI API" icon="cloud">
+    Cloud-based processing with industry-leading models
+  </Card>
+  
+  <Card title="Google Vertex AI" icon="cloud">
+    Alternative cloud options for processing
+  </Card>
+  
+  <Card title="Ollama" icon="server">
+    Local LLM deployment for complete data sovereignty
+  </Card>
+</CardGroup>
+
+<Info>
+  Set `LOCAL_LLM=True` in your environment to use Ollama for local processing
+</Info>
+
+## Deployment Options
+
+OPOL can be deployed in several configurations:
+
+<CardGroup cols={2}>
+  <Card title="Local Development" icon="laptop">
+    Run the entire stack on a local machine:
+    
+    ```bash
+    git clone https://github.com/open-politics/opol.git
+    cd opol
+    bash boot.sh
+    ```
+    
+    Best for development or testing
+  </Card>
+  
+  <Card title="Self-Hosted Production" icon="server">
+    Deploy the stack on your own infrastructure:
+    
+    - Docker Compose for simple deployments
+    - Kubernetes for production scaling
+    
+    Best for organisations needing data sovereignty
+  </Card>
+</CardGroup>
+
+<CardGroup cols={2}>
+  <Card title="Cloud-Hosted" icon="cloud">
+    Deploy components in cloud environments:
+    
+    - Managed databases (PostgreSQL)
+    - Container orchestration (Kubernetes)
+    - Monitoring and logging
+    
+    Best for production deployments with scalability needs
+  </Card>
+  
+  <Card title="Hybrid" icon="network-wired">
+    Mix local and cloud components:
+    
+    - Local LLMs for sensitive processing
+    - Cloud databases for scalability
+    - Local UI with cloud backend
+    
+    Best for balancing control and convenience
+  </Card>
+</CardGroup>
+
+## System Requirements
+
+For local deployments of the complete stack:
+
+<CardGroup cols={3}>
+  <Card title="RAM" icon="memory">
+    32GB recommended
+  </Card>
+  
+  <Card title="Storage" icon="hard-drive">
+    20GB minimum
+  </Card>
+  
+  <Card title="Processor" icon="microchip">
+    4+ cores recommended
+  </Card>
+</CardGroup>
+
+<Info>
+  GPU is optional but can significantly improve performance for LLM operations and vector processing.
+</Info>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Data Pipeline" icon="diagram-project" href="/engine/data-pipeline">
+    Detailed explanation of the data processing workflow
+  </Card>
+  
+  <Card title="Classification Framework" icon="tags" href="/engine/classification-framework">
+    How the LLM classification system works
+  </Card>
+  
+  <Card title="Services" icon="server" href="/engine/services">
+    Detailed information about each service component
+  </Card>
+  
+  <Card title="Installation" icon="download" href="/development/installation">
+    How to set up and run the OPOL stack
+  </Card>
+</CardGroup>

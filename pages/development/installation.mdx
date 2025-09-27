@@ -1,0 +1,344 @@
+---
+title: 'Installation Guide'
+description: 'How to set up the Open Politics platform'
+---
+
+import AdditionalRessources from '/snippets/additional_ressources.mdx'
+
+This guide covers the installation options for Open Politics. The platform consists of two main components - HQ (the web interface) and OPOL (the data engine) - which can be installed together or separately depending on your needs.
+
+## Installation Options
+
+<Tabs>
+  <Tab title="Hosted Version">
+    The simplest way to use Open Politics is through our hosted platform:
+    
+    1. Register at [open-politics.org](https://open-politics.org)
+    2. Log in to access your personal dashboard
+    3. Begin using the platform with pre-loaded data
+    
+    <Info>
+      Currently in beta with limited registration. Contact us at [engage@open-politics.org](mailto:engage@open-politics.org) for access.
+    </Info>
+  </Tab>
+  
+  <Tab title="Complete Stack">
+    For running both HQ and OPOL locally:
+    
+    <Steps>
+      <Step title="Prerequisites">
+        - Docker and Docker Compose
+        - 32GB RAM recommended
+        - 20GB free disk space
+        - Git
+      </Step>
+      
+      <Step title="Clone repositories">
+        ```bash
+        # Clone the HQ repository
+        git clone https://github.com/open-politics/open-politics.git
+        
+        # Clone the OPOL repository
+        git clone https://github.com/open-politics/opol.git
+        ```
+      </Step>
+      
+      <Step title="Configure environment">
+        For HQ:
+        ```bash
+        cd open-politics
+        cp .env.example .env
+        # Edit .env as needed
+        ```
+        
+        For OPOL:
+        ```bash
+        cd opol
+        cp .env.example .env.local
+        # Edit .env.local as needed
+        ```
+      </Step>
+      
+      <Step title="Start the stack">
+        First start OPOL:
+        ```bash
+        cd opol
+        bash boot.sh
+        ```
+        
+        Then start HQ:
+        ```bash
+        cd open-politics
+        docker compose up
+        ```
+      </Step>
+      
+      <Step title="Connect components">
+        Configure HQ to use your local OPOL instance by updating the OPOL_URL in the HQ .env file:
+        
+        ```
+        OPOL_URL=http://localhost:8089
+        ```
+      </Step>
+      
+      <Step title="Boot Prefect flows">
+        Start the data processing pipelines:
+        
+        ```bash
+        cd opol
+        bash boot-prefect-flows.sh
+        ```
+      </Step>
+      
+      <Step title="Access the interfaces">
+        - HQ: http://localhost:3000
+        - OPOL Dashboard: http://localhost:8089/dashboard
+        - Prefect Dashboard: http://localhost:4200
+      </Step>
+    </Steps>
+    
+    <Note>
+      Initial data population takes time. For every 10 sources specified, expect about 20 minutes to load everything (on a 32GB RAM machine).
+    </Note>
+  </Tab>
+  
+  <Tab title="HQ Only">
+    To run just the front-end interface:
+    
+    <Steps>
+      <Step title="Prerequisites">
+        - Docker and Docker Compose
+        - 8GB RAM recommended
+        - Git
+      </Step>
+      
+      <Step title="Clone the repository">
+        ```bash
+        git clone https://github.com/open-politics/open-politics.git
+        cd open-politics
+        ```
+      </Step>
+      
+      <Step title="Configure environment">
+        ```bash
+        cp .env.example .env
+        ```
+        
+        Edit the .env file to point to a hosted OPOL instance:
+        ```
+        OPOL_URL=https://api.open-politics.org
+        ```
+      </Step>
+      
+      <Step title="Start the application">
+        ```bash
+        docker compose up
+        ```
+      </Step>
+      
+      <Step title="Access the interface">
+        Open your browser and navigate to:
+        ```
+        http://localhost:3000
+        ```
+      </Step>
+    </Steps>
+    
+    <Note>
+      This configuration uses our hosted OPOL backend. To use your own data, you'll need to run the complete stack.
+    </Note>
+  </Tab>
+  
+  <Tab title="OPOL Only">
+    To run just the data engine:
+    
+    <Steps>
+      <Step title="Prerequisites">
+        - Docker and Docker Compose
+        - 24GB RAM recommended
+        - 16GB disk space
+        - Git
+      </Step>
+      
+      <Step title="Clone the repository">
+        ```bash
+        git clone https://github.com/open-politics/opol.git
+        cd opol
+        ```
+      </Step>
+      
+      <Step title="Configure environment">
+        ```bash
+        cp .env.example .env.local
+        ```
+        
+        Edit .env.local to configure:
+        - Data sources
+        - LLM settings
+        - Database connections
+      </Step>
+      
+      <Step title="Start the stack">
+        ```bash
+        bash boot.sh
+        ```
+      </Step>
+      
+      <Step title="Start data processing">
+        ```bash
+        bash boot-prefect-flows.sh
+        ```
+      </Step>
+      
+      <Step title="Access the interface">
+        Open your browser and navigate to:
+        ```
+        http://localhost:8089/dashboard
+        ```
+      </Step>
+    </Steps>
+    
+    <Info>
+      This setup allows you to use the OPOL API with other front-ends or integrate it into your own applications.
+    </Info>
+  </Tab>
+</Tabs>
+
+## Configuration
+
+### Core Environment Variables
+
+<AccordionGroup>
+  <Accordion title="HQ Configuration">
+    Key variables in the HQ .env file:
+    
+    | Variable | Description | Default |
+    | --- | --- | --- |
+    | `PORT` | Port for the HQ web server | `3000` |
+    | `OPOL_URL` | URL of the OPOL API | `http://localhost:8089` |
+    | `FIRST_SUPERUSER` | Admin username | `example@example.com` |
+    | `FIRST_SUPERUSER_PASSWORD` | Admin password | `example` |
+  </Accordion>
+  
+  <Accordion title="OPOL Configuration">
+    Key variables in the OPOL .env.local file:
+    
+    | Variable | Description | Default |
+    | --- | --- | --- |
+    | `CORE_APP_PORT` | Port for the OPOL dashboard | `8089` |
+    | `LOCAL_LLM` | Use local LLM (Ollama) | `TRUE` |
+    | `OLLAMA_MODEL` | Model to use with Ollama | `llama3` |
+    | `OPENAI_API_KEY` | OpenAI API key (if not using local LLM) | — |
+    | `ARTICLES_DB_PORT` | PostgreSQL database port | `5432` |
+    | `PREFECT_SERVER_PORT` | Prefect workflow server port | `4200` |
+  </Accordion>
+  
+  <Accordion title="Advanced Options">
+    Additional configuration options:
+    
+    | Variable | Description | Default |
+    | --- | --- | --- |
+    | `PELIAS_PLACEHOLDER_PORT` | Port for geocoding service | `4100` |
+    | `REDIS_PORT` | Port for Redis queue | `6379` |
+    | `SEARXNG_PORT` | Port for SearXNG search engine | `8021` |
+    | `EMBEDDING_SERVICE_PORT` | Port for embedding service | `0420` |
+    | `ENTITY_SERVICE_PORT` | Port for entity service | `1290` |
+    | `GEO_SERVICE_PORT` | Port for geocoding service | `3690` |
+  </Accordion>
+</AccordionGroup>
+
+## Hardware Requirements
+
+<CardGroup cols={3}>
+  <Card title="Minimum">
+    - 16GB RAM
+    - 4 CPU cores
+    - 10GB disk space
+    
+    Suitable for testing with limited data
+  </Card>
+  
+  <Card title="Recommended">
+    - 32GB RAM
+    - 8 CPU cores
+    - 20GB disk space
+    
+    Comfortable for development and medium datasets
+  </Card>
+  
+  <Card title="Production">
+    - 64GB+ RAM
+    - 16+ CPU cores
+    - 100GB+ disk space
+    - GPU (optional, for LLM acceleration)
+    
+    For large-scale deployments
+  </Card>
+</CardGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Container startup issues">
+    If containers fail to start:
+    
+    1. Check Docker logs:
+    ```bash
+    docker compose logs [service-name]
+    ```
+    
+    2. Ensure ports aren't already in use:
+    ```bash
+    sudo lsof -i :[port]
+    ```
+    
+    3. Try increasing Docker memory limits in Docker Desktop settings
+  </Accordion>
+  
+  <Accordion title="Database connection errors">
+    If services can't connect to the database:
+    
+    1. Check the database container is running:
+    ```bash
+    docker compose ps database-articles
+    ```
+    
+    2. Verify environment variables match in both services
+    
+    3. Try explicitly setting the database host:
+    ```
+    ARTICLES_DB_HOST=database-articles
+    ```
+  </Accordion>
+  
+  <Accordion title="LLM issues">
+    If classification or embedding services fail:
+    
+    1. For local LLM (Ollama), ensure the model is downloaded:
+    ```bash
+    docker exec -it engine-ollama ollama pull llama3
+    ```
+    
+    2. For API-based LLMs, check your API key is correct
+    
+    3. Monitor LLM logs for specific errors:
+    ```bash
+    docker compose logs engine-ollama
+    ```
+  </Accordion>
+  
+  <Accordion title="Memory problems">
+    If you encounter out-of-memory errors:
+    
+    1. Reduce concurrent processing by editing `.env.local`:
+    ```
+    PREFECT_CONCURRENCY=2  # Default is 4
+    ```
+    
+    2. Limit the number of data sources in your configuration
+    
+    3. Increase your system's swap space
+  </Accordion>
+</AccordionGroup>
+
+<AdditionalRessources />

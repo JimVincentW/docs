@@ -1,0 +1,148 @@
+---
+title: "Schemas"
+description: "Define analysis tasks in natural language to extract structured data from your content"
+---
+
+## What are Schemas?
+
+Schemas let you define what information to extract from documents using plain English instructions. Think of them as reusable analysis templates - write once, apply to many documents.
+
+<video 
+  autoPlay
+  muted
+  loop
+  playsInline
+  className="w-full aspect-video rounded-xl"
+  src="/images/schema-view-5.mp4"
+  caption="Create analysis schemas with natural language">
+</video>
+
+<CardGroup cols={2}>
+  <Card title="Plain English Instructions" icon="message-lines">
+    Write analysis tasks in natural language - no coding required
+  </Card>
+  <Card title="Create structure from natural language defined tasks" icon="brackets-curly">
+    Get consistent output that's easy to analyze and visualize
+  </Card>
+  <Card title="Formalise Methods" icon="file-lines">
+
+  </Card>
+  <Card title="Reusable Templates" icon="copy">
+    Create once, apply to hundreds of documents automatically
+  </Card>
+</CardGroup>
+
+---
+
+## Schema Example: Political Speech Analysis
+
+Here's a complete schema that extracts key information from political speeches:
+
+```json
+{
+  "position_summary": {
+    "type": "string",
+    "description": "Speaker's main political stance in 1-2 sentences"
+  },
+  "security_stance": {
+    "type": "number",
+    "description": "Immigration position on 1-10 scale (1=pro-immigration, 10=security-focused)"
+  },
+  "location": {
+    "type": "string", 
+    "description": "Geographic focus or location mentioned"
+  },
+  "timestamp": {
+    "type": "string",
+    "description": "When speech occurred (ISO format: YYYY-MM-DD)"
+  },
+  "topics": {
+    "type": "array",
+    "description": "List of policy areas discussed"
+  }
+}
+```
+
+<img 
+src="/images/schema-2.png"
+alt="Political Speech Analysis"
+/>
+### Sample Output
+```json
+{
+  "position_summary": "Speaker advocates for balanced immigration reform with emphasis on both security and humanitarian concerns",
+  "security_stance": 6,
+  "location": "Berlin",
+  "timestamp": "2025-01-15",
+  "topics": ["Border Security", "Asylum Policy", "EU Solidarity", "Economic Impact"]
+}
+```
+
+<Warning>
+Always test schemas on sample content first - results depend on document quality and clarity.
+</Warning>
+
+To learn more about how results are used in Dashboards [click here](/pages/app/dashboards)
+
+
+---
+
+## Running Your Analysis
+
+### Create an Annotation Run
+
+Once your schema is ready, apply it to your content:
+
+<Steps>
+<Step title="Choose Your Content">
+  Select individual assets or entire bundles to analyze
+</Step>
+<Step title="Pick Your Schema">
+  Choose which analysis template to apply
+</Step>
+<Step title="Configure Settings">
+  <Card title="AI Model" icon="brain">
+    Choose your AI provider: OpenAI, Gemini, or Ollama (local)
+  </Card>
+  <Card title="Processing Options" icon="settings">
+    • Process individual CSV rows separately
+    • Batch process multiple documents
+  </Card>
+</Step>
+</Steps>
+
+
+
+---
+
+## Tips for Better Results
+
+<CardGroup cols={1}>
+  <Card title="Write Clear Instructions" icon="pencil">
+    **Do**: "Find all mentions of budget allocations and categorize them by department"
+    
+    **Don't**: "Extract important financial information"
+    
+    Be specific about what you're looking for and how to categorize it.
+  </Card>
+  
+  <Card title="Start Simple, Then Expand" icon="seedling">
+    Begin with basic extraction, then add complexity:
+    1. First: Extract just the main entities
+    2. Then: Add sentiment analysis
+    3. Finally: Include relationship mapping
+  </Card>
+  
+  <Card title="Use Examples in Instructions" icon="lightbulb">
+    Help the AI understand by providing examples:
+    
+    > "Identify policy positions like 'increase education funding' or 'reduce corporate taxes'. For each position, determine if the speaker supports it (positive language like 'we should' or 'I propose') or opposes it (negative language like 'we must stop' or 'this is wrong')."
+  </Card>
+  
+  <Card title="Test Before Scaling" icon="flask">
+    Always test your schema on a few documents first:
+    - Check if the output matches your expectations
+    - Look for missing information or incorrect categorization
+    - Refine your instructions based on the results
+  </Card>
+</CardGroup>

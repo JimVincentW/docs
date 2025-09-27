@@ -17,19 +17,18 @@
           {
             "group": "The Project",
             "pages": [
-              "pages/project-manifest"
+              "pages/project/manifest"
             ]
           },
           {
-            "group": "The App",
+            "group": "HQ/ The App",
             "pages": [
-              "pages/introduction"
-            ]
-          },
-          {
-            "group": "The Data Engine",
-            "pages": [
-              "pages/architecture"
+              "pages/app/introduction",
+              "pages/app/getting-started",
+              "pages/app/assets",
+              "pages/app/schemas",
+              "pages/app/dashboards",
+              "pages/app/chat-tools"
             ]
           }
         ]
@@ -38,9 +37,14 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Discord Community Server",
-          "href": "https://discord.gg/AhqmEUr99T",
-          "icon": "slack"
+          "anchor": "Forum",
+          "href": "https://forum.open-politics.org",
+          "icon": "comments"
+        },
+        {
+          "anchor": "HQ Webapp",
+          "href": "https://open-politics.org/hq",
+          "icon": "arrow-up-right-from-square"
         }
       ]
     }
@@ -53,13 +57,13 @@
   "navbar": {
     "links": [
       {
-        "label": "OPP Desk",
+        "label": "HQ Desk",
         "href": "https://open-politics.org/desks/home/"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Main Page",
+      "label": "Open Politics Website",
       "href": "https://open-politics.org"
     }
   },
