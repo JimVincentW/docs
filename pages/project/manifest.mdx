@@ -3,30 +3,26 @@ title: "Project Manifest"
 description: "Open Politics HQ - Open Source Intelligence Platform"
 ---
 
-
-<img src="/images/exactly.png" alt="Multi dashboard" width="100%" />
-
-<Card title="Talk: Open Source Political Intelligence" icon="play" href="https://media.ccc.de/v/dg-111" horizontal>
-**CCCB Datengarten Presentation**
-
-</Card>
-
 ## Why?
 
-**The modern information landscape is a chaotic mess and, most often, difficult to navigate.** 
+<Frame caption="Is it not?">
+  <img src="/images/exactly.png" alt="Colorful gradient image with the titel /a big clusterfuck" width="100%" />
+</Frame>
 
-Whether you need to prove a point, dive deeper into a topic, or simply understand what's happening, the challenge is the same: making sense of vast amounts of unstructured information. Organisations drowning in unstructured data, NGOs overwhelmed by document management, journalists tracking patterns across hundreds of sources, researchers needing systematic analysis tools, businesses struggling with process inefficiencies—this is for you.
+**The modern information landscape is a chaotic mess and, most often, difficult to navigate.**
 
+
+Maybe you need to prove a point, are aiming to dive deeper into a topic, or simply want to understand what's happening. Whether you're an organisation drowning in unstructured data, an NGO with not enough hands on deck, an independent journalist tracking patterns across hundreds of sources, a researcher needing systematic analysis tools, or a business struggling with process inefficiencies, this is for you."
 
 ## The Idea
 
 A journalist knows how to identify "security framing" in news coverage. A policy analyst knows what counts as "meaningful stakeholder engagement" in legislative proposals. A bureaucrat knows whether a grant application is properly filled out.
 
-That expertise lives in their heads, maybe in spreadsheets and notes. This works great for tens of documents. At hundreds or thousands, you're either stuck or you need to hire engineers. Meanwhile, sophisticated analysis infrastructure — the kind that lets you systematically apply analytical frameworks at scale — has only been available to well-funded institutions.
+That expertise lives in their heads, maybe in spreadsheets and notes. This works great for tens of documents. At hundreds or thousands, you're either stuck or you need to hire engineers. Meanwhile, sophisticated analysis infrastructure, the kind that lets you systematically apply analytical frameworks at scale, has only been available to well-funded institutions.
 
-**HQ.** Define your analytical questions in plain language. Apply them at scale. The key innovation: schemas are shareable, transparent, and improvable. Other researchers can see exactly how you defined your framework, critique it, refine it, or apply it to their own data.
+**Thus HQ:** define your analytical questions in plain language. Apply them at scale. Your schemas are your "lenses" you use to see the data. They are shareable, transparent, and improvable. Other researchers can see exactly how you defined your framework, critique it, refine it, or apply it to their own data.
 
-**For example:** Imagine as a journalist, you are analyzing 200 news articles. You create a schema:
+**For example:** Imagine as a journalist, you are analysing 200 news articles. You create a schema:
 
 <CardGroup cols={2}>
   <Card>
@@ -52,11 +48,11 @@ That expertise lives in their heads, maybe in spreadsheets and notes. This works
   <img src="/images/multi-dashboard-1.png" alt="Multi dashboard" width="100%" />
 </Card>
 
-The principle scales. A journalist knows "framing." A policy analyst knows "stakeholder engagement." An NGO worker knows what signals a policy shift. Schemas let you take that knowledge and apply it systematically across thousands of documents. The same infrastructure that analyzes legislation can sort emails, process intake forms, track regulatory changes, or monitor media coverage.
+The principle scales. A journalist knows "framing." A policy analyst knows "stakeholder engagement." An NGO worker knows what signals a policy shift. Schemas let you take that knowledge and apply it systematically across thousands of documents. The same infrastructure that analyses legislation can sort emails, process intake forms, track regulatory changes, or monitor media coverage.
 
-This capability shouldn't be locked behind institutional walls. We're building it as **public infrastructure** — schemas, geocoding, vector search, local AI. Basic components, simple when you list them out. But that's the point. These are basic intelligence capabilities an open society needs, like libraries or archives, and they should be equally accessible.
+This capability shouldn't be locked behind institutional walls. We're building it as **public infrastructure**: schemas, geocoding, vector search, local AI. Basic components, simple when you list them out. But that's the point. These are basic intelligence capabilities an open society needs, like libraries or archives, and they should be equally accessible.
 
-Open source. Self hostable. Bring your own LLM keys if you want privacy. Share your analytical frameworks publicly if you want transparency. Use it for journalism, research, advocacy, governance — anything that serves the public interest.
+Open source. Self hostable. Bring your own LLM keys if you want privacy. Share your analytical frameworks publicly if you want transparency. Use it for journalism, research, advocacy, governance, anything that serves the public interest.
 
 Importantly: none of this would exist without the many people dedicated to open source. We're assembling the hard work of countless other projects. We are standing on the shoulders of a massive collaborative ecosystem that makes this possible. We are grateful for their work and we are proud to be part of it.
 
@@ -129,7 +125,7 @@ The easiest way to start. We host the infrastructure, you bring your own LLM API
   <Step title="Add API Keys">
     Configure your LLM API keys on the home page
   </Step>
-  <Step title="Start Analyzing">
+  <Step title="Start Analysing">
     Upload content and create your first schema
   </Step>
 </Steps>
@@ -203,7 +199,7 @@ Connect any of these AI providers:
     Gemini models
   </Card>
   <Card title="Ollama" icon="shield">
-    Run models locally — Llama, OAI OSS, Qwen, etc.
+    Run models locally: Llama, OAI OSS, Qwen, etc.
   </Card>
 </CardGroup>
 
@@ -244,15 +240,20 @@ We're building this in the open. The codebase, analytical methods, and documenta
 
 ## License
 
-AGPLv3 — see [LICENSE](LICENSE)
+AGPLv3, see [LICENSE](LICENSE)
 
 This means you can use, modify, and distribute this software, but any modifications or services built on it must also be open source. You can get an enterprise license for private use modifications which are not publicly deployed for one year at a time under strict ethical guidelines.
 
 ## Project Origins & Story
 
-This project started at Freie Universität Berlin's Political Science department. The gap between what research infrastructure could theoretically do and what was practically accessible to most researchers was obvious. Someone had to build the bridge. Our first official funding came from the European Horizon NGI Search project, and before that we were lucky to have a warm circle of friends and early supporters who believed in the idea before there was much to show. No venture capital—just journalists and neighbors who got it.
+<Card title="Talk: Open Source Political Intelligence" icon="play" href="https://media.ccc.de/v/dg-111" horizontal>
+**CCCB Datengarten Presentation**
 
-The business model is intentionally simple: we'll try to keep a free hosted version running as much as we can shoulder, but hosting HQ is rather cheap as most of the cost comes from LLMs. We focus on helping organizations deploy and use the platform effectively — infrastructure orchestration, custom implementations, training. The platform itself always stays open source and self hostable.
+</Card>
+
+This project started at Freie Universität Berlin's Political Science department. The gap between what research infrastructure could theoretically do and what was practically accessible to most researchers was obvious. Someone had to build the bridge. Our first official funding came from the European Horizon NGI Search project, and before that we were lucky to have a warm circle of friends and early supporters who believed in the idea before there was much to show. No venture capital, just journalists and neighbours who got it.
+
+The business model is intentionally simple: we'll try to keep a free hosted version running as much as we can shoulder, but hosting HQ is rather cheap as most of the cost comes from LLMs. We focus on helping organisations deploy and use the platform effectively: infrastructure orchestration, custom implementations, training. The platform itself always stays open source and self hostable.
 
 Our marketing is the research that gets done with these tools. If people publish interesting work using HQ, that's worth more than any advertising campaign.
 

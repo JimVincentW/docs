@@ -25,11 +25,16 @@
       {
         "group": "App Features",
         "pages": [
-          "pages/app/chat",
+          "pages/app/assets",
           "pages/app/schemas",
           "pages/app/dashboards",
-          "pages/app/assets",
-          "pages/app/infospaces",
+          "pages/app/chat",
+          "pages/app/infospaces" 
+        ]
+      },
+      {
+        "group": "Method Details",
+        "pages": [
           "pages/app/classification-system"
         ]
       },
