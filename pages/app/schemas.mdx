@@ -13,26 +13,24 @@ Schemas are reusable analysis templates in plain English. Define what to extract
 
 **Example:** Media bias analysis schema:
 
-```json
-{
-  "source_type": {
-    "type": "string",
-    "description": "Primary source: [government, activist, expert, anonymous]"
-  },
-  "emotional_intensity": {
-    "type": "number",
-    "description": "Emotional intensity: 1-10 scale"
-  },
-  "framing": {
-    "type": "string",
-    "description": "Issue framing: [economic, security, moral, procedural]"
-  },
-  "geographic_scope": {
-    "type": "string",
-    "description": "Geographic scope: [local, national, international]"
-  }
-}
-```
+<CardGroup cols={2}>
+  <Card title="Source Type" icon="user">
+    **Type:** Text  
+    **Extract:** Primary source - government, activist, expert, or anonymous
+  </Card>
+  <Card title="Emotional Intensity" icon="heart">
+    **Type:** Number (1-10 scale)  
+    **Extract:** How emotionally charged is the language?
+  </Card>
+  <Card title="Framing" icon="frame">
+    **Type:** Text  
+    **Extract:** Issue framing - economic, security, moral, or procedural
+  </Card>
+  <Card title="Geographic Scope" icon="globe">
+    **Type:** Text  
+    **Extract:** Geographic scope - local, national, or international
+  </Card>
+</CardGroup>
 
 Result: Comparison of how different outlets frame the same stories.
 
@@ -50,32 +48,29 @@ Start with the analytical questions you want to answer:
 ### Step 2: Write Clear Instructions
 
 **Good instructions:**
-```json
-{
-  "department": {
-    "type": "string",
-    "description": "Department or agency name"
-  },
-  "amount_millions": {
-    "type": "number",
-    "description": "Amount in millions of dollars"
-  },
-  "change_type": {
-    "type": "string",
-    "description": "Change from previous year: [increase, decrease, same]"
-  }
-}
-```
+
+<CardGroup cols={3}>
+  <Card title="Department" icon="building">
+    **Type:** Text  
+    **Extract:** Department or agency name
+  </Card>
+  <Card title="Amount (Millions)" icon="dollar-sign">
+    **Type:** Number  
+    **Extract:** Amount in millions of dollars
+  </Card>
+  <Card title="Change Type" icon="chart-line">
+    **Type:** Text  
+    **Extract:** Change from previous year - increase, decrease, or same
+  </Card>
+</CardGroup>
 
 **Avoid vague instructions:**
-```json
-{
-  "financial_info": {
-    "type": "string",
-    "description": "Extract important financial information"
-  }
-}
-```
+
+<Card title="❌ Financial Info" icon="question">
+  **Type:** Text  
+  **Extract:** Extract important financial information  
+  *Too vague - AI won't know what specific information to extract*
+</Card>
 
 ### Step 3: Choose Data Types
 
@@ -86,29 +81,23 @@ Start with the analytical questions you want to answer:
 
 ## Data Type Examples
 
-**String (Text):**
-```json
-"source_type": {
-  "type": "string",
-  "description": "News source: [mainstream, alternative, government, independent]"
-}
-```
-
-**Array (List):**
-```json
-"framing_categories": {
-  "type": "array",
-  "description": "Issue framing: [economic, security, moral, procedural]"
-}
-```
-
-**Number:**
-```json
-"security_stance": {
-  "type": "number",
-  "description": "Immigration position: 1-10 scale (1=pro-immigration, 10=security-focused)"
-}
-```
+<CardGroup cols={3}>
+  <Card title="Text Example" icon="text">
+    **Source Type**  
+    **Type:** Text  
+    **Extract:** News source - mainstream, alternative, government, or independent
+  </Card>
+  <Card title="List Example" icon="list">
+    **Framing Categories**  
+    **Type:** List  
+    **Extract:** Issue framing - can include multiple: economic, security, moral, procedural
+  </Card>
+  <Card title="Number Example" icon="hashtag">
+    **Security Stance**  
+    **Type:** Number (1-10 scale)  
+    **Extract:** Immigration position (1=pro-immigration, 10=security-focused)
+  </Card>
+</CardGroup>
 
 ### Step 4: Test and Refine
 
@@ -151,36 +140,35 @@ Process all selected content with your schema
 
 ### AI Models
 
-**Cloud Models:** OpenAI GPT-4/3.5, Google Gemini, Anthropic Claude  
+**Cloud Models:** OpenAI GPT, Google Gemini, Anthropic Claude  
 **Local Models:** Ollama (Llama, Mistral, Code Llama)
 
 ## Best Practices
 
 ### Write Specific Instructions
 
-**Good:**
-```json
-{
-  "department": {
-    "type": "string",
-    "description": "Department name (e.g., Education, Defense, Health)"
-  },
-  "amount_millions": {
-    "type": "number",
-    "description": "Budget amount in millions of dollars"
-  }
-}
-```
+**Good - Clear and specific:**
 
-**Avoid:**
-```json
-{
-  "financial_info": {
-    "type": "string",
-    "description": "Extract important financial information"
-  }
-}
-```
+<CardGroup cols={2}>
+  <Card title="✓ Department" icon="building">
+    **Type:** Text  
+    **Extract:** Department name (e.g., Education, Defense, Health)  
+    *Clear examples help AI understand what you want*
+  </Card>
+  <Card title="✓ Budget Amount" icon="dollar-sign">
+    **Type:** Number  
+    **Extract:** Budget amount in millions of dollars  
+    *Specific unit makes extraction consistent*
+  </Card>
+</CardGroup>
+
+**Avoid - Too vague:**
+
+<Card title="❌ Financial Info" icon="circle-xmark">
+  **Type:** Text  
+  **Extract:** Extract important financial information  
+  *AI won't know which financial details matter to you*
+</Card>
 
 ### Start Simple, Then Expand
 

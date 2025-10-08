@@ -163,7 +163,7 @@ FIRST_SUPERUSER_PASSWORD=app_user_password
     Run the application locally but use managed services (AWS RDS, Upstash Redis, S3) to reduce operational burden.
   </Card>
   <Card title="Kubernetes" icon="server">
-    We provide a Helm chart at [`.deployments/kubernetes/open-politics-hq-deployment`](.deployments/)
+    We provide a Helm chart at [`https://github.com/open-politics/open-politics-hq/tree/main/.deploymentskubernetes/open-politics-hq-deployment`](https://github.com/open-politics/open-politics-hq/tree/main/.deployments)
   </Card>
 </CardGroup>
 
@@ -189,17 +189,17 @@ The platform is built from several independent services that work together. You 
 Connect any of these AI providers:
 
 <CardGroup cols={2}>
-  <Card title="Anthropic" icon="brain">
-    Claude Sonnet, etc.
+  <Card title="Anthropic" icon="brain" color="#EC4899">
+    Claude Sonnet 4.5, etc. (Best Experience with tools)
   </Card>
-  <Card title="OpenAI" icon="zap">
-    GPT-4, GPT-3.5, etc.
+  <Card title="OpenAI" icon="robot" color="#10A37F">
+    GPT-5 etc. (Not sure)
   </Card>
-  <Card title="Google" icon="search">
-    Gemini models
+  <Card title="Google" icon="google" color="#4285F4">
+    Gemini models (Large context, speed and modality capabilities)
   </Card>
-  <Card title="Ollama" icon="shield">
-    Run models locally: Llama, OAI OSS, Qwen, etc.
+  <Card title="Ollama" icon="shield" color="#0D9373">
+    Run models locally: Llama, OAI OSS, Qwen, etc. (Best Privacy)
   </Card>
 </CardGroup>
 
