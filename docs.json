@@ -11,6 +11,12 @@
   "navigation": {
     "groups": [
       {
+        "group": "Project",
+        "pages": [
+          "pages/project/manifest"
+        ]
+      },
+      {
         "group": "Get Started",
         "pages": [
           "pages/app/introduction",
@@ -32,12 +38,6 @@
         "group": "Development",
         "pages": [
           "pages/development/installation"
-        ]
-      },
-      {
-        "group": "Project",
-        "pages": [
-          "pages/project/manifest"
         ]
       }
     ],

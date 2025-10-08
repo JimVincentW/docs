@@ -9,14 +9,15 @@ description: "Open Politics HQ - Open Source Intelligence Platform"
 
 </Card>
 
-<img src="images/exactly.png" alt="Open Politics HQ Platform" />
+
+
+The modern information landscape is chaotic and difficult to navigate. Whether you need to prove a point, dive deeper into a topic, or simply understand what's happening, the challenge is the same: making sense of vast amounts of unstructured information. This platform serves students seeking better research tools, organizations drowning in unstructured data, NGOs overwhelmed by document management, and businesses struggling with process inefficiencies.
+
 
 <video controls width="100%">
   <source src="/images/main-demo.mp4" type="video/mp4" />
   Your browser does not support the video tag.
 </video>
-
-The modern information landscape is chaotic and difficult to navigate. Whether you need to prove a point, dive deeper into a topic, or simply understand what's happening, the challenge is the same: making sense of vast amounts of unstructured information. This platform serves students seeking better research tools, organizations drowning in unstructured data, NGOs overwhelmed by document management, and businesses struggling with process inefficiencies.
 
 ## The Idea
 
@@ -28,32 +29,9 @@ That expertise lives in their heads, maybe in spreadsheets and notes. This works
 
 **For example:** Imagine as a journalist, you are analyzing 200 news articles. You create a schema:
 
-<CodeGroup>
-```json Schema Definition
-{
-  "primary_source": {
-    "type": "string",
-    "description": "Primary source cited: [government, activist, expert, anonymous]"
-  },
-  "emotional_intensity": {
-    "type": "number",
-    "description": "Emotional intensity: 1-5 scale"
-  },
-  "final_word": {
-    "type": "string",
-    "description": "Which side gets final word"
-  }
-}
-```
+<img src="/images/schema-config.png" alt="Schema configuration interface" width="100%" />
 
-```json Sample Output
-{
-  "primary_source": "government",
-  "emotional_intensity": 4,
-  "final_word": "pro-government"
-}
-```
-</CodeGroup>
+<img src="/images/schema-preview.png" alt="Schema preview interface" width="100%" />
 
 <img src="/images/dash-1.png" alt="Table with annotation" />
 
