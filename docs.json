@@ -13,7 +13,31 @@
       {
         "group": "Get Started",
         "pages": [
-          "pages/app/introduction"
+          "pages/app/introduction",
+          "pages/app/getting-started"
+        ]
+      },
+      {
+        "group": "App Features",
+        "pages": [
+          "pages/app/chat",
+          "pages/app/schemas",
+          "pages/app/dashboards",
+          "pages/app/assets",
+          "pages/app/infospaces",
+          "pages/app/classification-system"
+        ]
+      },
+      {
+        "group": "Development",
+        "pages": [
+          "pages/development/installation"
+        ]
+      },
+      {
+        "group": "Project",
+        "pages": [
+          "pages/project/manifest"
         ]
       }
     ],
@@ -49,6 +73,17 @@
       "github": "https://github.com/open-politics",
       "linkedin": "https://www.linkedin.com/company/102941572"
     }
+  },
+  "openapi": null,
+  "api": {
+    "baseUrl": "https://api.open-politics.org",
+    "auth": {
+      "method": "bearer"
+    }
+  },
+  "search": {
+    "enabled": true,
+    "placeholder": "Search documentation..."
   }
 }
 
