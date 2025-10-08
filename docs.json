@@ -19,7 +19,6 @@
       {
         "group": "Get Started",
         "pages": [
-          "pages/app/introduction",
           "pages/app/getting-started"
         ]
       },
