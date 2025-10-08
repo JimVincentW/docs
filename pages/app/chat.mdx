@@ -1,0 +1,227 @@
+# Chat & MCP
+
+> Unified analysis access point through conversational AI
+
+## What Is Chat & MCP?
+
+The **Chat & MCP (Model Context Protocol)** centralizes all platform tools (asset management, schema-based analysis, vector search, content ingestion) into a unified analysis access point that lets you work with structured analytical methods through conversational AI.
+
+<video controls width="100%">
+  <source src="/images/chat-demo.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+This combination allows for various workflows for researching & synthesizing data. Editing MCP configs (upcoming on a per user-level) furthermore allows you to grant your LLM access to almost arbitrary outside data and use it for your analysis.
+
+## What You Can Do
+
+- **Ask questions** about your uploaded content
+- **Create schemas** through conversation
+- **Run analysis** with natural language commands
+- **Explore results** through interactive chat
+- **Synthesize findings** across multiple sources
+- **Generate reports** and summaries
+
+## Integration with Analysis
+
+Chat works seamlessly with your existing analysis:
+- Access all your uploaded assets
+- Reference completed analysis runs
+- Create new schemas based on conversation
+- Export results for further analysis
+
+## Automated Monitoring
+
+Set up intelligent monitoring systems that automatically analyse new content as it arrives in your bundles. Set them up once and they'll continuously process new documents, articles, or data using your analysis schemas.
+
+**Example:** A journalist sets up a monitor for breaking news:
+- **RSS feeds** from major news sources
+- **Entity extraction** and **sentiment analysis** schemas
+- **Hourly monitoring** with alerts for high-impact stories
+- **Result:** Automatic analysis of breaking news with policy relevance scoring
+
+### How Monitoring Works
+
+**Content Detection:**
+Monitors continuously watch specified bundles for new assets:
+- RSS feed updates
+- Manual uploads by team members
+- Search results from automated searches
+- Bulk imports of large datasets
+
+**Automatic Analysis:**
+When new content is detected, monitors automatically:
+- Apply your pre-configured analysis schemas
+- Process content using your preferred AI models
+- Generate structured annotations and insights
+- Handle errors and retry failed analysis
+
+**Result Integration:**
+Analysis results are seamlessly integrated:
+- Added to your existing annotation runs
+- Made available in analysis dashboards
+- Searchable through the chat interface
+- Included in automated reports
+
+### Monitor Types
+
+**Bundle Monitors**
+Watch specific bundles for new content
+
+**Use Cases:**
+- Monitor news collections for breaking stories
+- Track document repositories for new releases
+- Watch research databases for fresh data
+- Monitor social media collections for trending topics
+
+**Configuration:**
+- Target bundles to monitor
+- Analysis schemas to apply
+- Processing frequency
+- Quality thresholds
+
+<Note>
+**Coming Soon:** Direct source monitoring (RSS feeds, APIs, web scraping) and automated search monitoring are planned for future releases.
+</Note>
+
+### Setting Up Monitors
+
+**Step 1: Choose Your Target**
+Select what you want to monitor:
+- Existing bundle
+- New collection
+- Multiple bundles
+
+**Step 2: Select Analysis Schemas**
+Choose which analysis to run automatically:
+- Entity extraction
+- Sentiment analysis
+- Topic classification
+- Custom schemas
+
+**Step 3: Configure Processing**
+Set up processing parameters:
+- Model selection (local vs cloud)
+- Processing frequency
+- Quality thresholds
+- Error handling
+
+**Step 4: Set Schedule & Limits**
+Configure monitoring behavior:
+- Check frequency (hourly, daily, weekly)
+- Processing limits per run
+- Resource constraints
+- Cost controls
+
+### Monitor Management
+
+**Performance Monitoring:**
+Track monitor performance and results:
+- Content processing volume and speed
+- Analysis success rates and error patterns
+- Resource usage and cost tracking
+- Result quality and confidence scores
+
+**Quality Control:**
+Configure quality controls:
+- Confidence thresholds for accepting results
+- Human review triggers for uncertain analysis
+- Automatic retry with different models
+- Escalation rules for persistent failures
+
+**Regular Review:**
+Periodically review monitor performance:
+- Check analysis quality and relevance
+- Adjust schemas based on new requirements
+- Update source configurations for changing feeds
+- Optimise processing settings for efficiency
+
+## Use Cases & Examples
+
+### News Monitoring
+
+**Breaking News Analysis:**
+- **Scenario:** Monitor breaking news for policy implications
+- **Setup:** RSS feeds from major news sources, entity extraction and policy analysis schemas, hourly monitoring, alerts for high-impact stories
+- **Outcome:** Automatic analysis of breaking news with policy relevance scoring and key entity tracking
+
+**Source Comparison:**
+- **Scenario:** Track how different sources cover the same events
+- **Setup:** Multiple news source feeds in separate bundles, sentiment and bias analysis schemas, daily monitoring with cross-source comparison
+- **Outcome:** Continuous tracking of media bias and coverage differences across sources
+
+### Government Monitoring
+
+**Policy Document Tracking:**
+- **Scenario:** Monitor government sites for new policy documents
+- **Setup:** Web scraping monitors for government sites, policy analysis and stakeholder extraction schemas, weekly monitoring with change detection
+- **Outcome:** Comprehensive tracking of government policy developments with automatic analysis
+
+**Legislative Monitoring:**
+- **Scenario:** Track legislative proceedings and voting patterns
+- **Setup:** Monitors for legislative databases and proceedings, voting analysis and position tracking schemas, daily monitoring during active sessions
+- **Outcome:** Real time analysis of legislative activity with relationship mapping
+
+### Research Project Automation
+
+**Academic Literature Monitoring:**
+- **Scenario:** Track new research publications in your field
+- **Setup:** Academic database RSS feeds, research synthesis and methodology analysis schemas, weekly monitoring with relevance filtering
+- **Outcome:** Continuous literature review with automatic synthesis of new findings
+
+**Social Media Monitoring:**
+- **Scenario:** Track social media discussions about your research topics
+- **Setup:** Social media API integrations, sentiment and trend analysis schemas, real time monitoring with volume alerts
+- **Outcome:** Real time social media intelligence with trend detection and sentiment tracking
+
+## Best Practices
+
+### Monitor Design
+
+**Start Simple:**
+Begin with basic monitoring setups:
+- Monitor one bundle with one schema
+- Use reliable, stable data sources
+- Set conservative processing limits
+- Monitor performance before scaling up
+
+**Design for Reliability:**
+Build robust monitoring systems:
+- Use multiple data sources for redundancy
+- Configure appropriate retry settings
+- Set up error notifications and alerts
+- Plan for source failures and downtime
+
+**Optimize for Efficiency:**
+Balance thoroughness with resource usage:
+- Use local models for high-volume processing
+- Reserve cloud models for complex analysis
+- Implement smart filtering to reduce noise
+- Monitor and adjust processing frequency
+
+### Quality Assurance
+
+**Regular Review:**
+Automated analysis should be reviewed regularly to ensure quality and relevance. Set up periodic manual review processes for critical monitoring workflows.
+
+**Establish Quality Baselines:**
+Create benchmarks for monitor performance:
+- Expected analysis accuracy rates
+- Acceptable processing delays
+- Quality score thresholds
+- Error rate tolerances
+
+**Continuous Improvement:**
+Evolve your monitoring based on results:
+- Refine schemas based on analysis quality
+- Adjust source selections based on relevance
+- Optimise processing settings for efficiency
+- Update monitoring strategies based on research needs
+
+## Next Steps
+
+1. **Try the chat interface** with your uploaded content
+2. **Set up your first monitor** using a simple bundle and schema
+3. **Monitor performance** and adjust settings based on results
+4. **Scale up gradually** as you gain confidence in the system
+5. **Explore advanced features** like conditional processing and multi stage analysis

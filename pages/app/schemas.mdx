@@ -1,148 +1,238 @@
 ---
 title: "Schemas"
-description: "Define analysis tasks in natural language to extract structured data from your content"
+description: "Define analysis tasks in natural language. Apply them at scale."
 ---
 
-## What are Schemas?
+# Schemas
 
-Schemas let you define what information to extract from documents using plain English instructions. Think of them as reusable analysis templates - write once, apply to many documents.
+> Define analysis tasks in natural language. Apply them at scale.
 
-<video 
-  autoPlay
-  muted
-  loop
-  playsInline
-  className="w-full aspect-video rounded-xl"
-  src="/images/schema-view-5.mp4"
-  caption="Create analysis schemas with natural language">
-</video>
+## What Are Schemas?
 
-<CardGroup cols={2}>
-  <Card title="Plain English Instructions" icon="message-lines">
-    Write analysis tasks in natural language - no coding required
-  </Card>
-  <Card title="Create structure from natural language defined tasks" icon="brackets-curly">
-    Get consistent output that's easy to analyze and visualize
-  </Card>
-  <Card title="Formalise Methods" icon="file-lines">
+Schemas are reusable analysis templates in plain English. Define what to extract from documents, AI applies it consistently across documents.
 
-  </Card>
-  <Card title="Reusable Templates" icon="copy">
-    Create once, apply to hundreds of documents automatically
-  </Card>
-</CardGroup>
-
----
-
-## Schema Example: Political Speech Analysis
-
-Here's a complete schema that extracts key information from political speeches:
+**Example:** Media bias analysis schema:
 
 ```json
 {
-  "position_summary": {
+  "source_type": {
     "type": "string",
-    "description": "Speaker's main political stance in 1-2 sentences"
+    "description": "Primary source: [government, activist, expert, anonymous]"
   },
-  "security_stance": {
+  "emotional_intensity": {
     "type": "number",
-    "description": "Immigration position on 1-10 scale (1=pro-immigration, 10=security-focused)"
+    "description": "Emotional intensity: 1-10 scale"
   },
-  "location": {
-    "type": "string", 
-    "description": "Geographic focus or location mentioned"
-  },
-  "timestamp": {
+  "framing": {
     "type": "string",
-    "description": "When speech occurred (ISO format: YYYY-MM-DD)"
+    "description": "Issue framing: [economic, security, moral, procedural]"
   },
-  "topics": {
-    "type": "array",
-    "description": "List of policy areas discussed"
+  "geographic_scope": {
+    "type": "string",
+    "description": "Geographic scope: [local, national, international]"
   }
 }
 ```
 
-<img 
-src="/images/schema-2.png"
-alt="Political Speech Analysis"
-/>
-### Sample Output
+Result: Comparison of how different outlets frame the same stories.
+
+## Creating Your First Schema
+
+### Step 1: Define Your Questions
+
+Start with the analytical questions you want to answer:
+
+- What policy positions are mentioned?
+- How do different sources frame the same issue?
+- What stakeholders are involved?
+- What's the timeline for implementation?
+
+### Step 2: Write Clear Instructions
+
+**Good instructions:**
 ```json
 {
-  "position_summary": "Speaker advocates for balanced immigration reform with emphasis on both security and humanitarian concerns",
-  "security_stance": 6,
-  "location": "Berlin",
-  "timestamp": "2025-01-15",
-  "topics": ["Border Security", "Asylum Policy", "EU Solidarity", "Economic Impact"]
+  "department": {
+    "type": "string",
+    "description": "Department or agency name"
+  },
+  "amount_millions": {
+    "type": "number",
+    "description": "Amount in millions of dollars"
+  },
+  "change_type": {
+    "type": "string",
+    "description": "Change from previous year: [increase, decrease, same]"
+  }
 }
 ```
 
-<Warning>
-Always test schemas on sample content first - results depend on document quality and clarity.
-</Warning>
+**Avoid vague instructions:**
+```json
+{
+  "financial_info": {
+    "type": "string",
+    "description": "Extract important financial information"
+  }
+}
+```
 
-To learn more about how results are used in Dashboards [click here](/pages/app/dashboards)
+### Step 3: Choose Data Types
 
+**Text (string):** Categories, descriptions, names, locations  
+**Numbers:** Ratings, amounts, counts, scales  
+**Lists (array):** Multiple items, themes, categories  
+**Dates:** Timestamps, deadlines, events
 
----
+## Data Type Examples
 
-## Running Your Analysis
+**String (Text):**
+```json
+"source_type": {
+  "type": "string",
+  "description": "News source: [mainstream, alternative, government, independent]"
+}
+```
 
-### Create an Annotation Run
+**Array (List):**
+```json
+"framing_categories": {
+  "type": "array",
+  "description": "Issue framing: [economic, security, moral, procedural]"
+}
+```
 
-Once your schema is ready, apply it to your content:
+**Number:**
+```json
+"security_stance": {
+  "type": "number",
+  "description": "Immigration position: 1-10 scale (1=pro-immigration, 10=security-focused)"
+}
+```
+
+### Step 4: Test and Refine
+
+Always test on 2-3 sample documents first:
+1. Check output quality matches expectations
+2. Identify gaps in extracted data
+3. Refine instructions based on results
+
+## How It Works
+
+<video controls width="100%">
+  <source src="/images/schema-view-5.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+**Pattern:** Domain expertise → Natural language instructions → Structured JSON output
+
+**Benefits:**
+- No coding required
+- Reproducible results
+- Transparent methodology
+- Continuously improvable
+
+## Running Analysis
 
 <Steps>
-<Step title="Choose Your Content">
-  Select individual assets or entire bundles to analyze
+<Step title="Select Content">
+Choose individual assets or entire bundles to analyze
 </Step>
-<Step title="Pick Your Schema">
-  Choose which analysis template to apply
+<Step title="Pick Schema">
+Select your analysis template from available schemas
 </Step>
 <Step title="Configure Settings">
-  <Card title="AI Model" icon="brain">
-    Choose your AI provider: OpenAI, Gemini, or Ollama (local)
-  </Card>
-  <Card title="Processing Options" icon="settings">
-    • Process individual CSV rows separately
-    • Batch process multiple documents
-  </Card>
+Choose AI model and processing options
+</Step>
+<Step title="Run Analysis">
+Process all selected content with your schema
 </Step>
 </Steps>
 
+### AI Models
 
+**Cloud Models:** OpenAI GPT-4/3.5, Google Gemini, Anthropic Claude  
+**Local Models:** Ollama (Llama, Mistral, Code Llama)
 
----
+## Best Practices
 
-## Tips for Better Results
+### Write Specific Instructions
 
-<CardGroup cols={1}>
-  <Card title="Write Clear Instructions" icon="pencil">
-    **Do**: "Find all mentions of budget allocations and categorize them by department"
-    
-    **Don't**: "Extract important financial information"
-    
-    Be specific about what you're looking for and how to categorize it.
-  </Card>
-  
-  <Card title="Start Simple, Then Expand" icon="seedling">
-    Begin with basic extraction, then add complexity:
-    1. First: Extract just the main entities
-    2. Then: Add sentiment analysis
-    3. Finally: Include relationship mapping
-  </Card>
-  
-  <Card title="Use Examples in Instructions" icon="lightbulb">
-    Help the AI understand by providing examples:
-    
-    > "Identify policy positions like 'increase education funding' or 'reduce corporate taxes'. For each position, determine if the speaker supports it (positive language like 'we should' or 'I propose') or opposes it (negative language like 'we must stop' or 'this is wrong')."
-  </Card>
-  
-  <Card title="Test Before Scaling" icon="flask">
-    Always test your schema on a few documents first:
-    - Check if the output matches your expectations
-    - Look for missing information or incorrect categorization
-    - Refine your instructions based on the results
-  </Card>
+**Good:**
+```json
+{
+  "department": {
+    "type": "string",
+    "description": "Department name (e.g., Education, Defense, Health)"
+  },
+  "amount_millions": {
+    "type": "number",
+    "description": "Budget amount in millions of dollars"
+  }
+}
+```
+
+**Avoid:**
+```json
+{
+  "financial_info": {
+    "type": "string",
+    "description": "Extract important financial information"
+  }
+}
+```
+
+### Start Simple, Then Expand
+
+1. Extract basic entities (people, organizations, locations)
+2. Add analysis layers (sentiment, categorization)
+3. Include complex reasoning (relationships, advanced analysis)
+
+### Test Before Scaling
+
+<Warning>
+Always test on 2-3 sample documents before processing large batches.
+</Warning>
+
+## Sharing Schemas
+
+**Schema Library:** Upload successful schemas and browse others' work  
+**Transparency:** Others can see, critique, and replicate your methodology  
+**Community:** Builds cumulative knowledge in the field
+
+## Next Steps
+
+<Steps>
+<Step title="Create Schema">
+Start with simple entity extraction and test on sample documents
+</Step>
+<Step title="Upload Content">
+Use [Assets & Bundles](/docs/assets) to organize your documents
+</Step>
+<Step title="Run Analysis">
+Apply your schema and choose appropriate AI models
+</Step>
+<Step title="Explore Results">
+Visualize findings with [Analysis Dashboards](/docs/dashboards)
+</Step>
+<Step title="Scale Up">
+Create complex schemas and explore [Chat & MCP](/docs/chat)
+</Step>
+</Steps>
+
+## Related Topics
+
+<CardGroup cols={2}>
+<Card title="Assets & Bundles" icon="folder" href="/docs/assets">
+Learn how to upload and organize your content for analysis
+</Card>
+<Card title="Classification System" icon="cog" href="/docs/classification-system">
+Understand how schemas power systematic content analysis
+</Card>
+<Card title="Analysis Dashboards" icon="chart-line" href="/docs/dashboards">
+Visualize your schema results with interactive dashboards
+</Card>
+<Card title="Chat & MCP" icon="comments" href="/docs/chat">
+Use conversational AI to work with your schemas and data
+</Card>
 </CardGroup>

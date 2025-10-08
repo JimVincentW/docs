@@ -1,26 +1,109 @@
----
-title: "Getting Started"
-description: "Interact with your data through AI-powered chat that can search, analyze, and synthesize information using advanced tool calling capabilities."
----
+# Getting Started
 
-<Note>
-Registration is currently not open but will open very soon.
-</Note>
-### Hosted Webapp
-1. Visit [open-politics.org](https://open-politics.org/webpages/register) 
+Welcome to Open Politics HQ! This guide will get you up and running quickly.
 
+## Choose Your Setup
 
-### Self-Hosted with Docker
-1. Clone the repository and prepare the environment:
+Select the setup method that best fits your needs:
+
+<Tabs>
+<Tab title="Hosted Instance (Recommended)">
+The fastest way to get started. We handle the infrastructure, you focus on analysis.
+
+<Steps>
+<Step title="Register">
+Sign up at [open-politics.org](https://open-politics.org)
+</Step>
+<Step title="Add API Keys">
+Configure your LLM API keys (OpenAI, Google, Anthropic, or Ollama)
+</Step>
+<Step title="Start Analyzing">
+Upload content and create your first schema
+</Step>
+</Steps>
+</Tab>
+
+<Tab title="Self-Hosted Setup">
+For privacy, customization, or institutional requirements. Run everything on your own infrastructure.
+
+<Steps>
+<Step title="Prerequisites">
+Docker, Git, 32GB RAM recommended
+</Step>
+<Step title="Clone & Setup">
 ```bash
 git clone https://github.com/open-politics/open-politics-hq.git
 cd open-politics-hq
-bash prepare.sh
 cp .env.example .env
+# Edit .env with your configuration
 ```
+</Step>
+<Step title="Start Services">
+```bash
+docker compose up
+```
+</Step>
+<Step title="Access Platform">
+Open http://localhost:3000
+</Step>
+</Steps>
 
-Log in with the FIRST_SUPERUSER and FIRST_SUPERUSER_PASSWORD set in the .env file.
+<Warning>
+**Security Notice:** Change the default admin credentials immediately:
+- Username: `app_user`
+- Password: `app_user_password`
+</Warning>
+</Tab>
+</Tabs>
 
+## Your First Analysis
 
-## Kubernetes
-More details will be added here soon, until then have a look at the [deployments store for hq]
+<Steps>
+<Step title="Upload Content">
+Upload PDFs, web articles, CSV files, or text documents
+</Step>
+<Step title="Create Schema">
+Define what to extract in plain English:
+
+```json
+{
+  "topic": {
+    "type": "string",
+    "description": "Main topic"
+  },
+  "sentiment": {
+    "type": "string",
+    "description": "Sentiment: [positive, negative, neutral]"
+  },
+  "entities": {
+    "type": "array",
+    "description": "Key people, organizations, locations"
+  }
+}
+```
+</Step>
+<Step title="Run Analysis">
+Select content and schema, choose AI model, then run analysis
+</Step>
+<Step title="Explore Results">
+View results in tables, charts, maps, or export data
+</Step>
+</Steps>
+
+## Supported Content
+
+**Formats:** PDFs, web articles, text files, CSV files  
+**AI Models:** OpenAI GPT-4/3.5, Google Gemini, Anthropic Claude, Ollama (local)
+
+## Next Steps
+
+1. Upload sample documents and test schemas
+2. Join the [community forum](https://forum.open-politics.org)
+3. Explore advanced features like chat and automation
+4. Share successful schemas with others
+
+## Support
+
+- **Documentation:** Comprehensive guides for all features
+- **Community:** [forum.open-politics.org](https://forum.open-politics.org)
+- **Email:** engage@open-politics.org

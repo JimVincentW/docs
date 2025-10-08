@@ -9,28 +9,11 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "anchors": [
+    "groups": [
       {
-        "anchor": "Documentation",
-        "icon": "book-open",
-        "groups": [
-          {
-            "group": "The Project",
-            "pages": [
-              "pages/project/manifest"
-            ]
-          },
-          {
-            "group": "HQ/ The App",
-            "pages": [
-              "pages/app/introduction",
-              "pages/app/getting-started",
-              "pages/app/assets",
-              "pages/app/schemas",
-              "pages/app/dashboards",
-              "pages/app/chat-tools"
-            ]
-          }
+        "group": "Get Started",
+        "pages": [
+          "pages/app/introduction"
         ]
       }
     ],
@@ -55,16 +38,10 @@
     "href": "https://open-politics.org"
   },
   "navbar": {
-    "links": [
-      {
-        "label": "HQ Desk",
-        "href": "https://open-politics.org/desks/home/"
-      }
-    ],
     "primary": {
       "type": "button",
-      "label": "Open Politics Website",
-      "href": "https://open-politics.org"
+      "label": "HQ Webapp",
+      "href": "https://open-politics.org/hq"
     }
   },
   "footer": {
@@ -74,3 +51,5 @@
     }
   }
 }
+
+

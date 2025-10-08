@@ -1,0 +1,30 @@
+# Tech Stack
+
+The platform is built from several independent services that work together. You can run them all locally or mix local and managed services.
+
+### Core Components
+
+| Component | What It Does | Technology |
+|-----------|-------------|------------|
+| **Backend** | API, analysis jobs, MCP server | FastAPI + Python |
+| **Frontend** | Web interface | Next.js + React |
+| **Worker** | Background processing for large jobs | Celery |
+| **Database** | Data storage with vector search | PostgreSQL + PGVector |
+| **Object Storage** | File storage for uploads | MinIO (S3-compatible) |
+| **Cache/Queue** | Session management, job queues | Redis |
+| **Geocoding** | Location extraction and mapping | Pelias |
+| **LLM** (optional) | Local AI inference | Ollama |
+
+### Deployment Flexibility
+
+<CardGroup cols={3}>
+  <Card title="Fully Local" icon="shield">
+    Run everything on your own hardware. Good for air-gapped environments or complete data control.
+  </Card>
+  <Card title="Hybrid" icon="cloud">
+    Run the application locally but use managed services (AWS RDS, Upstash Redis, S3) to reduce operational burden.
+  </Card>
+  <Card title="Kubernetes" icon="server">
+    We provide a Helm chart at [`.deployments/kubernetes/open-politics-hq-deployment`](.deployments/)
+  </Card>
+</CardGroup>

@@ -1,295 +1,270 @@
----
-title: 'Classification System'
-description: 'Creating and applying analytical frameworks to political content'
----
+# Classification System
 
-The Classification System lets you define analytical concepts in plain language and apply them systematically across political content. This powerful tool bridges the gap between qualitative and quantitative analysis.
+> Creating and applying analytical frameworks to political content
 
-<Frame>
-  <img src="/images/classification_interface.png" alt="Classification Interface" />
-</Frame>
+## What Is the Classification System?
 
-## What You Can Do
+The Classification System lets you define analytical concepts in plain language and apply them systematically across political content. This bridges the gap between qualitative and quantitative analysis.
 
-With the Classification System, you can:
+**Example:** A policy analyst creates a framework to analyse legislative proposals:
 
-- Create frameworks that extract structured information from political texts
-- Define multiple analytical dimensions to capture complex concepts
-- Apply your frameworks consistently across large document collections
-- Analyze and visualize patterns in the resulting data
+```
+For each proposal, extract:
+- Policy area: [healthcare, environment, economy, security]
+- Stakeholder engagement: [consultation, public input, expert review, none]
+- Implementation timeline: [immediate, 1-year, 2-5 years, undefined]
+- Budget impact: [no cost, low cost, moderate cost, high cost]
+```
 
-This approach enables sophisticated analysis without requiring programming skills.
+Result: Systematic analysis of 500 proposals revealing patterns in stakeholder involvement and implementation planning.
 
-## Getting Started
+## How It Works
 
-<Steps>
-  <Step title="Access the Classification Runner">
-    From your dashboard, click on the "Classification" section in the navigation menu.
-    
-    <Frame>
-      <img src="/images/classification_menu.png" alt="Classification Menu" />
-    </Frame>
-  </Step>
-  
-  <Step title="Select or Create a Schema">
-    You can choose an existing analytical framework or create a new one:
-    
-    <Tabs>
-      <Tab title="Use Existing Schema">
-        Browse the schema library for frameworks like:
-        - Topic classification
-        - Sentiment analysis
-        - Policy position analysis
-        - Rhetorical strategy detection
-      </Tab>
-      
-      <Tab title="Create New Schema">
-        Click "Create Schema" and provide:
-        - Name for your framework
-        - Description of its purpose
-        - The dimensions you want to analyze
-      </Tab>
-    </Tabs>
-  </Step>
-  
-  <Step title="Define Your Dimensions">
-    For each dimension in your schema:
-    
-    1. Select the data type (number, text, list, etc.)
-    2. Write a clear description of what you're looking for
-    3. Optionally add examples or edge cases
-    
-    <Frame>
-      <img src="/images/dimension_definition.png" alt="Dimension Definition" />
-    </Frame>
-    
-    <Tip>
-      The better your descriptions, the more consistent your results will be. Be specific and provide context.
-    </Tip>
-  </Step>
-  
-  <Step title="Select Content">
-    Choose which documents to analyze:
-    
-    - Search results
-    - Saved collections
-    - Recent news
-    - Uploaded documents
-    
-    <Note>
-      For large document sets, consider starting with a small sample to test your schema.
-    </Note>
-  </Step>
-  
-  <Step title="Run the Classification">
-    Click "Run Analysis" to apply your schema to the selected documents.
-    
-    <Frame>
-      <img src="/images/classification_progress.png" alt="Classification Progress" />
-    </Frame>
-    
-    The system will:
-    1. Process each document
-    2. Extract information according to your schema
-    3. Store the structured results
-  </Step>
-  
-  <Step title="Explore Results">
-    When processing completes, you can:
-    
-    - View results in table format
-    - Create visualizations
-    - Export data for further analysis
-    - Share insights with others
-    
-    <Frame>
-      <img src="/images/classification_results.png" alt="Classification Results" />
-    </Frame>
-  </Step>
-</Steps>
+### Step 1: Define Your Framework
 
-## Example Schemas
+<Card title="Create Analytical Dimensions" icon="cog">
+- Choose data types (text, number, list, etc.)
+- Write clear descriptions of what you're looking for
+- Add examples or edge cases for clarity
+- Test your framework on sample content
+</Card>
 
-Here are some example schemas to help you get started:
+**Example Framework:**
+```
+Political Position Analysis:
+- Economic stance (1-10): Where 1 is extremely progressive and 10 is extremely conservative on economic issues
+- Social stance (1-10): Where 1 is extremely progressive and 10 is extremely conservative on social issues
+- Foreign policy approach (text): Brief description of the foreign policy approach (isolationist, interventionist, multilateral, etc.)
+- Key policies (list): The 3-5 main policy positions mentioned
+```
 
-<Tabs>
-  <Tab title="Political Positioning">
-    ```
-    Schema: Political Position Analysis
-    
-    Dimensions:
-    - economic_position (1-10): Where 1 is extremely progressive and 10 is extremely conservative on economic issues
-    - social_position (1-10): Where 1 is extremely progressive and 10 is extremely conservative on social issues
-    - foreign_policy_approach (text): Brief description of the foreign policy approach (isolationist, interventionist, multilateral, etc.)
-    - key_policies (list): The 3-5 main policy positions mentioned
-    ```
-    
-    <Frame>
-      <img src="/images/political_position_chart.png" alt="Political Position Chart" />
-    </Frame>
-  </Tab>
-  
-  <Tab title="Issue Framing">
-    ```
-    Schema: Issue Framing Analysis
-    
-    Dimensions:
-    - economic_frame (0.0-1.0): Extent to which the issue is framed in economic terms
-    - security_frame (0.0-1.0): Extent to which the issue is framed as a security concern
-    - moral_frame (0.0-1.0): Extent to which the issue is framed as a moral question
-    - primary_frame (text): The dominant framing approach used
-    - supporting_evidence (list): Specific evidence cited to support the framing
-    ```
-  </Tab>
-  
-  <Tab title="Rhetoric Analysis">
-    ```
-    Schema: Rhetorical Strategy Analysis
-    
-    Dimensions:
-    - emotional_appeal (0.0-1.0): Extent of emotional language and appeals
-    - factual_content (0.0-1.0): Degree of fact-based argumentation
-    - authority_citation (list): Sources of authority referenced
-    - narrative_techniques (list): Storytelling techniques employed
-    - primary_audience (text): Who appears to be the intended audience
-    ```
-  </Tab>
-</Tabs>
+### Step 2: Apply to Content
 
-## Creating Effective Schemas
+<CardGroup cols={2}>
+  <Card title="Select Your Documents" icon="folder">
+    - Choose from uploaded content
+    - Filter by source, date, or other criteria
+    - Start with a small sample to test your framework
+    - Scale up once you're confident in the results
+  </Card>
+  <Card title="Run the Analysis" icon="play">
+    - Apply your framework to selected documents
+    - Process content using AI models
+    - Generate structured results
+    - Store findings for further analysis
+  </Card>
+</CardGroup>
 
-For best results, follow these guidelines when creating your analytical frameworks:
+### Step 3: Explore Results
 
-<AccordionGroup>
-  <Accordion title="Be Specific and Clear">
-    Define exactly what you're looking for in plain language. Avoid vague terms that could be interpreted differently.
-    
-    <Check>
-      "Evaluate the extent to which the text frames immigration in economic terms (jobs, taxes, fiscal impact) versus security terms (border control, crime, terrorism)."
-    </Check>
-    
-    <Cross>
-      "Analyze how the text talks about immigration."
-    </Cross>
-  </Accordion>
-  
-  <Accordion title="Use Appropriate Data Types">
-    Choose the right type for each dimension:
-    
-    - **Numbers (int/float)**: For ratings, scales, or percentages
-    - **Text (string)**: For categories, descriptions, or primary characteristics
-    - **Lists**: For multiple items, themes, or examples
-    - **Structured objects**: For complex information with sub-components
-  </Accordion>
-  
-  <Accordion title="Provide Context">
-    Help the system understand the political context relevant to your analysis:
-    
-    <Check>
-      "In the context of European politics, identify the policy positions that would be considered center-left versus center-right on economic issues."
-    </Check>
-    
-    <Cross>
-      "Identify left vs right positions."
-    </Cross>
-  </Accordion>
-  
-  <Accordion title="Consider Scale Definitions">
-    When using numerical scales, clearly define what different values represent:
-    
-    <Check>
-      "Rate from 1-5, where 1 means strongly opposed to international cooperation, 3 means neutral or mixed, and 5 means strongly favoring international institutions and agreements."
-    </Check>
-    
-    <Cross>
-      "Rate international cooperation from 1-5."
-    </Cross>
-  </Accordion>
-</AccordionGroup>
+<CardGroup cols={2}>
+  <Card title="View Results" icon="eye">
+    - **Table format** — Sortable, filterable results
+    - **Visualizations** — Charts and graphs showing patterns
+    - **Geographic maps** — Spatial analysis when location data exists
+    - **Export options** — Download data for external analysis
+  </Card>
+  <Card title="Analyze Patterns" icon="chart-line">
+    - Identify trends and relationships
+    - Compare results across different sources
+    - Find outliers and unusual cases
+    - Generate insights and conclusions
+  </Card>
+</CardGroup>
+
+## Example Frameworks
+
+### Political Positioning Analysis
+
+**Framework:**
+```
+Schema: Political Position Analysis
+
+Dimensions:
+- economic_position (1-10): Where 1 is extremely progressive and 10 is extremely conservative on economic issues
+- social_position (1-10): Where 1 is extremely progressive and 10 is extremely conservative on social issues
+- foreign_policy_approach (text): Brief description of the foreign policy approach (isolationist, interventionist, multilateral, etc.)
+- key_policies (list): The 3-5 main policy positions mentioned
+```
+
+**Use Cases:**
+- Analyze political speeches and statements
+- Compare positions across different politicians
+- Track position changes over time
+- Identify coalition opportunities
+
+### Issue Framing Analysis
+
+**Framework:**
+```
+Schema: Issue Framing Analysis
+
+Dimensions:
+- economic_frame (0.0-1.0): Extent to which the issue is framed in economic terms
+- security_frame (0.0-1.0): Extent to which the issue is framed as a security concern
+- moral_frame (0.0-1.0): Extent to which the issue is framed as a moral question
+- primary_frame (text): The dominant framing approach used
+- supporting_evidence (list): Specific evidence cited to support the framing
+```
+
+**Use Cases:**
+- Analyze media coverage of political issues
+- Compare framing across different sources
+- Identify dominant narratives
+- Track framing changes over time
+
+### Rhetorical Strategy Analysis
+
+**Framework:**
+```
+Schema: Rhetorical Strategy Analysis
+
+Dimensions:
+- emotional_appeal (0.0-1.0): Extent of emotional language and appeals
+- factual_content (0.0-1.0): Degree of fact-based argumentation
+- authority_citation (list): Sources of authority referenced
+- narrative_techniques (list): Storytelling techniques employed
+- primary_audience (text): Who appears to be the intended audience
+```
+
+**Use Cases:**
+- Analyze political communication strategies
+- Compare rhetorical approaches across speakers
+- Identify effective messaging techniques
+- Study audience targeting strategies
+
+## Creating Effective Frameworks
+
+### Be Specific and Clear
+
+**Good Instructions:**
+```
+Evaluate the extent to which the text frames immigration in economic terms (jobs, taxes, fiscal impact) versus security terms (border control, crime, terrorism).
+```
+
+**Avoid Vague Instructions:**
+```
+Analyze how the text talks about immigration.
+```
+
+### Use Appropriate Data Types
+
+**Choose the Right Type:**
+- **Numbers (int/float)** — For ratings, scales, or percentages
+- **Text (string)** — For categories, descriptions, or primary characteristics
+- **Lists** — For multiple items, themes, or examples
+- **Structured objects** — For complex information with sub-components
+
+### Provide Context
+
+**Help the System Understand:**
+```
+In the context of European politics, identify the policy positions that would be considered center-left versus center-right on economic issues.
+```
+
+**Avoid Ambiguous Context:**
+```
+Identify left vs right positions.
+```
+
+### Consider Scale Definitions
+
+**Define What Different Values Mean:**
+```
+Rate from 1-5, where 1 means strongly opposed to international cooperation, 3 means neutral or mixed, and 5 means strongly favoring international institutions and agreements.
+```
+
+**Avoid Unclear Scales:**
+```
+Rate international cooperation from 1-5.
+```
 
 ## Working with Results
 
-After running a classification, you have several options for working with the results:
-
-<CardGroup cols={2}>
-  <Card title="Table View" icon="table">
-    View all dimensions across your documents in a sortable, filterable table
-  </Card>
-  
-  <Card title="Visualizations" icon="chart-bar">
-    Create charts and graphs to identify patterns and relationships
-  </Card>
-  
-  <Card title="Globe Mapping" icon="earth-americas">
-    View results geospatially when content has location information
-  </Card>
-  
-  <Card title="Export" icon="file-export">
-    Download results as CSV, JSON, or Excel for external analysis
-  </Card>
-</CardGroup>
-
 ### Filtering and Refining
 
-You can filter your results to focus on specific aspects:
-
+**Filter Your Results:**
 - Filter by dimension values (e.g., economic position > 7)
 - Filter by source, date, or other metadata
 - Create subsets for more detailed analysis
+- Compare different time periods or sources
 
 ### Comparing Frameworks
 
-A powerful feature is the ability to apply different analytical frameworks to the same content:
+**Apply Multiple Frameworks:**
+- Run different analytical frameworks on the same content
+- Compare how different approaches reveal different patterns
+- Identify areas of consensus and divergence
+- Understand how analytical choices influence results
 
-1. Run multiple schemas on the same document set
-2. Compare how different analytical approaches reveal different patterns
-3. Identify areas of consensus and divergence
+### Quality Control
 
-This can reveal how analytical choices influence results, promoting methodological transparency.
+**Review and Validate:**
+- Spot check results for accuracy
+- Identify systematic errors or biases
+- Refine frameworks based on results
+- Document limitations and assumptions
 
-## Technical Details
+## Best Practices
 
-Behind the user interface, the Classification System uses:
+### Framework Design
 
-- Large Language Models (LLMs) to interpret your analytical frameworks
-- Structured data types for consistent results
-- Validation to ensure outputs match expected formats
-- Comprehensive metadata tracking for reproducibility
+**Start Simple:**
+- Begin with basic extraction tasks
+- Add complexity gradually
+- Test thoroughly before scaling
+- Document your methodology
 
-For more technical information, see the [LLM Classification Framework](/engine/classification-framework) documentation.
+**Design for Reliability:**
+- Use clear, unambiguous instructions
+- Provide examples and edge cases
+- Test on diverse content types
+- Validate results with domain experts
 
-## Examples in Practice
+### Analysis Workflow
 
-<CardGroup cols={2}>
-  <Card title="Coalition Analysis">
-    <Frame>
-      <img src="/images/coalition_analysis.png" alt="Coalition Analysis" />
-    </Frame>
-    
-    A research team analyzed coalition documents across multiple dimensions to identify areas of alignment and potential conflict.
-  </Card>
-  
-  <Card title="Media Framing Study">
-    <Frame>
-      <img src="/images/media_framing.png" alt="Media Framing" />
-    </Frame>
-    
-    Researchers compared how different news sources framed the same events, revealing systematic differences in coverage.
-  </Card>
-</CardGroup>
+**Systematic Approach:**
+- Define your research questions clearly
+- Choose appropriate analytical frameworks
+- Apply frameworks consistently
+- Document your methodology and assumptions
+
+**Quality Assurance:**
+- Review results regularly
+- Validate findings with multiple sources
+- Document limitations and uncertainties
+- Share methodologies for peer review
+
+## Advanced Features
+
+### Multi Dimensional Analysis
+
+**Complex Frameworks:**
+- Combine multiple analytical dimensions
+- Create hierarchical classification systems
+- Apply conditional logic based on content
+- Build comprehensive analytical models
+
+### Temporal Analysis
+
+**Track Changes Over Time:**
+- Monitor how classifications change
+- Identify trends and patterns
+- Compare different time periods
+- Predict future developments
+
+### Cross-Source Comparison
+
+**Comparative Analysis:**
+- Compare results across different sources
+- Identify systematic differences
+- Track coverage patterns
+- Analyze bias and perspective
 
 ## Next Steps
 
-<CardGroup cols={3}>
-  <Card title="Schema Library" icon="book">
-    Browse and use community-contributed analytical frameworks
-  </Card>
-  
-  <Card title="Advanced Visualization" icon="chart-network">
-    Create interactive visualizations from your classification results
-  </Card>
-  
-  <Card title="Temporal Analysis" icon="clock">
-    Track how classifications change over time for ongoing topics
-  </Card>
-</CardGroup>
+1. **Start with a simple framework** and test it on sample content
+2. **Refine your framework** based on initial results
+3. **Scale up gradually** as you gain confidence
+4. **Share successful frameworks** with the community
+5. **Explore advanced features** like multi dimensional analysis

@@ -1,0 +1,267 @@
+# Infospaces & Vector Storage
+
+> Isolated workspaces to organise your project data
+
+## What Are Infospaces?
+
+Infospaces are separate workspaces that isolate your data. Each infospace contains its own assets, schemas, analysis results, and configurations. Think of them as separate research projects or departments.
+
+**Example:** A research organisation might have:
+- **"Climate Policy Research"** — Climate-related documents and analysis
+- **"Election Coverage 2024"** — News articles and media analysis
+- **"Grant Applications"** — Funding requests and review processes
+- **"Academic Papers"** — Research literature and methodology
+
+## Managing Infospaces
+
+### Creating and Switching
+
+**Default Infospace:**
+You start with "Default Infospace" containing example assets and schemas to help you get started.
+
+<video controls width="100%">
+  <source src="/images/infospace-switcher.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+**Switching Between Infospaces:**
+Use the Infospace Switcher in the top left sidebar to see all your infospaces. Click any infospace to switch to it.
+
+**Creating New Infospaces:**
+- Click "Create Infospace" to add a new workspace
+- Choose a descriptive name for your project
+- Set up initial bundles and schemas
+- Configure settings specific to that workspace
+
+**Managing Existing Infospaces:**
+- Select "Manage Infospaces" to rename or delete
+- Archive old projects to keep your workspace clean
+- Export infospace data for backup or sharing
+- Import infospace configurations from other users
+
+## Infospace Organization
+
+<CardGroup cols={3}>
+  <Card title="Research Projects" icon="microscope">
+    - "Immigration Policy Analysis" — All immigration-related content
+    - "Media Bias Study" — News coverage analysis
+    - "Legislative Tracking" — Bill monitoring and analysis
+    - "Academic Research" — Literature review and methodology
+  </Card>
+  <Card title="Department-Based" icon="building">
+    - "Policy Research" — Government and policy analysis
+    - "Media Analysis" — News and social media monitoring
+    - "Academic Studies" — Research and methodology development
+    - "Client Projects" — External consulting work
+  </Card>
+  <Card title="Topic-Based" icon="tags">
+    - "Climate Change" — Environmental policy and research
+    - "Economic Policy" — Financial and economic analysis
+    - "Social Issues" — Community and social policy
+    - "International Relations" — Global politics and diplomacy
+  </Card>
+</CardGroup>
+
+### Cross-Infospace Collaboration
+
+<CardGroup cols={2}>
+  <Card title="Shared Resources" icon="share">
+    - Common schemas and analysis frameworks
+    - Shared knowledge bases and reference materials
+    - Collaborative research projects
+    - Cross-project insights and findings
+  </Card>
+  <Card title="Data Isolation" icon="shield">
+    - Separate analysis results and findings
+    - Independent user access and permissions
+    - Isolated processing and monitoring
+    - Separate backup and recovery processes
+  </Card>
+</CardGroup>
+
+## Vector Storage & Search
+
+An infospace is also a vectorspace—a collection of vector embeddings that enable semantic search and AI powered analysis.
+
+### Vector Search Capabilities
+
+<CardGroup cols={2}>
+  <Card title="Similarity Search" icon="search">
+    - Find documents with similar content or themes
+    - Discover related research and analysis
+    - Identify patterns across different sources
+    - Connect disparate pieces of information
+  </Card>
+  <Card title="AI Context Enhancement" icon="brain">
+    - Provide relevant context for AI analysis
+    - Improve schema accuracy and relevance
+    - Enhance chat interface with document knowledge
+    - Enable more sophisticated analysis workflows
+  </Card>
+</CardGroup>
+
+### Vectorization Process
+
+<CardGroup cols={2}>
+  <Card title="Automatic Vectorization" icon="cog">
+    When you enable vectorisation in your infospace settings:
+    - Background task creates vectors for all content
+    - Continuous processing of new uploads
+    - Automatic updates when content changes
+    - Quality monitoring and optimisation
+  </Card>
+  <Card title="Use Cases" icon="lightbulb">
+    - **Deduplication** — Find and merge similar assets
+    - **Clustering** — Group related content automatically
+    - **Recommendation** — Suggest relevant documents
+    - **Knowledge Discovery** — Find hidden connections
+  </Card>
+</CardGroup>
+
+## Data Storage & Backups
+
+### Storage Locations
+
+<CardGroup cols={2}>
+  <Card title="Self Hosted" icon="server">
+    - Data stored locally in `./store/minio`
+    - Full control over data location and access
+    - No external dependencies for storage
+    - Suitable for sensitive or confidential data
+  </Card>
+  <Card title="Hosted Service" icon="cloud">
+    - Data stored in Hetzner Object Storage
+    - Managed infrastructure and maintenance
+    - Automatic scaling and redundancy
+    - Professional backup and recovery services
+  </Card>
+</CardGroup>
+
+### Backup Management
+
+<video controls width="100%">
+  <source src="/images/backup-view-1.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+**Creating Backups:**
+1. **Navigate to Backup Settings** in your infospace
+2. **Choose Backup Scope** — Full infospace or specific data
+3. **Select Backup Destination** — Local storage or cloud
+4. **Schedule Regular Backups** — Daily, weekly, or monthly
+5. **Monitor Backup Status** — Ensure successful completion
+
+**Backup Types:**
+- **Full Backups** — Complete infospace data and configuration
+- **Incremental Backups** — Only changed data since last backup
+- **Schema Backups** — Analysis frameworks and configurations
+- **Asset Backups** — Document content and metadata
+
+**Restoring from Backups:**
+1. **Select Backup to Restore** from available backups
+2. **Choose Restore Scope** — Full restore or selective data
+3. **Verify Data Integrity** — Check restored content
+4. **Update Permissions** — Ensure proper access controls
+5. **Test Functionality** — Verify all features work correctly
+
+### Data Security
+
+**Access Control:**
+- User permissions per infospace
+- Role-based access management
+- Audit logs for data access
+- Secure authentication and authorization
+
+**Data Encryption:**
+- Encryption at rest for stored data
+- Encryption in transit for data transfer
+- Secure key management
+- Compliance with data protection regulations
+
+**Privacy Protection:**
+- Data isolation between infospaces
+- Configurable data retention policies
+- Secure deletion of sensitive data
+- Privacy-preserving analysis options
+
+## Best Practices
+
+### Infospace Design
+
+**Logical Organization:**
+- Group related projects and research
+- Use descriptive names and descriptions
+- Maintain consistent naming conventions
+- Document infospace purposes and contents
+
+**Resource Management:**
+- Monitor storage usage and costs
+- Archive completed projects
+- Clean up unused assets and schemas
+- Optimise processing and analysis workflows
+
+### Backup Strategy
+
+**Regular Backups:**
+- Schedule automated backups
+- Test backup and restore procedures
+- Maintain multiple backup copies
+- Store backups in different locations
+
+**Disaster Recovery:**
+- Plan for system failures and data loss
+- Test recovery procedures regularly
+- Maintain emergency contact information
+- Document recovery processes and procedures
+
+### Collaboration
+
+**Team Coordination:**
+- Establish clear ownership and responsibilities
+- Use consistent naming and organisation
+- Document shared resources and processes
+- Regular team meetings and updates
+
+**Knowledge Sharing:**
+- Share successful schemas and workflows
+- Document best practices and lessons learned
+- Create templates for common tasks
+- Maintain knowledge bases and references
+
+## Advanced Features
+
+### Infospace Templates
+
+**Pre-Built Templates:**
+- Research project templates
+- Analysis workflow templates
+- Monitoring setup templates
+- Collaboration framework templates
+
+**Custom Templates:**
+- Create templates from successful projects
+- Share templates with team members
+- Version control for template updates
+- Template marketplace for community sharing
+
+### Cross-Infospace Analysis
+
+**Comparative Analysis:**
+- Compare results across different infospaces
+- Identify patterns and trends
+- Share insights and findings
+- Collaborative research projects
+
+**Data Integration:**
+- Combine data from multiple infospaces
+- Cross reference analysis results
+- Identify connections and relationships
+- Build comprehensive knowledge bases
+
+## Next Steps
+
+1. **Explore your default infospace** and understand the interface
+2. **Create a new infospace** for your first project
+3. **Set up backup procedures** to protect your data
+4. **Organise your content** using bundles and schemas
+5. **Enable vectorisation** when available for enhanced search capabilities
