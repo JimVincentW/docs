@@ -7,10 +7,10 @@ We aim to provide few but powerful core concepts to allow for flexible data inge
 Foundation services like AI Models, a Geocoder or a Websearch tool can extend the functionality and allow for hybrid setups. From cloud to fully local on your own hardware.
 
 
-<Note>Before you start: make sure everything is properly installed and configured. </Note>
+<Note>Before you start: make sure your providers for the foundation services are properly installed and configured. See [App Setup](/pages/app/app-setup) for more information. </Note>
 
-## Infospaces - your project spaces
-Everything lives inside one - isolated from other projects, each its own vector index for semantic search.
+## Infospaces
+Think of an infospace as a project workspace. Each one keeps your data separate from other projects and has its own database and vector index to help you find relevant content.
 
 <Frame>
 ```mermaid
@@ -25,12 +25,12 @@ flowchart TB
 
 <CardGroup cols={2}>
 <Card title="Assets" icon="file-lines" href="/pages/app/assets">
-Your content. Composable - a file decomposes into analysable units. Bundles group assets for organisation and analysis.
+Your data. PDFs, CSVs, articles, web feeds - anything you want to analyse. Composable: a document breaks into pages, a spreadsheet into rows. Bundles group assets for organisation and batch analysis.
 <img className="hidden dark:block" src="/images/asset-article-dark.png" alt="Assets" width="100%" />
 <img className="block dark:hidden" src="/images/asset-article-light.png" alt="Assets" width="100%" />
 </Card>
 <Card title="Schemas" icon="microscope" href="/pages/app/schemas">
-Your lens and instructions for the AI. They are natural language tasks with strict definitions of the output.
+Your lens and instructions for the AI. Natural language tasks with strict output definitions. Get structured, comparable data across all your documents.
 <img className="hidden dark:block" src="/images/schema-japan-dark.png" alt="Schemas" width="100%" />
 <img className="block dark:hidden" src="/images/schema-japan-light.png" alt="Schemas" width="100%" />
 </Card>
@@ -49,20 +49,22 @@ flowchart TB
 ``` 
 </Frame>
 <CardGroup cols={2}>
-<Card icon="cog" title="">
-[1. Configure an analysis run](/pages/concepts/running-analysis)
+<Card icon="cog" title="1. Configure an analysis run">
 What questions do you want to answer? What data do you have? 
 Also set up parametrs like parallelisation and if you want justifications for fields.
 <img className="hidden dark:block" src="/images/run-config-dark.png" alt="Configure an analysis" width="100%" />
 <img className="block dark:hidden" src="/images/run-config-light.png" alt="Configure an analysis" width="100%" />
+[More information on creating an analysis](/pages/concepts/running-analysis)
 </Card>
-<Card title="2. Explore, Share and Work with the run's Dashboard" icon="chart-line" href="/pages/app/dashboards">
-Your results. Tables, charts, maps. Export or share. Every run produces structured data. Or as we call them: <span className="font-bold">annotations</span>.
+<Card icon="chart-line" title="2. Explore, Share and Work with the run's Dashboard">
+Your results. Tables, charts, maps. Export or share.
+Every run produces structured data. Or as we call them: <span className="font-bold">annotations</span>. Filter, visualise and drill down into your findings.
 <img className="hidden dark:block" src="/images/dashboard-speeches-dark.png" alt="Dashboard" width="100%" />
 <img className="block dark:hidden" src="/images/dashboard-speeches-light.png" alt="Dashboard" width="100%" />
+[More information on dashboards](/pages/app/dashboards)
 </Card>
 </CardGroup>
-Once it's done, we can start to explore the results. We can filter, sort, visualise, share, curate and export the resulting data.
+
 
 
 ## Chat & Tools
@@ -73,6 +75,7 @@ Your data management interface. Query, build schemas, run analysis, explore, fin
   <video controls width="100%">
   <source src="/images/chat-demo.mp4" type="video/mp4" />
 </video>
+| [More information on chat](/pages/app/chat) | [Advanced Chatting](/pages/concepts/advanced-chatting) |
 <CardGroup cols={1}>
 ```mermaid
 %%{init: {'theme': 'dark'}}%%

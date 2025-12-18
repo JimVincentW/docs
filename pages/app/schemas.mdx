@@ -3,24 +3,26 @@ title: "Schemas"
 description: "Tell the AI what to extract from your documents"
 ---
 
-# Schemas
-
 A schema is a set of instructions for extracting structured data from documents. You describe what you want in plain English, the AI applies it consistently across hundreds or thousands of items.
 
-## What You Get
+Schemas bridge natural language and structured data. You express your framework in plain English, and get back consistent, well-defined results ready for analysis, data management and export.
 
-Here's output from a schema analysing EU Parliament speeches on migration:
-
+## What You Get 
+<Card title="Output from a schema analysing EU Parliament speeches on migration">
 <Frame>
   <img src="/images/result-speeches-light.png" alt="Schema results showing extracted fields from parliamentary speeches" className="block dark:hidden" />
   <img src="/images/result-speeches-dark.png" alt="Schema results showing extracted fields from parliamentary speeches" className="hidden dark:block" />
 </Frame>
+</Card>
 
 Each speech gets analysed for the same fields: position summary, security stance (1-10), location mentions, talking point topics, migration attitude, governance focus, rhetoric style. The schema defines what to extract - the AI does the extraction.
 
 With structured output, you can filter, compare, and visualise. Which speakers emphasise humanitarian concerns vs. security? How does rhetoric differ by country? That's the point.
 
----
+<Card title="The schema that was used to extract the data">
+  <img className="hidden dark:block" src="/images/schema-pretty-speeches-dark.png" alt="Schema" width="100%" />
+  <img className="block dark:hidden" src="/images/schema-pretty-speeches-light.png" alt="Schema" width="100%" />
+</Card>
 
 ## Building a Schema
 
