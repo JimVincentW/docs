@@ -70,20 +70,21 @@ The difference between useful output and noise is specificity.
 | **Number** | Ratings, scales, counts, amounts | `security_stance: 7` |
 | **List** | Multiple values, tags, topics | `topics: ["migration", "EU solidarity"]` |
 
-Everything is stored as strings or numbers - there's no special date type. Timestamps are strings in a parseable format (`"2024-03-15"`).
 
-**Binary fields for filtering:** It's often useful to include 0/1 or yes/no fields for filtering results. Something like `is_spam: 0` or `is_relevant: 1` lets you quickly filter out noise in dashboards.
+<Note>**Binary fields for filtering:** It's often useful to include 0/1 or yes/no fields for filtering results. Something like `is_spam: 0` or `is_relevant: 1` lets you quickly filter out noise in dashboards.</Note>
 
 ### Special Field Names
 
 Certain field names unlock specific features when you view results:
 
-| Field name | What it enables |
-|------------|-----------------|
-| `location` | Geographic maps - locations get geocoded and plotted |
-| `timestamp` | Time series charts - combine with number fields to track changes over time |
-| `summary` | Highlighted in result views as the main description |
-| `tags` | Counted and aggregated across results |
+| Field name | What it enables | How to prompt |
+|------------|-----------------| -----------------|
+| `location` | Geographic maps - locations get geocoded and plotted | Ask for single most relevant location or region relevant |
+| `timestamp` | Time series charts - combine with number fields to track changes over time | Ask for a ISO timestamp of the article's main event or publication date |
+| `summary` | Highlighted in result views as the main description | Ask for a summary with your preferred style and length |
+| `tags` | Counted and aggregated across results | Either freeform or just from a few given tags |
+
+<Note>It is always good to provide a fallback choice like "None" or "Unapplicable".</Note>
 
 Other list fields also get counted automatically. If you extract `talking_point_topics` as a list, you'll see frequency distributions in dashboards.
 
