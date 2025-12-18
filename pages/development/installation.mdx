@@ -6,22 +6,19 @@ description: 'How to set up the Open Politics platform'
 
 This guide covers installation options for Open Politics HQ. The platform is now a unified application that includes all necessary components.
 
-## Installation Options
+## How to set up your HQ
 
 <Tabs>
-  <Tab title="Hosted Version">
+  <Tab title="Hosted (open-politics.org)">
     The simplest way to use Open Politics is through our hosted platform:
     
     1. Register at [open-politics.org](https://open-politics.org)
     2. Log in to access your personal dashboard
     3. Begin using the platform with pre-loaded data
     
-    <Info>
-      Currently in beta with limited registration. Contact us at [engage@open-politics.org](mailto:engage@open-politics.org) for access.
-    </Info>
   </Tab>
   
-  <Tab title="Self-Hosted">
+  <Tab title="Docker Compose">
     Run the complete platform locally:
     
     <Steps>
@@ -43,6 +40,8 @@ This guide covers installation options for Open Politics HQ. The platform is now
         ```bash
         cp .env.example .env
         # Edit .env with your configuration
+        # All values with changeThis need to be changed before the app will start.
+        # for example with 'openssl rand -base64 14' in your terminal.
         ```
       </Step>
       
@@ -64,17 +63,20 @@ This guide covers installation options for Open Politics HQ. The platform is now
       Initial setup may take time depending on your system configuration.
     </Note>
   </Tab>
-  
+
+  <Tab title="Kubernetes">
+    Base Helm Chart
+    We have a helmchart available at [GitHub](https://github.com/open-politics/open-politics-hq/tree/main/.deployments)
+    If you are here, you probably know what you are doing.
+    
+    Hetzner API Key
+    THE EASIEST WAY: is to get a hetzner API Key.
+    
+    Terraform
+    We have a end-to-end script that boots up a master and x worker nodes, according to your processing needs.
+    The API Key sets up a the worker nodes via Terraform and install K3s.
+    The maschines connect and form a cluster that runs the stack. We also provide a few management scripts to handle and setup the cluster.
+    We suggest using tooling like K9s along our scripts to install and manage and scale the cluster.
+    </Tab>
 </Tabs>
 
-## Configuration
-
-### Environment Variables
-
-Key variables in the .env file:
-
-| Variable | Description | Default |
-| --- | --- | --- |
-| `PORT` | Port for the web server | `3000` |
-| `FIRST_SUPERUSER` | Admin username | `app_user` |
-| `FIRST_SUPERUSER_PASSWORD` | Admin password | `app_user_password` |

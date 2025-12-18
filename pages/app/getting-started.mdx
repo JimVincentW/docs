@@ -1,34 +1,36 @@
 ---
 title: 'Getting Started'
-description: 'Quick start guide for Open Politics HQ platform'
+description: 'Get up and running with Open Politics HQ'
 ---
 
 # Getting Started
 
-Welcome to Open Politics HQ! This guide will get you up and running quickly.
+You have two options: use our hosted instance, or run HQ yourself.
 
 ## Choose Your Setup
 
-Select the setup method that best fits your needs:
-
 <Tabs>
-<Tab title="Hosted Instance (Recommended)">
-The fastest way to get started. We handle the infrastructure, you focus on analysis.
+<Tab title="Hosted Instance">
+The fastest way to start. We handle the infrastructure - you bring your own LLM API keys.
 
 <Steps>
 <Step title="Register">
-Sign up at [open-politics.org](https://open-politics.org)
+Sign up at [open-politics.org](https://open-politics.org/accounts/register)
 </Step>
 <Step title="Add API Keys">
-Configure your LLM API keys (OpenAI, Google, Anthropic, or Ollama)
+Configure your LLM API keys (OpenAI, Anthropic, Google, or run Ollama locally)
 </Step>
 <Step title="Start Analysing">
 Upload content and create your first schema
 </Step>
 </Steps>
+
+<Note>
+Your account also works on the [forum](https://forum.open-politics.org) for community support.
+</Note>
 </Tab>
 
-<Tab title="Self-Hosted Setup">
+<Tab title="Self-Hosted">
 For privacy, customization, or institutional requirements. Run everything on your own infrastructure.
 
 <Steps>
@@ -54,49 +56,48 @@ Open http://localhost:3000
 </Steps>
 
 <Warning>
-**Security Notice:** Change the default admin credentials immediately:
+**Change the defaults immediately:**
 - Username: `app_user`
 - Password: `app_user_password`
 </Warning>
+
+### Deployment Options
+
+<CardGroup cols={3}>
+  <Card title="Fully Local" icon="shield">
+    Everything on your hardware. Air-gapped environments, complete data control.
+  </Card>
+  <Card title="Hybrid" icon="cloud">
+    App locally, managed services (AWS RDS, Upstash Redis, S3) for less overhead.
+  </Card>
+  <Card title="Kubernetes" icon="server">
+    Helm chart available at [GitHub](https://github.com/open-politics/open-politics-hq/tree/main/.deployments)
+  </Card>
+</CardGroup>
 </Tab>
 </Tabs>
 
-## Your First Analysis
+---
 
-<Steps>
-<Step title="Upload Content">
-Upload PDFs, web articles, CSV files, or text documents
-</Step>
-<Step title="Create Schema">
-Define what to extract in plain English:
+## LLM Support
 
-<Card>
-    <img src="/images/schema-preview.png" alt="Schema preview interface" width="100%" />
-</Card>
+HQ works with multiple AI providers. Bring your own keys.
 
-</Step>
-<Step title="Run Analysis">
-Select content and schema, choose AI model, then run analysis
-</Step>
-<Step title="Explore Results">
-View results in tables, charts, maps, or export data
-</Step>
-</Steps>
+<CardGroup cols={2}>
+  <Card title="Ollama" icon="shield" color="#0D9373">
+    Run locally: Llama, Qwen, etc. - complete privacy
+  </Card>
+  <div>
+  <Card title="Anthropic" icon="brain" color="#EC4899">
+    Claude models - best experience with tools
+  </Card>
+  <Card title="OpenAI" icon="robot" color="#10A37F">
+    GPT-4o and newer
+  </Card>
+  <Card title="Google" icon="google" color="#4285F4">
+    Gemini - large context, speed, multimodal
+  </Card>
+  </div>
+</CardGroup>
 
-## Supported Content
-
-**Formats:** PDFs, web articles, text files, CSV files  
-**AI Models:** OpenAI GPT-4/3.5, Google Gemini, Anthropic Claude, Ollama (local)
-
-## Next Steps
-
-1. Upload sample documents and test schemas
-2. Join the [community forum](https://forum.open-politics.org)
-3. Explore advanced features like chat and automation
-4. Share successful schemas with others
-
-## Support
-
-- **Documentation:** Comprehensive guides for all features
-- **Community:** [forum.open-politics.org](https://forum.open-politics.org)
-- **Email:** engage@open-politics.org
+Configure keys in the web interface. Or run Ollama locally and skip the cloud entirely.

@@ -7,7 +7,7 @@
     "light": "#07C983",
     "dark": "#0D9373"
   },
-  "favicon": "/favstream.svg",
+  "favicon": "/favicon.ico",
   "navigation": {
     "groups": [
       {
@@ -17,25 +17,29 @@
         ]
       },
       {
-        "group": "Get Started",
+        "group": "Getting Started",
         "pages": [
-          "pages/app/getting-started"
+          "pages/app/overview",
+          "pages/app/installation-self-hosted",
+          "pages/app/app-setup"
         ]
       },
       {
-        "group": "App Features",
+        "group": "Core Concepts",
         "pages": [
+          "pages/app/infospaces",
           "pages/app/assets",
           "pages/app/schemas",
           "pages/app/dashboards",
-          "pages/app/chat",
-          "pages/app/infospaces" 
+          "pages/app/chat"
         ]
       },
       {
-        "group": "Method Details",
+        "group": "How To",
         "pages": [
-          "pages/app/classification-system"
+          "pages/concepts/running-analysis",
+          "pages/concepts/curating-fragments",
+          "pages/concepts/advanced-chatting"
         ]
       },
       {
@@ -90,5 +94,3 @@
     "placeholder": "Search documentation..."
   }
 }
-
-

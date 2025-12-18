@@ -1,251 +1,48 @@
-# Analysis Dashboards
+---
+title: "Dashboards"
+description: "Visualize analysis results through charts, maps, and tables"
+---
 
-> Visualise your analysis results through interactive charts, maps, and tables
-
-## What Are Dashboards?
-
-Dashboards transform your analysis results into visual insights. Create multi panel layouts that combine different visualisation types to explore your findings systematically.
+Dashboards turn annotation results into visual insights. After running a schema on your assets, explore the data through charts, maps, and tables.
 
 <video controls width="100%">
   <source src="/images/dashboard-demo.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
 </video>
 
-**Example:** A policy analyst creates a dashboard showing:
-- **Time series chart**: Policy mentions over time
-- **Geographic map**: Regional distribution of issues
-- **Data table**: Detailed results with filtering
-- **Distribution chart**: Topic breakdown by source
-
-## Dashboard Types
+## Available Panels
 
 <CardGroup cols={2}>
   <Card title="Data Tables" icon="table">
-    **Perfect for:** Reviewing individual results and detailed exploration
-    
-    **Features:**
-    - Advanced Filtering: Filter by any field, value, or combination
-    - Sorting & Grouping: Organise results by multiple criteria
-    - Column Customisation: Show/hide fields based on your focus
-    - Export Options: Download filtered results in multiple formats
-    
-    **Use Cases:** Reviewing entity extraction results, validating analysis quality, finding specific documents
+    Filter, sort, and export individual results. Good for reviewing quality and finding specific items.
   </Card>
-  <Card title="Time Series Charts" icon="chart-line">
-    **Perfect for:** Understanding how things change over time
-    
-    **Chart Types:**
-    - Line Charts: Track continuous trends and patterns
-    - Bar Charts: Compare volumes and counts across time periods
-    - Area Charts: Show cumulative effects and proportions
-    - Multi-Series: Compare multiple trends simultaneously
-    
-    **Use Cases:** Tracking news coverage volume, monitoring sentiment changes, analysing policy evolution
+  <Card title="Time Series" icon="chart-line">
+    Track how values change over time. Line charts, bar charts, area charts.
   </Card>
   <Card title="Geographic Maps" icon="map">
-    **Perfect for:** Understanding geographic patterns and relationships
-    
-    **Map Features:**
-    - Point Mapping: Show locations mentioned in documents
-    - Choropleth Maps: Colour regions by data intensity
-    - Cluster Analysis: Group nearby events and activities
-    - Route Visualisation: Show movement and connection patterns
-    
-    **Use Cases:** Mapping conflict zones, visualising policy impact, tracking political figures
+    Plot locations mentioned in documents. Requires geocoding enabled.
   </Card>
   <Card title="Distribution Charts" icon="chart-pie">
-    **Perfect for:** Understanding proportions and distributions
-    
-    **Chart Types:**
-    - Pie Charts: Show proportions of different categories
-    - Histograms: Display data distributions and patterns
-    - Bar Charts: Compare counts across different groups
-    - Scatter Plots: Show relationships between variables
-    
-    **Use Cases:** Source distribution analysis, topic breakdown, sentiment patterns, entity frequency
+    See proportions across categories. Pie charts, histograms, bar comparisons.
   </Card>
 </CardGroup>
 
-<Card title="Knowledge Graphs (Beta)" icon="project-diagram">
-**Perfect for:** Exploring connections between entities and concepts
+## Default Dashboard
 
-<Note>
-**Beta Feature:** Knowledge graphs are currently in development. Basic network visualisation is available with limited functionality.
-</Note>
-
-**Graph Types:**
-- Entity Networks: People, organisations, and their relationships
-- Topic Maps: How concepts and themes connect
-- Citation Networks: How documents reference each other
-- Influence Maps: Power and influence relationships
-
-**Use Cases:**
-- Mapping political coalitions and opposition groups
-- Understanding organisational relationships
-- Tracking information flow between sources
-- Identifying key influencers and decision makers
-</Card>
-
-## Creating Dashboards
-
-### Default Layout
-New analysis runs automatically get a default dashboard with:
+Every annotation run gets a default dashboard with:
 - Data table showing all results
-- Time series chart of analysis activity
-- Distribution chart of schema results
 
-### Custom Panels
-Add panels to focus on specific aspects:
+## Adding Panels
 
-**Geographic Panel**: Add a map for location-based analysis
-**Knowledge Graph Panel**: Show relationship networks
-**Custom Chart Panel**: Focus on specific metrics or trends
-**Filtered Table Panel**: Show subset of results with specific criteria
+Click **Add Panel** to include additional visualizations. Each panel can be:
+- Filtered to show specific subsets
+- Configured for colors, labels, scales
+- Exported as image or data
 
-### Panel Configuration
-Each panel can be independently configured:
+## Export Options
 
-**Filters**: Show only relevant data in each panel
-**Display Options**: Customise colours, labels, and formatting
-**Interaction Settings**: Enable click through and drill down features
-**Update Frequency**: Control how often panels refresh
-
-## Dashboard Patterns
-
-### The Multi Panel Analysis Pattern
-**Pattern:** Combine different visualisation types to explore findings systematically
-
-**Example Layout:**
-- **Data Table**: Detailed results with filtering
-- **Time Series Chart**: Trends and changes over time
-- **Geographic Map**: Spatial patterns and relationships
-- **Distribution Chart**: Proportions and breakdowns
-
-**Benefits:**
-- **Comprehensive view**: Multiple perspectives on same data
-- **Interactive exploration**: Drill down from overview to details
-- **Cross validation**: Compare results across different views
-- **Insight generation**: Discover patterns through interaction
-
-### The Temporal Analysis Pattern
-**Pattern:** Track changes and trends over time
-
-**Components:**
-- **Timeline visualisation**: Key events and milestones
-- **Trend analysis**: Changes in metrics over time
-- **Event correlation**: Overlay events with trend data
-- **Predictive modelling**: Forecast future developments
-
-**Benefits:**
-- **Dynamic understanding**: See how things change
-- **Early warning**: Identify emerging trends
-- **Strategic planning**: Anticipate future developments
-- **Historical context**: Understand current events
-
-### The Geographic Analysis Pattern
-**Pattern:** Understand spatial patterns and relationships
-
-**Components:**
-- **Point mapping**: Show locations mentioned in documents
-- **Choropleth maps**: Colour regions by data intensity
-- **Cluster analysis**: Group nearby events and activities
-- **Route visualisation**: Show movement and connections
-
-**Benefits:**
-- **Spatial intelligence**: Understand geographic patterns
-- **Regional analysis**: Compare different areas
-- **Network mapping**: See how locations connect
-- **Policy impact**: Visualise effects across regions
-
-## Dashboard Examples
-
-### Media Bias Analysis Dashboard
-**Pattern:** Systematic bias detection across sources
-
-**Panels:**
-- **Time Series**: Bias scores over time by outlet
-- **Distribution**: Source type breakdown
-- **Geographic Map**: Regional coverage patterns
-- **Data Table**: Individual article analysis
-
-**Insights Generated:**
-- Systematic differences in framing across outlets
-- Geographic patterns in coverage bias
-- Temporal trends in media positioning
-- Source diversity analysis
-
-### Policy Monitoring Dashboard
-**Pattern:** Stakeholder engagement and policy development tracking
-
-**Panels:**
-- **Timeline**: Policy development stages
-- **Stakeholder Network**: Who's involved in each policy
-- **Geographic Impact**: Regional effects of policies
-- **Sentiment Tracking**: Public opinion over time
-
-**Insights Generated:**
-- Policy development patterns
-- Stakeholder influence networks
-- Regional impact variations
-- Public opinion trends
-
-### Research Analysis Dashboard
-**Pattern:** Academic literature and methodology analysis
-
-**Panels:**
-- **Topic Evolution**: How research topics change over time
-- **Citation Network**: How papers reference each other
-- **Methodology Distribution**: Research methods used
-- **Author Collaboration**: Co-authorship patterns
-
-**Insights Generated:**
-- Research trend identification
-- Collaboration network analysis
-- Methodology adoption patterns
-- Citation influence mapping
-
-## Advanced Features
-
-### Interactive Filtering
-**Cross-Panel Filtering:**
-- Select a time period to filter all panels
-- Choose a geographic region to focus analysis
-- Filter by source type across all visualisations
-- Select specific topics or themes
-
-**Dynamic Updates:**
-- Panels update automatically when filters change
-- Maintain context while drilling down into details
-- Preserve filter state across dashboard sessions
-- Export filtered views for external analysis
+- **CSV/JSON** - The table can export as CSV, the whole run can be exported as a zip of JSON & media files.
+- **Share Link** - Share a public static link to the dashboard. Logged in users can import the analysis.
 
 <Note>
-**Current Implementation:** Basic filtering is available. Advanced cross-panel filtering and dynamic updates are planned for future releases.
+**In Development:** Knowledge graphs, cross-panel filtering, and interactive drill-down are planned features.
 </Note>
-
-### Custom Visualisations
-**Chart Customisation:**
-- Choose chart types and layouts
-- Customise colours and themes
-- Add annotations and labels
-- Configure axis ranges and scales
-
-**Map Configuration:**
-- Select base map styles
-- Configure clustering and aggregation
-- Set up colour schemes and point sizes
-- Define zoom levels and default views
-
-### Export and Sharing
-**Export Options:**
-- **Static Images**: PNG, SVG for presentations
-- **Interactive Dashboards**: HTML for web sharing
-- **Data Exports**: CSV, JSON for further analysis
-- **PDF Reports**: Formatted reports with insights
-
-**Sharing Features:**
-- **Public Dashboards**: Share with external audiences
-- **Team Collaboration**: Work together on analysis
-- **Embed Options**: Include in websites or reports
-- **Version Control**: Track dashboard changes over time
-

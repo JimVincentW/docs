@@ -1,0 +1,86 @@
+---
+title: "Overview"
+description: "How HQ is organized and where to find what"
+---
+
+We aim to provide few but powerful core concepts to allow for flexible data ingestion, analysis and management.
+Foundation services like AI Models, a Geocoder or a Websearch tool can extend the functionality and allow for hybrid setups. From cloud to fully local on your own hardware.
+
+
+<Note>Before you start: make sure everything is properly installed and configured. </Note>
+
+## Infospaces - your project spaces
+Everything lives inside one - isolated from other projects, each its own vector index for semantic search.
+
+<Frame>
+```mermaid
+%%{init: {'theme': 'dark'}}%%
+flowchart TB
+    I[Infospace]
+    I --> A[Assets]
+    I --> S[Schemas]
+    
+```
+</Frame>
+
+<CardGroup cols={2}>
+<Card title="Assets" icon="file-lines" href="/pages/app/assets">
+Your content. Composable - a file decomposes into analyzable units. Bundles group assets for organisation and analysis.
+</Card>
+<Card title="Schemas" icon="microscope" href="/pages/app/schemas">
+Your lens and instructions for the AI. They are natural language tasks with strict definitions of the output.
+</Card>
+</CardGroup>
+---
+
+## Analysis
+This is where it all comes together. With the building blocks above you are set to work through your data by configuring an analysis.
+<Frame>
+```mermaid
+%%{init: {'theme': 'dark'}}%%
+flowchart TB
+    A[Assets] --> AN[Annotations]
+    S[Schemas] --> AN
+    AN --> D[Dashboards]
+``` 
+</Frame>
+<CardGroup cols={2}>
+<Card icon="cog" title="">
+[1. Configure an analysis run](/pages/concepts/running-analysis)
+What questions do you want to answer? What data do you have? 
+Also set up parametrs like parallelisation and if you want justifications for fields.
+<img className="hidden dark:block" src="/images/run-config-dark.png" alt="Configure an analysis" width="100%" />
+<img className="block dark:hidden" src="/images/run-config-light.png" alt="Configure an analysis" width="100%" />
+</Card>
+<Card title="2. Explore, Share and Work with the run's Dashboard" icon="chart-line" href="/pages/app/dashboards">
+Your results. Tables, charts, maps. Export or share. Every run produces structured data. Or as we call them: <span className="font-bold">annotations</span>.
+<img className="hidden dark:block" src="/images/dashboard-speeches-dark.png" alt="Dashboard" width="100%" />
+<img className="block dark:hidden" src="/images/dashboard-speeches-light.png" alt="Dashboard" width="100%" />
+</Card>
+</CardGroup>
+Once it's done, we can start to explore the results. We can filter, sort, visualise, share, curate and export the resulting data.
+
+
+## Chat & Tools
+
+<Card title="Chat" icon="comments" href="/pages/app/chat">
+Your data management interface. Query, build schemas, run analysis, explore, find similar items. Deduplicate and synthesize - through dialogue.
+
+  <video controls width="100%">
+  <source src="/images/chat-demo.mp4" type="video/mp4" />
+</video>
+<CardGroup cols={1}>
+```mermaid
+%%{init: {'theme': 'dark'}}%%
+flowchart TB
+    C[Chat] --> A[Assets]
+    C[Chat] --> S[Schemas]
+    C[Chat] --> D[Dashboards]
+    C[Chat] --> W[Websearch]
+    C[Chat] --> V[Vector search]
+```
+</CardGroup>
+</Card>
+
+
+## Want to know what do with the results?

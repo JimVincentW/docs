@@ -1,226 +1,170 @@
 ---
 title: "Schemas"
-description: "Define analysis tasks in natural language. Apply them at scale."
+description: "Tell the AI what to extract from your documents"
 ---
 
 # Schemas
 
-> Define analysis tasks in natural language. Apply them at scale.
+A schema is a set of instructions for extracting structured data from documents. You describe what you want in plain English, the AI applies it consistently across hundreds or thousands of items.
 
-## What Are Schemas?
+## What You Get
 
-Schemas are reusable analysis templates in plain English. Define what to extract from documents, AI applies it consistently across documents.
+Here's output from a schema analyzing EU Parliament speeches on migration:
 
-**Example:** Media bias analysis schema:
+<Frame>
+  <img src="/images/result-speeches-light.png" alt="Schema results showing extracted fields from parliamentary speeches" className="block dark:hidden" />
+  <img src="/images/result-speeches-dark.png" alt="Schema results showing extracted fields from parliamentary speeches" className="hidden dark:block" />
+</Frame>
 
-<CardGroup cols={2}>
-  <Card title="Source Type" icon="user">
-    **Type:** Text  
-    **Extract:** Primary source - government, activist, expert, or anonymous
-  </Card>
-  <Card title="Emotional Intensity" icon="heart">
-    **Type:** Number (1-10 scale)  
-    **Extract:** How emotionally charged is the language?
-  </Card>
-  <Card title="Framing" icon="frame">
-    **Type:** Text  
-    **Extract:** Issue framing - economic, security, moral, or procedural
-  </Card>
-  <Card title="Geographic Scope" icon="globe">
-    **Type:** Text  
-    **Extract:** Geographic scope - local, national, or international
-  </Card>
-</CardGroup>
+Each speech gets analyzed for the same fields: position summary, security stance (1-10), location mentions, talking point topics, migration attitude, governance focus, rhetoric style. The schema defines what to extract - the AI does the extraction.
 
-Result: Comparison of how different outlets frame the same stories.
+With structured output, you can filter, compare, and visualize. Which speakers emphasize humanitarian concerns vs. security? How does rhetoric differ by country? That's the point.
 
-## Creating Your First Schema
+---
 
-### Step 1: Define Your Questions
+## Building a Schema
 
-Start with the analytical questions you want to answer:
+Start with your actual questions. What do you want to know about your documents?
 
-- What policy positions are mentioned?
-- How do different sources frame the same issue?
-- What stakeholders are involved?
-- What's the timeline for implementation?
+- What positions are being taken?
+- How is the issue framed?
+- Who's mentioned, and in what context?
+- What's the emotional temperature?
 
-### Step 2: Write Clear Instructions
+Then turn each question into an extraction field.
 
-**Good instructions:**
+### Good Instructions vs. Vague Instructions
 
-<CardGroup cols={3}>
-  <Card title="Department" icon="building">
-    **Type:** Text  
-    **Extract:** Department or agency name
-  </Card>
-  <Card title="Amount (Millions)" icon="dollar-sign">
-    **Type:** Number  
-    **Extract:** Amount in millions of dollars
-  </Card>
-  <Card title="Change Type" icon="chart-line">
-    **Type:** Text  
-    **Extract:** Change from previous year - increase, decrease, or same
-  </Card>
-</CardGroup>
+The difference between useful output and noise is specificity.
 
-**Avoid vague instructions:**
+<Tabs>
+  <Tab title="✓ This works">
+    <CardGroup cols={2}>
+      <Card title="security_stance" icon="shield">
+        **Type:** Number (1-10)  
+        **Extract:** Position on border security. 1 = open borders, 10 = strict enforcement
+      </Card>
+      <Card title="talking_point_topics" icon="list">
+        **Type:** List  
+        **Extract:** Main topics discussed - migration policy, demographic change, EU solidarity, public services, etc.
+      </Card>
+    </CardGroup>
+    
+    *Clear scales, concrete categories, examples of valid values.*
+  </Tab>
+  <Tab title="✗ This doesn't">
+    <Card title="position" icon="question">
+      **Type:** Text  
+      **Extract:** What is their position on the issue?
+    </Card>
+    
+    *Too vague. Which issue? What aspects of their position? The AI will guess, and guesses vary.*
+  </Tab>
+</Tabs>
 
-<Card title="❌ Financial Info" icon="question">
-  **Type:** Text  
-  **Extract:** Extract important financial information  
-  *Too vague - AI won't know what specific information to extract*
-</Card>
+### Field Types
 
-### Step 3: Choose Data Types
+| Type | Use for | Example |
+|------|---------|---------|
+| **String** | Freeform text, summaries, answers, categories | `summary: "Speaker argues for..."` |
+| **Number** | Ratings, scales, counts, amounts | `security_stance: 7` |
+| **List** | Multiple values, tags, topics | `topics: ["migration", "EU solidarity"]` |
 
-**Text (string):** Categories, descriptions, names, locations  
-**Numbers:** Ratings, amounts, counts, scales  
-**Lists (array):** Multiple items, themes, categories  
-**Dates:** Timestamps, deadlines, events
+Everything is stored as strings or numbers - there's no special date type. Timestamps are strings in a parseable format (`"2024-03-15"`).
 
-## Data Type Examples
+**Binary fields for filtering:** It's often useful to include 0/1 or yes/no fields for filtering results. Something like `is_spam: 0` or `is_relevant: 1` lets you quickly filter out noise in dashboards.
 
-<CardGroup cols={3}>
-  <Card title="Text Example" icon="text">
-    **Source Type**  
-    **Type:** Text  
-    **Extract:** News source - mainstream, alternative, government, or independent
-  </Card>
-  <Card title="List Example" icon="list">
-    **Framing Categories**  
-    **Type:** List  
-    **Extract:** Issue framing - can include multiple: economic, security, moral, procedural
-  </Card>
-  <Card title="Number Example" icon="hashtag">
-    **Security Stance**  
-    **Type:** Number (1-10 scale)  
-    **Extract:** Immigration position (1=pro-immigration, 10=security-focused)
-  </Card>
-</CardGroup>
+### Special Field Names
 
-### Step 4: Test and Refine
+Certain field names unlock specific features when you view results:
 
-Always test on 2-3 sample documents first:
-1. Check output quality matches expectations
-2. Identify gaps in extracted data
-3. Refine instructions based on results
+| Field name | What it enables |
+|------------|-----------------|
+| `location` | Geographic maps - locations get geocoded and plotted |
+| `timestamp` | Time series charts - combine with number fields to track changes over time |
+| `summary` | Highlighted in result views as the main description |
+| `tags` | Counted and aggregated across results |
 
-## How It Works
+Other list fields also get counted automatically. If you extract `talking_point_topics` as a list, you'll see frequency distributions in dashboards.
 
-<video controls width="100%">
-  <source src="/images/schema-view-5.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+Numbers with defined scales (1-10, 1-5) work well for comparative analysis - they enable meaningful aggregation and time series when combined with timestamps.
 
-**Pattern:** Domain expertise → Natural language instructions → Structured JSON output
-
-**Benefits:**
-- No coding required
-- Reproducible results
-- Transparent methodology
-- Continuously improvable
+---
 
 ## Running Analysis
 
 <Steps>
-<Step title="Select Content">
-Choose individual assets or entire bundles to analyse
+<Step title="Select content">
+Pick individual assets or entire bundles
 </Step>
-<Step title="Pick Schema">
-Select your analysis template from available schemas
+<Step title="Choose schema">
+Select which schema to apply
 </Step>
-<Step title="Configure Settings">
-Choose AI model and processing options
+<Step title="Pick model">
+OpenAI, Anthropic, Google, or local via Ollama
 </Step>
-<Step title="Run Analysis">
-Process all selected content with your schema
+<Step title="Run">
+Each document gets processed, results stored as structured JSON
 </Step>
 </Steps>
 
-### AI Models
-
-**Cloud Models:** OpenAI GPT, Google Gemini, Anthropic Claude  
-**Local Models:** Ollama (Llama, Mistral, Code Llama)
-
-## Best Practices
-
-### Write Specific Instructions
-
-**Good - Clear and specific:**
-
-<CardGroup cols={2}>
-  <Card title="✓ Department" icon="building">
-    **Type:** Text  
-    **Extract:** Department name (e.g., Education, Defense, Health)  
-    *Clear examples help AI understand what you want*
-  </Card>
-  <Card title="✓ Budget Amount" icon="dollar-sign">
-    **Type:** Number  
-    **Extract:** Budget amount in millions of dollars  
-    *Specific unit makes extraction consistent*
-  </Card>
-</CardGroup>
-
-**Avoid - Too vague:**
-
-<Card title="❌ Financial Info" icon="circle-xmark">
-  **Type:** Text  
-  **Extract:** Extract important financial information  
-  *AI won't know which financial details matter to you*
-</Card>
-
-### Start Simple, Then Expand
-
-1. Extract basic entities (people, organisations, locations)
-2. Add analysis layers (sentiment, categorization)
-3. Include complex reasoning (relationships, advanced analysis)
-
-### Test Before Scaling
+<video controls width="100%">
+  <source src="/images/schema-view-5.mp4" type="video/mp4" />
+</video>
 
 <Warning>
-Always test on 2-3 sample documents before processing large batches.
+Test on 2-3 documents first. Check if outputs match expectations, refine instructions, then scale up. Saves time and API costs.
 </Warning>
+
+---
+
+## Curation & Persistent Fragments
+
+Schema results are annotations - they sit alongside your assets but aren't part of the asset itself. If you want an extraction to become a permanent feature of the document, you can **promote** it.
+
+When you curate or promote a result, it becomes a **persistent fragment** - a special metadata field attached to the asset. These fragments get included when you run further analysis, so the AI sees them as context.
+
+This is useful for building up knowledge incrementally:
+1. Run a schema to extract key claims
+2. Review results, promote the good ones
+3. Run a second schema - it now sees those claims as context
+4. Extract relationships or contradictions that depend on the first pass
+
+Promoted extractions become durable. They survive re-runs and inform future analysis.
+
+---
+
+## Tips
+
+**Include examples in your instructions.** "Source type: government, activist, expert, journalist, or anonymous" gives the AI a bounded set to work with.
+
+**Use scales for subjective measures.** "Emotional intensity (1-10)" is more useful than "how emotional is it?" because you can aggregate and compare.
+
+**Start simple, then add.** Begin with basic extraction (who, what, where), confirm it works, then layer in analysis fields (sentiment, framing, stance).
+
+**Look at failures.** When extraction is wrong or inconsistent, the instructions usually need tightening. What did the AI misunderstand?
+
+---
 
 ## Sharing Schemas
 
-**Schema Library:** Upload successful schemas and browse others' work  
-**Transparency:** Others can see, critique, and replicate your methodology  
-**Community:** Builds cumulative knowledge in the field
+Schemas can be uploaded to the library for others to use. They can see your methodology, critique it, replicate it, build on it. Transparency about how analysis is done matters - it's what separates systematic research from vibes.
 
-## Next Steps
+---
 
-<Steps>
-<Step title="Create Schema">
-Start with simple entity extraction and test on sample documents
-</Step>
-<Step title="Upload Content">
-Use [Assets & Bundles](/docs/assets) to organise your documents
-</Step>
-<Step title="Run Analysis">
-Apply your schema and choose appropriate AI models
-</Step>
-<Step title="Explore Results">
-Visualise findings with [Analysis Dashboards](/docs/dashboards)
-</Step>
-<Step title="Scale Up">
-Create complex schemas and explore [Chat & MCP](/docs/chat)
-</Step>
-</Steps>
-
-## Related Topics
+## Related pages
 
 <CardGroup cols={2}>
-<Card title="Assets & Bundles" icon="folder" href="/docs/assets">
-Learn how to upload and organise your content for analysis
+<Card title="Assets & Bundles" icon="folder" href="/pages/app/assets">
+Upload and organize documents for analysis
 </Card>
-<Card title="Classification System" icon="cog" href="/docs/classification-system">
-Understand how schemas power systematic content analysis
+<Card title="Dashboards" icon="chart-line" href="/pages/app/dashboards">
+Visualize results with charts and tables
 </Card>
-<Card title="Analysis Dashboards" icon="chart-line" href="/docs/dashboards">
-Visualise your schema results with interactive dashboards
+<Card title="Chat & MCP" icon="comments" href="/pages/app/chat">
+Query your data conversationally
 </Card>
-<Card title="Chat & MCP" icon="comments" href="/docs/chat">
-Use conversational AI to work with your schemas and data
+<Card title="Data Model" icon="database" href="/pages/concepts/data-model">
+How schemas, annotations, and assets fit together
 </Card>
 </CardGroup>

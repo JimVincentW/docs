@@ -1,260 +1,119 @@
 ---
-title: "Project Manifest"
-description: "Open Politics HQ - Open Source Intelligence Platform"
+title: "Manifest"
+description: "Dive into our mission and the ideas behind HQ and the Open Politics Project"
 ---
 
-## Why?
+## Why we are building HQ
 
-<Frame caption="Is it not?">
-  <img src="/images/exactly.png" alt="Colorful gradient image with the titel /a big clusterfuck" width="100%" />
+<Frame caption="">
+  <img src="/images/exactly_cut.png" alt="Colorful gradient image with the titel /a big clusterfuck" width="100%" height="50%" />
 </Frame>
 
-**The modern information landscape is a chaotic mess and, most often, difficult to navigate.**
+The modern information landscape is a chaotic mess that is hard to navigate.
+It has become hard, almost impossible, to stay up-to-date with what is happening around the world, your bubble or inside your organisation. Many are lost and unable to make sense of the information they are presented with. Understandably so, as the amount of information is growing exponentially and the quality of the information is decreasing.
 
+**So how can you make sense of and present the information in a way that is easy to understand and use?**
 
-Maybe you need to prove a point, are aiming to dive deeper into a topic, or simply want to understand what's happening. Whether you're an organisation drowning in unstructured data, an NGO with not enough hands on deck, an independent journalist tracking patterns across hundreds of sources, a researcher needing systematic analysis tools, or a business struggling with process inefficiencies, this is for you."
+This is not a problem of knowledge. It's a problem of not having the right tools.
 
 ## The Idea
 
-A journalist knows how to identify "security framing" in news coverage. A policy analyst knows what counts as "meaningful stakeholder engagement" in legislative proposals. A bureaucrat knows whether a grant application is properly filled out.
+A journalist knows how to identify "security framing" in news coverage. \
+A policy analyst knows what counts as "meaningful stakeholder engagement." \
+An accountant knows which line on a scanned invoice is the total. \
+A legal assistant knows which clause in a contract actually matters.
 
-That expertise lives in their heads, maybe in spreadsheets and notes. This works great for tens of documents. At hundreds or thousands, you're either stuck or you need to hire engineers. Meanwhile, sophisticated analysis infrastructure, the kind that lets you systematically apply analytical frameworks at scale, has only been available to well-funded institutions.
+Any document you work with - you know what to look for. You have your own "lens" on things.
 
-**This is where HQ shines:** define your analytical questions in plain language. Apply them at scale. Your schemas are your "lenses" you use to see the data. They are shareable, transparent, and improvable. Other researchers can see exactly how you defined your framework, critique it, refine it, or apply it to their own data.
+**Our goal is to enable you in applying your lens on your data.**
+> (Methodically, reproducible, and at scale)
 
-**For example:** Imagine as a journalist, you are analysing 200 news articles. You create a schema:
+You inherited 10 years of internal documents - nobody knows what's in there. \
+Your inbox has 3,000 unread emails from a project that ended badly. \
+You have a folder called "misc" with 400 PDFs.
 
-<CardGroup cols={2}>
-  <Card>
-    <img src="/images/schema-config.png" alt="Schema configuration interface" width="100%" />
-  </Card>
-  <Card>
-    <img src="/images/schema-preview.png" alt="Schema preview interface" width="100%" />
-  </Card>
-</CardGroup>
+You'd know it if you saw it. You've done this before, manually, on a handful of documents.
 
-**Run it. Get structured data showing systematic patterns. Export visualizations.**
+That recognition - you've done it. On ten documents. Maybe fifty. But not five hundred. Not five thousand. At some point you stop. Not because you don't know what you're looking for. Because doing it again, and again, and again - that's not a knowledge problem. It's a labor problem. And until now, solving it meant hiring engineers or learning to code yourself.
 
-<CardGroup cols={2}>
-  <Card>
-    <img src="/images/annotation-runs.png" alt="Annotation runs" width="100%" />
-  </Card>
-  <Card>
-    <img src="/images/annotation-results.png" alt="Annotation results" width="100%" />
-  </Card>
-</CardGroup>
+HQ lets you write down what you're looking for - in plain language - and apply it across everything.
 
-<Card>
-  <img src="/images/multi-dashboard-1.png" alt="Multi dashboard" width="100%" />
-</Card>
+**Your questions, your methods and results.**
 
-The principle scales. A journalist knows "framing." A policy analyst knows "stakeholder engagement." An NGO worker knows what signals a policy shift. Schemas let you take that knowledge and apply it systematically across thousands of documents. The same infrastructure that analyses legislation can sort emails, process intake forms, track regulatory changes, or monitor media coverage.
+Your question becomes a schema. The schema becomes a method. The outputs structured and reproducible. The method runs at scale. And because schemas are just text, they're shareable, transparent, improvable. Others can see exactly how you defined your framework - critique it, refine it, or apply it to their own data.
 
-This capability shouldn't be locked behind institutional walls. We're building it as **public infrastructure**: schemas, geocoding, vector search, local AI. Basic components, simple when you list them out. But that's the point. These are basic intelligence capabilities an open society needs, like libraries or archives, and they should be equally accessible.
-
-Open source. Self hostable. Bring your own LLM keys if you want privacy. Share your analytical frameworks publicly if you want transparency. Use it for journalism, research, advocacy, governance, anything that serves the public interest.
-
-Importantly: none of this would exist without the many people dedicated to open source. We're assembling the hard work of countless other projects. We are standing on the shoulders of a massive collaborative ecosystem that makes this possible. We are grateful for their work and we are proud to be part of it.
-
-## How It Works
-
-<Steps>
-  <Step title="Ingest Content">
-    Upload files, URLs, search results, RSS feeds<br />
-    <video controls width="100%">
-      <source src="/images/upload-view.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-  </Step>
-  <Step title="Define Schemas">
-    Describe what information to extract in plain language (see above)
-  </Step>
-  <Step title="Run Analysis">
-    Use AI to apply your schema at scale across documents
-  </Step>
-  <Step title="Explore Results">
-    View through tables, visualizations, maps, or export the data<br />
-    <video controls width="100%">
-      <source src="/images/dashboard-demo.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-  </Step>
-</Steps>
+**For example: analysing 1,000 speeches from the European Parliament**
 
 <CardGroup cols={2}>
-  <Card title="Supported Formats" icon="file-text">
-    PDFs, web articles, text, CSV, RSS feeds
+  <Card title="1. Your data" horizontal>
+    In this case a csv file of 1,000 speeches
+    <img className="block dark:hidden" src="/images/asset-csv-speeches-light.png" alt="Speeches CSV" width="100%" />
+    <img className="hidden dark:block" src="/images/asset-csv-speeches-dark.png" alt="Speeches CSV" width="100%" />
   </Card>
-  <Card title="Coming Soon" icon="clock">
-    Images, audio, email inbox ingestion
+  <div>
+  <Card title="2. A schema - Your lens" horizontal>
+    Define your questions, methods and scores.
+    <img className="block dark:hidden" src="/images/schema-preview.png" alt="Schema preview interface" width="100%" />
+    <img className="hidden dark:block" src="/images/schema-dark-speeches.png" alt="Schema preview interface" width="100%" />
   </Card>
+  <Card title="3. Dashboard" horizontal>
+    View the results
+    <img className="block dark:hidden" src="/images/dashboard-speeches-light.png" alt="Multi dashboard" width="100%" />
+    <img className="hidden dark:block" src="/images/dashboard-speeches-dark.png" alt="Multi dashboard" width="100%" />
+  </Card>
+  </div>
 </CardGroup>
 
-The schemas are the key innovation. They let you formalize your analytical method in natural language, making qualitative approaches reproducible and transparent. Other researchers can see exactly how you defined "populist rhetoric" or "security framing" and apply the same lens to their data.
+---
 
-<img src="/images/schema-2.png" alt="Example annotation schema" />
+## A note about software as public infrastructure
 
-## Chat & MCP
+This capability of analysing large amounts of data that is generalizable and works at scale should not be locked behind wealthy private companies or institutional walls. Yet it mostly is.
 
-<video controls width="100%">
-  <source src="/images/chat-demo.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+Schemas, geocoding, vector search, local AI - basic components when you list them out. But that's the point. These are intelligence capabilities an open society needs. Like libraries or archives, they should be equally accessible.
 
-The **Chat & MCP (Model Context Protocol)** centralizes all platform tools (asset management, schema based analysis, vector search, content ingestion) into a unified analysis access point that lets you work with structured analytical methods through conversational AI. This combination allows for various workflows for researching & synthesizing data. Editing MCP configs (upcoming on a per user level) furthermore allows you to grant your LLM access to almost arbitrary outside data and use it for your analysis.
+Open source. Self-hostable. Or bring your own LLM keys and use our hosted variant. Share your analytical frameworks publicly if you want transparency. Use it for journalism, research, advocacy, governance - anything that serves the public interest. 
 
-## Infospaces & Vector Storage
 
-Your assets, schemas and analysis results are scoped to "Information Spaces" that you can use to curate information. Each Information Space is a dedicated vector space. Use vector embeddings from local or cloud models to search through your data, cluster it (upcoming) and find duplicates.
+None of this would exist without the many people dedicated to open source and the countless open technologies we build upon. We are standing on the shoulders of giants and a massive collaborative ecosystem. We are grateful for their work and proud to take part of it.
 
-<video controls width="100%">
-  <source src="/images/infospace-switcher.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
 
-## Getting Started
-
-### Option 1: Use the Hosted Instance
-
-The easiest way to start. We host the infrastructure, you bring your own LLM API keys.
-
-<Steps>
-  <Step title="Register">
-    Sign up at [open-politics.org/accounts/register](https://open-politics.org/accounts/register)
-  </Step>
-  <Step title="Add API Keys">
-    Configure your LLM API keys on the home page
-  </Step>
-  <Step title="Start Analysing">
-    Upload content and create your first schema
-  </Step>
-</Steps>
-
-<Note>
-Your account also works on the [forum](https://forum.open-politics.org) for community support.
-</Note>
-
-### Option 2: Self-Host with Docker
-
-For privacy, customization, or institutional requirements. Run everything on your own infrastructure.
-
-```bash
-git clone https://github.com/open-politics/open-politics-hq.git
-cd open-politics-hq
-bash prepare.sh
-cp .env.example .env
-# Edit .env with your configuration
-docker compose up
-```
-
-**Default admin credentials** (change these):
-```bash
-FIRST_SUPERUSER=app_user
-FIRST_SUPERUSER_PASSWORD=app_user_password
-```
-
-### Deployment Flexibility
-
-<CardGroup cols={3}>
-  <Card title="Fully Local" icon="shield">
-    Run everything on your own hardware. Good for air gapped environments or complete data control.
-  </Card>
-  <Card title="Hybrid" icon="cloud">
-    Run the application locally but use managed services (AWS RDS, Upstash Redis, S3) to reduce operational burden.
-  </Card>
-  <Card title="Kubernetes" icon="server">
-    We provide a Helm chart at [`https://github.com/open-politics/open-politics-hq/tree/main/.deploymentskubernetes/open-politics-hq-deployment`](https://github.com/open-politics/open-politics-hq/tree/main/.deployments)
-  </Card>
-</CardGroup>
-
-## Architecture
-
-The platform is built from several independent services that work together. You can run them all locally or mix local and managed services.
-
-### Core Components
-
-| Component | What It Does | Technology |
-|-----------|-------------|------------|
-| **Backend** | API, analysis jobs, MCP server | FastAPI + Python |
-| **Frontend** | Web interface | Next.js + React |
-| **Worker** | Background processing for large jobs | Celery |
-| **Database** | Data storage with vector search | PostgreSQL + PGVector |
-| **Object Storage** | File storage for uploads | MinIO (S3-compatible) |
-| **Cache/Queue** | Session management, job queues | Redis |
-| **Geocoding** | Location extraction and mapping | Pelias |
-| **LLM** (optional) | Local AI inference | Ollama |
-
-### LLM Support
-
-Connect any of these AI providers:
-
-<CardGroup cols={2}>
-  <Card title="Anthropic" icon="brain" color="#EC4899">
-    Claude Sonnet 4.5, etc. (Best Experience with tools)
-  </Card>
-  <Card title="OpenAI" icon="robot" color="#10A37F">
-    GPT-5 etc. (Not sure)
-  </Card>
-  <Card title="Google" icon="google" color="#4285F4">
-    Gemini models (Large context, speed and modality capabilities)
-  </Card>
-  <Card title="Ollama" icon="shield" color="#0D9373">
-    Run models locally: Llama, OAI OSS, Qwen, etc. (Best Privacy)
-  </Card>
-</CardGroup>
-
-Configure API keys in the web interface or run Ollama locally for complete privacy.
-
-## Contributing
-
-We're building this in the open. The codebase, analytical methods, and documentation are all public and improvable.
-
-<CardGroup cols={2}>
-  <Card title="Code Contributions" icon="code">
-    Report bugs, suggest features, contribute code
-  </Card>
-  <Card title="Documentation" icon="book">
-    Improve docs, add examples, share schemas
-  </Card>
-  <Card title="Community" icon="users">
-    Join forum discussions, share knowledge
-  </Card>
-  <Card title="Research" icon="microscope">
-    Build analytical frameworks, publish findings
-  </Card>
-</CardGroup>
-
-## Contact & Community
-
-<CardGroup cols={3}>
-  <Card title="Email" icon="mail">
-    engage@open-politics.org
-  </Card>
-  <Card title="Forum" icon="comments">
-    [forum.open-politics.org](https://forum.open-politics.org)
-  </Card>
-  <Card title="Dev Meetings" icon="calendar">
-    Wednesdays 15:30 Berlin Time
-  </Card>
-</CardGroup>
-
-## License
-
-AGPLv3, see [LICENSE](LICENSE)
-
-This means you can use, modify, and distribute this software, but any modifications or services built on it must also be open source. You can get an enterprise license for private use modifications which are not publicly deployed for one year at a time under strict ethical guidelines.
-
-## Project Origins & Story
+## Project Origins & Funding 
 
 <Card title="Talk: Open Source Political Intelligence" icon="play" href="https://media.ccc.de/v/dg-111" horizontal>
 **CCCB Datengarten Presentation**
-
 </Card>
 
-This project started at Freie Universität Berlin's Political Science department. The gap between what research infrastructure could theoretically do and what was practically accessible to most researchers was obvious. Someone had to build the bridge. Our first official funding came from the European Horizon NGI Search project, and before that we were lucky to have a warm circle of friends and early supporters who believed in the idea before there was much to show. No venture capital, just journalists and neighbours who got it.
+We started this at Freie Universität Berlin's Political Science department, working on a research paper. At some point we looked at what we'd built and thought - this is useful beyond just our project. And the capability to do this kind of work exists, but it's locked behind expensive platforms or requires engineering teams - and always written in proprietary code.
 
-The business model is intentionally simple: we'll try to keep a free hosted version running as much as we can shoulder, but hosting HQ is rather cheap as most of the cost comes from LLMs. We focus on helping organisations deploy and use the platform effectively: infrastructure orchestration, custom implementations, training. The platform itself always stays open source and self hostable.
+So we felt to urge to build HQ, start the Open Politics Project and make this available for everyone.
+
+Our first official funding came from the European Horizon NGI Search project. Before that, we were lucky to have a warm circle of friends and early supporters who believed in the idea before there was much to show. No venture capital - just journalists and neighbours who got it.
+
+The business model is simple: we'll keep a free hosted version running as much as we can shoulder. Hosting HQ is cheap - most of the cost comes from LLMs which on the hosted variant you bring yourself via API keys. We focus on helping organisations deploy and use the platform effectively: infrastructure orchestration, custom implementations, training. The platform itself always stays open source and self-hostable. No tracking or telemetry.
 
 Our marketing is the research that gets done with these tools. If people publish interesting work using HQ, that's worth more than any advertising campaign.
 
-If you want to support this mission or just talk about what you're building, reach out: engage@open-politics.org
+## Contact & Contributing
+We're building this in the open. Code, analytical methods, documentation - all public and improvable.
+<CardGroup cols={3}>
+  <Card title="Mail" icon="envelope" className="" href="mailto:engage@open-politics.org">
+    engage@open-politics.org
+  </Card>
+  <Card title="Forum" icon="comments" href="https://forum.open-politics.org">
+    Community discussions
+  </Card>
+  <Card title="Brainstorming" icon="calendar">
+    Come by on Thursdays to the Chaos Computer Club Berlin - we might be around :) 
+  </Card>
+</CardGroup>
+
+<Card title="Code Repository" icon="code" href="https://github.com/open-politics/open-politics-hq">
+    Report bugs, suggest features, contribute or have a look inside.
+</Card>
+
+## License
+
+**AGPLv3** - Use, modify, distribute freely. Services built on it must also be open source. Enterprise licenses available for private modifications under strict ethical guidelines.
+
+Find the full license [here](https://github.com/open-politics/open-politics-hq/blob/main/LICENSE.md).
