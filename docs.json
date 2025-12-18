@@ -40,13 +40,8 @@
           "pages/concepts/running-analysis",
           "pages/concepts/curating-fragments"
         ]
-      },
-      {
-        "group": "Development",
-        "pages": [
-          "pages/development/installation"
-        ]
       }
+     
     ],
     "global": {
       "anchors": [

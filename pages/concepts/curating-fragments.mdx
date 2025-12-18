@@ -26,7 +26,7 @@ When you curate or promote a result, it becomes a **persistent fragment** - a sp
 
 ## Why Promote Results?
 
-This is useful for building up knowledge incrementally:
+This is useful for building up knowledge incrementally, but also one time tagging and sorting of your
 
 <Steps>
 <Step title="Run initial extraction">
@@ -46,38 +46,19 @@ Find contradictions, connections, or patterns that depend on the first pass
 </Step>
 </Steps>
 
-## Example Workflow
-
-**Pass 1: Entity Extraction**
-- Run schema to extract people, organisations, locations
-- Review results, promote verified entities as fragments
-
-**Pass 2: Relationship Analysis**
-- Run second schema asking "what relationships exist between entities?"
-- The AI now sees the promoted entities as part of the document context
-- Extracts relationships with better accuracy
-
-**Pass 3: Claim Verification**
-- Run third schema to identify claims about those entities
-- Cross-reference with known facts
-- Build a knowledge graph incrementally
-
 ## Promoting Results
 
-From the annotation results view:
+From the results table of a run dashboard:
 
 1. **Review the extraction** - Check it's accurate and useful
-2. **Click "Promote"** - Converts to persistent fragment
-3. **Optionally edit** - Refine the value before saving
+2. **Click "Promote"** - Converts annotations to persistent fragments
 4. **Confirm** - Fragment is now attached to the asset
 
-Promoted extractions become durable. They survive re-runs and inform future analysis.
 
 ## Managing Fragments
 
 View and manage fragments on any asset:
 - See all attached fragments
-- Edit fragment values
 - Remove fragments you no longer need
 - See which schema run originally created them
 

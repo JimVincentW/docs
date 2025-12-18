@@ -44,83 +44,53 @@ Use the Infospace Switcher in the top left sidebar to see all your infospaces. C
 - Export infospace data for backup or sharing
 - Import infospace configurations from other users
 
-## Infospace Organisation
+## Example Infospace Organisation
 
-<CardGroup cols={3}>
-  <Card title="Research Projects" icon="microscope">
-    - "Immigration Policy Analysis": All immigration-related content
-    - "Media Bias Study": News coverage analysis
-    - "Legislative Tracking": Bill monitoring and analysis
-    - "Academic Research": Literature review and methodology
+  <Card title="Project Infospaces" icon="tags" horizontal>
+    - "Election Coverage 2024"
+    - "Grant Applications"
+    - "Academic Papers"
   </Card>
-  <Card title="Department-Based" icon="building">
-    - "Policy Research": Government and policy analysis
-    - "Media Analysis": News and social media monitoring
-    - "Academic Studies": Research and methodology development
-    - "Client Projects": External consulting work
-  </Card>
-  <Card title="Topic-Based" icon="tags">
-    - "Climate Change": Environmental policy and research
-    - "Economic Policy": Financial and economic analysis
-    - "Social Issues": Community and social policy
-    - "International Relations": Global politics and diplomacy
-  </Card>
-</CardGroup>
-
-### Cross-Infospace Collaboration
-
 <CardGroup cols={2}>
-  <Card title="Shared Resources" icon="share">
-    - Common schemas and analysis frameworks
-    - Shared knowledge bases and reference materials
-    - Collaborative research projects
-    - Cross-project insights and findings
+  <Card title="Research Projects" icon="microscope">
+    - "Immigration Policy Analysis"
+    - "Media Bias Study"
+    - "Legislative Tracking"
   </Card>
-  <Card title="Data Isolation" icon="shield">
-    - Separate analysis results and findings
-    - Independent user access and permissions
-    - Isolated processing and monitoring
-    - Separate backup and recovery processes
+  <div>
+  <Card title="Personal Infospaces" icon="building">
+    - "Taxes"
+    - "Personal Mail"
+    - "Old documents"
   </Card>
+  </div>
 </CardGroup>
 
 ## Vector Storage & Search
 
-Every infospace is also a vector store. Your documents get embedded - enabling semantic search, similarity matching, and AI-powered discovery.
+Every infospace is also a [vector store](https://en.wikipedia.org/wiki/Vector_database). Your documents get embedded - enabling semantic search, similarity matching and better tooling for your LLM model to work with.
 
-### What You Can Do
-
+  <Card title="Automatic Vectorization" icon="cog" horizontal>
+    When you enable vectorisation in your infospace settings:
+    - Background task creates vectors for all content
+    - Continuous processing of new uploads
+    - Automatic updates when content changes
+  </Card>
 <CardGroup cols={2}>
   <Card title="Similarity Search" icon="search">
     - Find documents with similar content or themes
-    - Discover related research and analysis
-    - Identify patterns across different sources
-    - Connect disparate pieces of information
+    - Deduplicate documents
   </Card>
   <Card title="AI Context Enhancement" icon="brain">
     - Provide relevant context for AI analysis
-    - Improve schema accuracy and relevance
     - Enhance chat interface with document knowledge
-    - Enable more sophisticated analysis workflows
   </Card>
 </CardGroup>
 
 ### Vectorization Process
 
 <CardGroup cols={2}>
-  <Card title="Automatic Vectorization" icon="cog">
-    When you enable vectorisation in your infospace settings:
-    - Background task creates vectors for all content
-    - Continuous processing of new uploads
-    - Automatic updates when content changes
-    - Quality monitoring and optimisation
-  </Card>
-  <Card title="Use Cases" icon="lightbulb">
-    - **Deduplication**: Find and merge similar assets
-    - **Clustering**: Group related content automatically
-    - **Recommendation**: Suggest relevant documents
-    - **Knowledge Discovery**: Find hidden connections
-  </Card>
+  
 </CardGroup>
 
 ## Data Storage & Backups

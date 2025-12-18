@@ -21,6 +21,9 @@ HQ uses foundation services to power different capabilities. Configure them in t
   </Card>
 </CardGroup>
 
+<img className="hidden dark:block" src="/images/home-config-dark.png" alt="App Setup" width="100%" />
+<img className="block dark:hidden" src="/images/home-config-light.png" alt="App Setup" width="100%" />
+
 Each service type supports multiple providers. Pick what fits your needs — cloud APIs, local inference, or a mix.
 
 ---
@@ -52,6 +55,22 @@ Two storage modes for each provider:
 | Google | [aistudio.google.com](https://aistudio.google.com) |
 | Ollama | Local — no key needed |
 
+
+### Ollama 
+
+Ollama is a local language model server that has many models available and is a great way to get started with local inference.
+
+<Steps>
+    <Step title="Select Ollama as LLM and Embedding Provider">
+    <img className="hidden dark:block" src="/images/ollama-select-dark.png" alt="Ollama" width="100%" />
+    <img className="block dark:hidden" src="/images/ollama-select-light.png" alt="Ollama" width="100%" />
+</Step>
+<Step title="Select a model">
+    <img className="hidden dark:block" src="/images/ollama-model-menu-dark.png" alt="Ollama" width="100%" />
+    <img className="block dark:hidden" src="/images/ollama-model-menu-light.png" alt="Ollama" width="100%" />
+</Step>
+</Steps>
+
 ### Embeddings
 
 Used for vectorizing content in your infospaces. Configure separately from language models.
@@ -68,10 +87,11 @@ Enables the chat to pull in live search results.
 | Provider | Get Key |
 |----------|---------|
 | Tavily | [tavily.com](https://tavily.com) |
+| SearXNG | (soon back integrated in the stack)
 
 ### Geocoding
 
-Location extraction uses Pelias. Self-hosted deployments include it by default. No API key needed for local Pelias.
+Location extraction uses Nominatim. Self-hosted deployments include it by default. No API key needed for local Nominatim.
 
 ---
 
