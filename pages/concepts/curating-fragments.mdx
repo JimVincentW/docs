@@ -1,0 +1,101 @@
+---
+title: "Curating & Promoting Fragments"
+description: "Turn analysis results into persistent document metadata"
+---
+
+Schema results are **annotations** - they sit alongside your assets but aren't part of the asset itself. If you want an extraction to become a permanent feature of the document, you can **promote** it.
+
+## What Are Persistent Fragments?
+
+When you curate or promote a result, it becomes a **persistent fragment** - a special metadata field attached to the asset. These fragments get included when you run further analysis, so the AI sees them as context.
+
+<CardGroup cols={2}>
+  <Card title="Annotations" icon="note-sticky">
+    - Temporary analysis results
+    - Tied to a specific schema run
+    - Can be deleted or re-run
+    - Not visible to subsequent analysis
+  </Card>
+  <Card title="Persistent Fragments" icon="bookmark">
+    - Permanent asset metadata
+    - Survives schema changes
+    - Included in future analysis context
+    - Builds cumulative knowledge
+  </Card>
+</CardGroup>
+
+## Why Promote Results?
+
+This is useful for building up knowledge incrementally:
+
+<Steps>
+<Step title="Run initial extraction">
+Apply a schema to extract key claims, entities, or summaries
+</Step>
+<Step title="Review results">
+Check quality, identify good extractions
+</Step>
+<Step title="Promote the good ones">
+Convert accurate results to persistent fragments
+</Step>
+<Step title="Run deeper analysis">
+Subsequent schemas now see those fragments as context
+</Step>
+<Step title="Extract relationships">
+Find contradictions, connections, or patterns that depend on the first pass
+</Step>
+</Steps>
+
+## Example Workflow
+
+**Pass 1: Entity Extraction**
+- Run schema to extract people, organisations, locations
+- Review results, promote verified entities as fragments
+
+**Pass 2: Relationship Analysis**
+- Run second schema asking "what relationships exist between entities?"
+- The AI now sees the promoted entities as part of the document context
+- Extracts relationships with better accuracy
+
+**Pass 3: Claim Verification**
+- Run third schema to identify claims about those entities
+- Cross-reference with known facts
+- Build a knowledge graph incrementally
+
+## Promoting Results
+
+From the annotation results view:
+
+1. **Review the extraction** - Check it's accurate and useful
+2. **Click "Promote"** - Converts to persistent fragment
+3. **Optionally edit** - Refine the value before saving
+4. **Confirm** - Fragment is now attached to the asset
+
+Promoted extractions become durable. They survive re-runs and inform future analysis.
+
+## Managing Fragments
+
+View and manage fragments on any asset:
+- See all attached fragments
+- Edit fragment values
+- Remove fragments you no longer need
+- See which schema run originally created them
+
+---
+
+## Related
+
+<CardGroup cols={2}>
+<Card title="Running Analysis" icon="play" href="/pages/concepts/running-analysis">
+Apply schemas to your documents
+</Card>
+<Card title="Schemas" icon="microscope" href="/pages/app/schemas">
+Define what to extract from documents
+</Card>
+<Card title="Assets & Bundles" icon="folder" href="/pages/app/assets">
+Upload and organise documents
+</Card>
+<Card title="Dashboards" icon="chart-line" href="/pages/app/dashboards">
+Visualise results with charts and tables
+</Card>
+</CardGroup>

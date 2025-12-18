@@ -38,8 +38,7 @@
         "group": "How To",
         "pages": [
           "pages/concepts/running-analysis",
-          "pages/concepts/curating-fragments",
-          "pages/concepts/advanced-chatting"
+          "pages/concepts/curating-fragments"
         ]
       },
       {

@@ -16,9 +16,9 @@ Here's output from a schema analyzing EU Parliament speeches on migration:
   <img src="/images/result-speeches-dark.png" alt="Schema results showing extracted fields from parliamentary speeches" className="hidden dark:block" />
 </Frame>
 
-Each speech gets analyzed for the same fields: position summary, security stance (1-10), location mentions, talking point topics, migration attitude, governance focus, rhetoric style. The schema defines what to extract - the AI does the extraction.
+Each speech gets analysed for the same fields: position summary, security stance (1-10), location mentions, talking point topics, migration attitude, governance focus, rhetoric style. The schema defines what to extract - the AI does the extraction.
 
-With structured output, you can filter, compare, and visualize. Which speakers emphasize humanitarian concerns vs. security? How does rhetoric differ by country? That's the point.
+With structured output, you can filter, compare, and visualise. Which speakers emphasise humanitarian concerns vs. security? How does rhetoric differ by country? That's the point.
 
 ---
 
@@ -91,49 +91,6 @@ Numbers with defined scales (1-10, 1-5) work well for comparative analysis - the
 
 ---
 
-## Running Analysis
-
-<Steps>
-<Step title="Select content">
-Pick individual assets or entire bundles
-</Step>
-<Step title="Choose schema">
-Select which schema to apply
-</Step>
-<Step title="Pick model">
-OpenAI, Anthropic, Google, or local via Ollama
-</Step>
-<Step title="Run">
-Each document gets processed, results stored as structured JSON
-</Step>
-</Steps>
-
-<video controls width="100%">
-  <source src="/images/schema-view-5.mp4" type="video/mp4" />
-</video>
-
-<Warning>
-Test on 2-3 documents first. Check if outputs match expectations, refine instructions, then scale up. Saves time and API costs.
-</Warning>
-
----
-
-## Curation & Persistent Fragments
-
-Schema results are annotations - they sit alongside your assets but aren't part of the asset itself. If you want an extraction to become a permanent feature of the document, you can **promote** it.
-
-When you curate or promote a result, it becomes a **persistent fragment** - a special metadata field attached to the asset. These fragments get included when you run further analysis, so the AI sees them as context.
-
-This is useful for building up knowledge incrementally:
-1. Run a schema to extract key claims
-2. Review results, promote the good ones
-3. Run a second schema - it now sees those claims as context
-4. Extract relationships or contradictions that depend on the first pass
-
-Promoted extractions become durable. They survive re-runs and inform future analysis.
-
----
-
 ## Tips
 
 **Include examples in your instructions.** "Source type: government, activist, expert, journalist, or anonymous" gives the AI a bounded set to work with.
@@ -155,16 +112,16 @@ Schemas can be uploaded to the library for others to use. They can see your meth
 ## Related pages
 
 <CardGroup cols={2}>
+<Card title="Running Analysis" icon="play" href="/pages/concepts/running-analysis">
+Apply schemas to your documents
+</Card>
+<Card title="Curating Fragments" icon="star" href="/pages/concepts/curating-fragments">
+Promote extractions to persistent metadata
+</Card>
 <Card title="Assets & Bundles" icon="folder" href="/pages/app/assets">
-Upload and organize documents for analysis
+Upload and organise documents for analysis
 </Card>
 <Card title="Dashboards" icon="chart-line" href="/pages/app/dashboards">
-Visualize results with charts and tables
-</Card>
-<Card title="Chat & MCP" icon="comments" href="/pages/app/chat">
-Query your data conversationally
-</Card>
-<Card title="Data Model" icon="database" href="/pages/concepts/data-model">
-How schemas, annotations, and assets fit together
+Visualise results with charts and tables
 </Card>
 </CardGroup>

@@ -3,165 +3,266 @@ title: 'Installation & Architecture'
 description: 'Self-hosting guide and platform architecture'
 ---
 
-# Installation & Architecture
+## How to set up your HQ
 
-This guide covers self-hosting Open Politics HQ and the underlying architecture.
+<Tabs>
+  <Tab title="Hosted">
+    The simplest way to use Open Politics is through our hosted platform:
+    
+    1. Register at [open-politics.org](https://open-politics.org)
+    2. Log in to access your personal dashboard
+    3. Begin using the platform with pre-loaded data and continue to:
+    <Card horizontal title="App Setup">
+    </Card>
+  </Tab>
+  
+  <Tab title="Self-hosted">
+
+    Our preferred way to self-host on a single machine or develop with is Docker Compose. For Multi-machine setups, we recommend Kubernetes.
+    
+    But in both the cases you can choose to outsource services to managed providers for a more lightweight (but less private) setup.
+
+      | Service | Purpose | Example Provider | 
+      |---------|---------|---------| 
+      | Postgres | Main database | Hetzner | 
+      | Redis | Cache and queue | Upstash |
+      | MinIO / S3 | Object storage | Hetzner |
+      | Nominatim | Geocoding | Nominatim | - uses lot of disk space (170gb+)
+      | LLM API | Language model | OpenAI | - high gpu and/or cpu usage
+      | Tavily / SerpAPI | Web search | Tavily |
+    <Tabs>
+      <Tab title="Docker Compose">
+        Run the complete platform locally:
+        
+        <Steps>
+          <Step title="Prerequisites">
+            - Docker and Docker Compose
+            - 32GB RAM recommended
+            - 20GB free disk space
+            - Git
+          </Step>
+          
+          <Step title="Clone repository">
+            ```bash
+            git clone https://github.com/open-politics/open-politics-hq.git
+            cd open-politics-hq
+            ```
+          </Step>
+          
+          <Step title="Configure environment">
+            ```bash
+            cp .env.example .env
+            # Edit .env with your configuration
+            # All values with changeThis need to be changed before the app will start.
+            # for example with 'openssl rand -base64 14' in your terminal.
+            ```
+          </Step>
+          
+          <Step title="Start services">
+            ```bash
+            docker compose up
+            ```
+          </Step>
+          
+          <Step title="Access the platform">
+            Open your browser and navigate to:
+            ```
+            http://localhost:3000
+            ```
+          </Step>
+        </Steps>
+        
+        <Note>
+          Initial setup may take time depending on your system configuration.
+        </Note>
+      </Tab>
+
+      <Tab title="Kubernetes">
+        <Note>If you are here, we assume you know what you are doing.</Note>
+        
+        ## Base Helm Chart
+        We have a base helm chart available [here](https://github.com/open-politics/open-politics-hq/tree/main/.deployments)
+        
+        ```bash
+        git clone https://github.com/open-politics/open-politics-hq
+        cd open-politics-hq/.deployments/end-to-end-hetzner-k3s-terraform-helm
+        cp .tfvars.example .tfvars
+        ```
+
+        ## Hetzner Kubernetes Stack
+        Our easiest way to deploy HQ via Kubernetes is to use Hetzner. We provide an end-to-end script that provisions a master and worker nodes via Terraform and installs K3s. We suggest using K9s alongside our scripts to manage and scale the cluster.
+
+        <Accordion title="Hetzner Kubernetes Stack">
+          # HQ on Hetzner (K3s) — End-to-End Deployment Guide
+
+This repository delivers a batteries-included, reproducible way to provision a Hetzner K3s cluster and deploy your application stack with one command.
+
+## What This Gives You
+
+- **3 Hetzner Cloud servers by default**: 1 control plane, 2 workers (configurable)
+- **K3s** with sensible flags for Hetzner CCM integration
+- **Traefik** Ingress with automatic TLS via Let's Encrypt (ACME)
+- **Persistent storage** using Hetzner CSI
+- **Application stack via Helm**: frontend, backend API, Celery workers, Redis, optional Postgres/MinIO templates
+
+---
 
 ## Quick Start
 
 <Steps>
-  <Step title="Prerequisites">
-    - Docker and Docker Compose
-    - 32GB RAM recommended
-    - 20GB free disk space
-    - Git
-  </Step>
-  
-  <Step title="Clone & Configure">
+  <Step title="Configure Hetzner token">
     ```bash
-    git clone https://github.com/open-politics/open-politics-hq.git
-    cd open-politics-hq
-    cp .env.example .env
-    # Edit .env with your configuration
+    cd hq-deployment/
+    cp .tfvars.example .tfvars
+    # Edit .tfvars and set hcloud_token
     ```
   </Step>
   
-  <Step title="Start Services">
+  <Step title="Deploy">
     ```bash
-    docker compose up
+    ./deploy.sh
     ```
-  </Step>
-  
-  <Step title="Access">
-    Open http://localhost:3000
+    The script is idempotent. Re-running applies updates safely. Typical first deploy time: ~10–15 minutes.
   </Step>
 </Steps>
 
-<Warning>
-**Change defaults immediately:**
-- `FIRST_SUPERUSER=app_user`
-- `FIRST_SUPERUSER_PASSWORD=app_user_password`
-</Warning>
+## Configuration Checklist
+
+Before running `./deploy.sh`, ensure you've completed:
+
+- [ ] **Hetzner API Token**: Set `hcloud_token` in `.tfvars`
+- [ ] **Domain**: Set `domain` in `.tfvars` (must match `env.config.DOMAIN` in `values.yaml`)
+- [ ] **Application Values**: Copy and customize `hq-cluster-chart/values.yaml`
+- [ ] **Secrets**: Replace all `xxx` placeholders with real values
+- [ ] **SSH Keys**: Run `./scripts/manage-ssh-keys.sh generate`
+- [ ] **DNS Ready**: Have your domain ready for A record creation
 
 ---
 
-## Architecture
+## Prerequisites
 
-HQ is built from independent services that work together. Run them all locally, or mix local and managed services.
-
-### Core Components
-
-| Component | What It Does | Technology |
-|-----------|-------------|------------|
-| **Backend** | API, analysis jobs, MCP server | FastAPI + Python |
-| **Frontend** | Web interface | Next.js + React |
-| **Worker** | Background processing for large jobs | Celery |
-| **Database** | Data storage with vector search | PostgreSQL + PGVector |
-| **Object Storage** | File storage for uploads | MinIO (S3-compatible) |
-| **Cache/Queue** | Session management, job queues | Redis |
-| **Geocoding** | Location extraction and mapping | Pelias |
-| **LLM** (optional) | Local AI inference | Ollama |
-
-### Service Dependencies
-
-```
-Frontend (Next.js) ──► Backend (FastAPI) ──► Database (PostgreSQL)
-                              │                    │
-                              ▼                    ▼
-                         Worker (Celery)    Vector Search (PGVector)
-                              │
-                              ▼
-                      Object Storage (MinIO)
-```
+- Hetzner Cloud account and API token (Read/Write)
+- Local tools: `terraform`, `kubectl`, `helm`, `jq`
+- An SSH key uploaded to Hetzner; the scripts can rotate/manage keys automatically
 
 ---
 
-## Deployment Options
+## Initial Configuration
 
-<CardGroup cols={3}>
-  <Card title="Fully Local" icon="shield">
-    Everything on your hardware. For air-gapped environments or complete data control.
-  </Card>
-  <Card title="Hybrid" icon="cloud">
-    App locally, managed services (AWS RDS, Upstash Redis, S3) for less operational overhead.
-  </Card>
-  <Card title="Kubernetes" icon="server">
-    Helm chart available for production deployments.
-  </Card>
-</CardGroup>
-
-### Kubernetes Deployment
-
-We provide a Helm chart for Kubernetes deployments:
-
-```bash
-# Clone the repo
-git clone https://github.com/open-politics/open-politics-hq.git
-
-# Navigate to Helm chart
-cd open-politics-hq/.deployments/kubernetes/open-politics-hq-deployment
-
-# Install with Helm
-helm install open-politics-hq . -f values.yaml
-```
+<Steps>
+  <Step title="Infrastructure Configuration (.tfvars)">
+    ```bash
+    cp .tfvars.example .tfvars
+    ```
+    
+    **Required:**
+    - `hcloud_token`: Hetzner API token ([get from console](https://console.hetzner.com/projects))
+    - `domain`: your public domain for TLS/ingress
+    
+    **Optional (with defaults):**
+    - `worker_count`: number of workers (default: 2)
+    - `master_server_type` / `worker_server_type`: server types (default: `cx22`)
+    - `location`: Hetzner location (default: `fsn1`)
+    - `cluster_slug`: resource naming prefix (default: `hq`)
+  </Step>
+  
+  <Step title="Application Configuration (values.yaml)">
+    ```bash
+    cp hq-cluster-chart/values.example.yaml hq-cluster-chart/values.yaml
+    ```
+    
+    **Required customizations:**
+    - `email`: admin email for Let's Encrypt
+    - `env.config.DOMAIN`: your domain (must match `.tfvars`)
+    - `env.config.BACKEND_CORS_ORIGINS`: update with your domain
+    - Docker image repositories for backend, frontend, and celery-worker
+    
+    **Secrets (replace all `xxx` placeholders):**
+    - `SECRET_KEY`, `FIRST_SUPERUSER_PASSWORD`, `POSTGRES_PASSWORD`
+    - `MINIO_ROOT_PASSWORD`, `MINIO_SECRET_KEY`
+    - `SMTP_USER`, `SMTP_PASSWORD`, `EMAILS_FROM_EMAIL`
+    - API keys: `OPENAI_API_KEY`, `TAVILY_API_KEY`, `GOOGLE_API_KEY`, `MAPBOX_ACCESS_TOKEN`
+  </Step>
+  
+  <Step title="SSH Key Management">
+    ```bash
+    ./scripts/manage-ssh-keys.sh generate
+    ```
+    This generates key pairs, uploads to Hetzner, and updates cloud-init templates.
+    
+    **Manual alternative:** Upload your SSH key to Hetzner Console and set `ssh_key_name` in `.tfvars`.
+  </Step>
+  
+  <Step title="DNS Preparation">
+    Have your domain ready. After deployment, create A records pointing to the Load Balancer IP for both `your-domain.com` and `www.your-domain.com`.
+  </Step>
+</Steps>
 
 ---
 
-## Configuration
+## How It Works
 
-### Environment Variables
+The `./deploy.sh` orchestrator performs two phases:
 
-Key variables in `.env`:
+1. **Provision infrastructure**: Terraform creates network, firewall, servers; cloud-init installs K3s
+2. **Deploy stack**: Configures Traefik, installs Hetzner CCM/CSI, deploys the Helm chart
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `PORT` | Web server port | `3000` |
-| `FIRST_SUPERUSER` | Admin username | `app_user` |
-| `FIRST_SUPERUSER_PASSWORD` | Admin password | `app_user_password` |
-| `DATABASE_URL` | PostgreSQL connection | (local) |
-| `REDIS_URL` | Redis connection | (local) |
-| `S3_ENDPOINT` | Object storage endpoint | (local MinIO) |
+**Core commands:**
 
-### LLM Configuration
+| Command | Description |
+|---------|-------------|
+| `./deploy.sh` | Full deploy (infra → app) |
+| `./scripts/connect.sh` | Fetch kubeconfig and set kubectl context |
+| `./scripts/status.sh` | Summary of nodes, services, ingress, PVs |
+| `./scripts/logs.sh` | Tail app logs |
+| `./scripts/monitor.sh` | Open k9s |
+| `./scripts/destroy.sh` | Tear everything down |
 
-HQ supports multiple LLM providers. Configure in the web interface or via environment:
+---
 
-| Provider | Environment Variable | Notes |
-|----------|---------------------|-------|
-| Anthropic | `ANTHROPIC_API_KEY` | Best tool support |
-| OpenAI | `OPENAI_API_KEY` | GPT-4o and newer |
-| Google | `GOOGLE_API_KEY` | Gemini models |
-| Ollama | `OLLAMA_BASE_URL` | Local inference |
+## DNS and TLS
 
-For complete privacy, run Ollama locally — no API keys needed, no data leaves your machine.
+<Steps>
+  <Step title="Get Load Balancer IP">
+    ```bash
+    kubectl get svc traefik -n kube-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+    ```
+  </Step>
+  
+  <Step title="Create DNS A records">
+    Point your domain (and `www`) to the Load Balancer IP. Traefik will obtain Let's Encrypt certificates automatically (typically 2-5 minutes after DNS propagation).
+  </Step>
+  
+  <Step title="Verify deployment">
+    ```bash
+    ./scripts/test-deployment.sh  # Test DNS, HTTP/HTTPS, and TLS
+    ./scripts/status.sh           # View pods, services, ingress
+    ./scripts/check-ssl.sh        # Check ACME progress
+    ```
+  </Step>
+</Steps>
 
 ---
 
 ## Troubleshooting
 
-### Common Issues
+| Issue | Solution |
+|-------|----------|
+| Workers don't schedule pods | CCM removes taints automatically; wait or remove manually |
+| No Load Balancer IP | Confirm Traefik is `LoadBalancer` and CCM is Ready |
+| Domain mismatch | Ensure `.tfvars` domain matches `values.yaml` |
+| CORS errors | Verify `BACKEND_CORS_ORIGINS` includes your domain |
+| ACME stuck | Verify DNS A records point to LB IP; run `./scripts/check-ssl.sh` |
+| SSH failures | Run `./scripts/manage-ssh-keys.sh generate` |
 
-<Accordion title="Services won't start">
-Check Docker resources. HQ needs ~32GB RAM for all services. Reduce by disabling optional services like Pelias (geocoding) if not needed.
+## Cost
+
+Default: 3× `cx22` + 1 Load Balancer ≈ €40–45/month. Reduce costs by lowering `worker_count` or using smaller server types.
+
 </Accordion>
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
 
-<Accordion title="Database connection errors">
-Ensure PostgreSQL is fully started before the backend. The `docker compose up` command handles ordering, but on slow systems you may need to wait or restart.
-</Accordion>
-
-<Accordion title="Vector search not working">
-PGVector extension must be enabled. The default Docker setup handles this automatically. For managed databases, ensure the extension is available.
-</Accordion>
-
----
-
-## Resources
-
-<CardGroup cols={2}>
-  <Card title="GitHub Repository" icon="github" href="https://github.com/open-politics/open-politics-hq">
-    Source code and issues
-  </Card>
-  <Card title="Forum" icon="comments" href="https://forum.open-politics.org">
-    Community support
-  </Card>
-</CardGroup>
+|

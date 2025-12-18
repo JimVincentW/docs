@@ -1,0 +1,96 @@
+---
+title: 'App Setup'
+description: 'Configure providers and foundation services'
+---
+HQ uses foundation services to power different capabilities. Configure them in the **Provider Configuration** panel on the home screen.
+
+## Foundation Services
+
+<CardGroup cols={2}>
+  <Card title="Language Models" icon="brain">
+    Chat, classification, structured extraction. The core AI capability.
+  </Card>
+  <Card title="Embeddings" icon="vector-square">
+    Vector search, similarity matching, semantic discovery within infospaces.
+  </Card>
+  <Card title="Web Search" icon="globe">
+    Live web results for chat - ground responses in current information.
+  </Card>
+  <Card title="Geocoding" icon="location-dot">
+    Extract and map locations from your documents. Powers geographic visualizations.
+  </Card>
+</CardGroup>
+
+Each service type supports multiple providers. Pick what fits your needs — cloud APIs, local inference, or a mix.
+
+---
+
+## API Key Storage
+
+Two storage modes for each provider:
+
+| Mode | What it does | Use when |
+|------|--------------|----------|
+| **Runtime Only** | Keys stay in your browser | Quick testing, interactive use |
+| **Save for Tasks** | Keys encrypted in database | Background jobs, large analysis runs, automation |
+
+<Warning>
+**Background tasks require saved keys.** The Celery worker that processes large analysis runs can't access your browser. If jobs hang or fail, check that you've saved keys to the backend.
+</Warning>
+
+
+---
+
+## Providers
+
+### Language Models
+
+| Provider | Get Key |
+|----------|---------|
+| Anthropic | [console.anthropic.com](https://console.anthropic.com) |
+| OpenAI | [platform.openai.com](https://platform.openai.com) |
+| Google | [aistudio.google.com](https://aistudio.google.com) |
+| Ollama | Local — no key needed |
+
+### Embeddings
+
+Used for vectorizing content in your infospaces. Configure separately from language models.
+
+| Provider | Notes |
+|----------|-------|
+| OpenAI | Reliable, widely used |
+| Ollama | Local embeddings, complete privacy |
+
+### Web Search
+
+Enables the chat to pull in live search results.
+
+| Provider | Get Key |
+|----------|---------|
+| Tavily | [tavily.com](https://tavily.com) |
+
+### Geocoding
+
+Location extraction uses Pelias. Self-hosted deployments include it by default. No API key needed for local Pelias.
+
+---
+
+## Verifying Setup
+
+1. Open **Chat** and send a message — confirms language model works
+2. Upload an asset and check if it appears in vector search — confirms embeddings
+3. Ask chat to search the web — confirms web search
+4. Run an analysis with location fields — confirms geocoding
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Infospaces" icon="folder" href="/pages/app/infospaces">
+    Create workspaces for your projects
+  </Card>
+  <Card title="Schemas" icon="microscope" href="/pages/app/schemas">
+    Define what to extract from documents
+  </Card>
+</CardGroup>

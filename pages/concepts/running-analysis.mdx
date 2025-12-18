@@ -1,0 +1,88 @@
+---
+title: "Running Analysis"
+description: "Apply schemas to your documents and extract structured data"
+---
+
+Once you have a schema and some assets, you can run analysis. Each document gets processed by your chosen model, and results are stored as structured annotations.
+
+## The Process
+
+<Steps>
+<Step title="Select content">
+Pick individual assets or entire bundles
+</Step>
+<Step title="Choose schema">
+Select which schema to apply
+</Step>
+<Step title="Pick model">
+OpenAI, Anthropic, Google, or local via Ollama
+</Step>
+<Step title="Run">
+Each document gets processed, results stored as structured JSON
+</Step>
+</Steps>
+
+<video controls width="100%">
+  <source src="/images/schema-view-5.mp4" type="video/mp4" />
+</video>
+
+## Choosing a Model
+
+Different models have different strengths:
+
+| Provider | Best for | Notes |
+|----------|----------|-------|
+| **OpenAI** | General extraction, high throughput | Reliable, fast, good default |
+| **Anthropic** | Nuanced analysis, long documents | Better at complex reasoning |
+| **Google** | Large context windows | Good for lengthy documents |
+| **Ollama** | Privacy, local processing | No data leaves your machine |
+
+## Batch Processing
+
+When analysing large collections:
+
+1. **Start small** - Test on 2-3 documents first
+2. **Check outputs** - Do they match expectations?
+3. **Refine instructions** - Tighten schema if needed
+4. **Scale up** - Run on full collection
+
+<Warning>
+Test on 2-3 documents first. Check if outputs match expectations, refine instructions, then scale up. Saves time and API costs.
+</Warning>
+
+## Monitoring Runs
+
+Active analysis runs show progress in the UI:
+- Documents processed / total
+- Current status (running, completed, failed)
+- Error details if something goes wrong
+
+Failed documents can be retried individually without re-running the entire batch.
+
+## Results
+
+After analysis completes, results appear as **annotations** on your assets. Each annotation contains the structured data your schema extracted.
+
+View results:
+- **On the asset** - See all annotations for a specific document
+- **In dashboards** - Aggregate and visualise across the entire run
+- **Via export** - Download as CSV or JSON for external analysis
+
+---
+
+## Related
+
+<CardGroup cols={2}>
+<Card title="Schemas" icon="microscope" href="/pages/app/schemas">
+Define what to extract from documents
+</Card>
+<Card title="Curating Fragments" icon="star" href="/pages/concepts/curating-fragments">
+Promote good extractions to persistent metadata
+</Card>
+<Card title="Dashboards" icon="chart-line" href="/pages/app/dashboards">
+Visualise results with charts and tables
+</Card>
+<Card title="App Setup" icon="gear" href="/pages/app/app-setup">
+Configure API keys and providers
+</Card>
+</CardGroup>
