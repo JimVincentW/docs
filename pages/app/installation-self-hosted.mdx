@@ -86,8 +86,9 @@ description: 'Self-hosting guide and platform architecture'
         
         ```bash
         git clone https://github.com/open-politics/open-politics-hq
-        cd open-politics-hq/.deployments/end-to-end-hetzner-k3s-terraform-helm
-        cp .tfvars.example .tfvars
+        cd .deployments/end-to-end-hetzner-k3s-terraform-helm/open-politics-hq-deployment/hq-cluster-chart
+        cp values.example.yaml values.yaml
+        # Edit values.yaml with your configuration
         ```
 
         ## Hetzner Kubernetes Stack
@@ -113,9 +114,10 @@ This repository delivers a batteries-included, reproducible way to provision a H
 <Steps>
   <Step title="Configure Hetzner token">
     ```bash
-    cd hq-deployment/
+    cd .deployments/end-to-end-hetzner-k3s-terraform-helm/open-politics-hq-deployment/
     cp .tfvars.example .tfvars
-    # Edit .tfvars and set hcloud_token
+    cp hq-cluster-chart/values.example.yaml hq-cluster-chart/values.yaml
+    # Edit .tfvars and values.yaml with your configuration (see below)
     ```
   </Step>
   
