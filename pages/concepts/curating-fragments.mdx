@@ -1,13 +1,20 @@
 ---
-title: "Curating & Promoting Fragments"
+title: "Curating Annotations"
 description: "Turn analysis results into persistent document metadata"
 ---
 
-Schema results are **annotations** - they sit alongside your assets but aren't part of the asset itself. If you want an extraction to become a permanent feature of the document, you can **promote** it.
+Annotations are scoped to a run. \
+Curating them makes them permanent qualities of our data.
 
-## What Are Persistent Fragments?
+Curated results become **persistent fragments** - metadata pinned to the asset. Subsequent runs see them as context.
 
-When you curate or promote a result, it becomes a **persistent fragment** - a special metadata field attached to the asset. These fragments get included when you run further analysis, so the AI sees them as context.
+
+<Frame>
+  <img src="/images/fragments-dark.png" alt="Fragments" width="100%" className="hidden dark:block" />
+  <img src="/images/fragments-light.png" alt="Fragments" width="100%" className="block dark:hidden" />
+</Frame>
+
+
 
 <CardGroup cols={2}>
   <Card title="Annotations" icon="note-sticky">
@@ -24,43 +31,18 @@ When you curate or promote a result, it becomes a **persistent fragment** - a sp
   </Card>
 </CardGroup>
 
-## Why Promote Results?
-
-This is useful for building up knowledge incrementally, but also one time tagging and sorting of your
-
-<Steps>
-<Step title="Run initial extraction">
-Apply a schema to extract key claims, entities, or summaries
-</Step>
-<Step title="Review results">
-Check quality, identify good extractions
-</Step>
-<Step title="Promote the good ones">
-Convert accurate results to persistent fragments
-</Step>
-<Step title="Run deeper analysis">
-Subsequent schemas now see those fragments as context
-</Step>
-<Step title="Extract relationships">
-Find contradictions, connections, or patterns that depend on the first pass
-</Step>
-</Steps>
-
-## Promoting Results
+## How to
 
 From the results table of a run dashboard:
 
-1. **Review the extraction** - Check it's accurate and useful
-2. **Click "Promote"** - Converts annotations to persistent fragments
-4. **Confirm** - Fragment is now attached to the asset
+1. **Review the extraction** - Check it's accurate and useful, set filters
+2. **Click "Curate"** - Converts annotations to persistent fragments
+4. **Confirm** - Fragment is now attached to the asset (see above)
 
-
-## Managing Fragments
-
-View and manage fragments on any asset:
-- See all attached fragments
-- Remove fragments you no longer need
-- See which schema run originally created them
+<Frame>
+  <img src="/images/curating-dark.png" alt="Promote Fragment" width="100%" className="hidden dark:block" />
+  <img src="/images/curating-light.png" alt="Promote Fragment" width="100%" className="block dark:hidden" />
+</Frame>
 
 ---
 
