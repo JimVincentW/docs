@@ -22,13 +22,25 @@ Each document gets processed, results stored as structured JSON
 </Step>
 </Steps>
 
-<video controls width="100%">
-  <source src="/images/schema-view-5.mp4" type="video/mp4" />
+
+<Frame className="block dark:hidden">
+<video classNamecontrols width="100%">
+  <source src="/images/analysis-light.mp4" type="video/mp4" />
 </video>
+</Frame>
+
+<Frame className="hidden dark:block">
+<video controls width="100%">
+  <source src="/images/analysis-dark.mp4" type="video/mp4" />
+</video>
+</Frame>
+
+
 
 ## Choosing a Model
 
 Different models have different strengths:
+
 
 | Provider | Best for | Notes |
 |----------|----------|-------|
@@ -37,7 +49,8 @@ Different models have different strengths:
 | **Google** | Large context windows | Good for lengthy documents |
 | **Ollama** | Privacy, local processing | No data leaves your machine |
 
-## Batch Processing
+For more recent references check: https://artificialanalysis.ai/models
+
 
 <Note> When analysing large collections </Note>
 
@@ -47,14 +60,13 @@ Different models have different strengths:
 4. **Scale up** - Run on full collection
 
 
-## Monitoring Runs
+<video controls width="100%">
+  <source src="/images/analysis-dark.mp4" type="video/mp4" />
+</video>
 
-Active analysis runs show progress in the UI:
-- Documents processed / total
-- Current status (running, completed, failed)
-- Error details if something goes wrong
 
-Failed documents can be retried individually without re-running the entire batch.
+
+
 
 ## Results
 
@@ -62,7 +74,7 @@ After analysis completes, results appear as **annotations** on your assets. Each
 
 View results:
 - **On the asset** - See all annotations for a specific document
-- **Fragments** - If curated from a table, you can see the persistent fragments on the asset detail view
+- **Fragments** - If curated from a table (see [curation](/pages/concepts/curating-fragments)), you can see the persistent fragments on the asset detail view
 - **In dashboards** - Aggregate and visualise across the entire run
 - **Via export** - Download as CSV or JSON for external analysis
 
